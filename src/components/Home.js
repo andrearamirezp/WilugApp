@@ -1,16 +1,43 @@
 import React, {useState}from 'react';
-import {StyleSheet, View, Text, Image,TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, Image,TouchableOpacity, Linking} from 'react-native';
 import colors from '../utils/colors';
 import LoginForm from "./LoginForm";
-
+import Contactanos from "./Contactanos";
+import Mantencion from "./Mantencion";
+/* import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+ */
 export default function Home(props){
     const {changeForm} = props;
-    return(
-            <View style={styles.view}>
-            
-            <Image style={styles.logo} source={require("../assets/logo.png")}/>
+    const [isContactanos, setIsContactanos] = useState(true);
+    const [isMantencion, setIsMantencion] = useState(true);
 
-            <TouchableOpacity style={styles.maintenanceboton}> 
+    const changeContactanos = () => {
+        setIsContactanos(!isContactanos);
+    }
+    const changeMantencion = () => {
+        setIsMantencion(!isMantencion);
+    }
+    const abrirlink = ()=>{
+        Linking.openURL('https://www.wilug.cl/tienda/')
+    }
+    return(
+        <View style={styles.view}>
+            {isContactanos ? (
+                    <>
+                    </>
+                ) : (
+                    <Contactanos changeContactanos={changeContactanos}/>
+                )}
+            {isMantencion ? (
+                    <>
+                    </>
+                ) : (
+                    <Mantencion changeMantencion={changeMantencion}/>
+                )}    
+            <Image style={styles.logo} source={require("../assets/logo.png")}/>
+            
+            <TouchableOpacity style={styles.maintenanceboton} onPress={changeMantencion} > 
             <Image style={styles.icono} source={require("../assets/maintenanceicon.png")}/>
                 <Text style={styles.text}>Mantención</Text>
             </TouchableOpacity>       
@@ -25,17 +52,17 @@ export default function Home(props){
                 <Text style={styles.text}>Nosotros</Text>
             </TouchableOpacity> 
 
-            <TouchableOpacity style={styles.botonTienda}> 
+            <TouchableOpacity style={styles.botonTienda} onPress={abrirlink}> 
             <Image style={styles.icono} source={require("../assets/tienda.png")}/>
                 <Text style={styles.text}>Tienda</Text>
             </TouchableOpacity> 
 
             <TouchableOpacity style={styles.botonExtintor}> 
             <Image style={styles.icono} source={require("../assets/extintor.png")}/>
-                <Text style={styles.text}>Extintor</Text>
+                <Text style={styles.text}>Informacion</Text>
             </TouchableOpacity> 
 
-            <TouchableOpacity style={styles.botonContacto}> 
+            <TouchableOpacity style={styles.botonContacto} onPress={changeContactanos}> 
             <Image style={styles.icono} source={require("../assets/contacto.png")}/>
                 <Text style={styles.text}>Contacto</Text>
             </TouchableOpacity> 
