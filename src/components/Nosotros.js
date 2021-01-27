@@ -3,8 +3,8 @@ import { StyleSheet, View, Text, SafeAreaView, Image, TextInput, Button } from "
 
 
 
-export default function Mantencion(props) {
-  const { changeMantencion } = props;
+export default function Nosotros(props) {
+  const { changeNosotros } = props;
   return (
     <>
       <SafeAreaView style={styles.safeArea}>
@@ -15,30 +15,28 @@ export default function Mantencion(props) {
 
       </SafeAreaView>
       <View style={styles.TituloSeccion}>
-        <Text style={styles.TituloSeccion}>Solicitar Mantencion</Text>
+        <Text style={styles.TituloSeccion}>Nosotros</Text>
       </View>
       <View style={styles.cuerpo}>
-        <Text style={styles.texto}>Nombre</Text>
-        <TextInput style={styles.fondoInput} placeholder="Ingrese su nombre" />
-
-        <Text style={styles.texto}>Direccion</Text>
-        <TextInput style={styles.fondoInput} placeholder="Ingrese su direccion" />
-
-        <Text style={styles.texto}>Mensaje</Text>
-        <TextInput style={styles.fondoInput} placeholder="Mantencion" />
-        <View style={styles.espacio}></View>
-        <Button style={styles.boton}
-
-          title="Enviar"
-          color="#212778"
-
+        <Text style={styles.texto}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+        Cras bibendum felis at laoreet tincidunt. 
+        Ut hendrerit velit id pellentesque hendrerit. 
+        Maecenas convallis, augue sollicitudin dictum mollis, 
+        odio eros fermentum ante, a vestibulum ipsum odio eu velit. 
+        Ut a blandit nibh. Sed mattis quis risus eu consectetur.</Text>
+        <Image style={styles.imgStyle}
+          source={require('../assets/nosotros.jpg')}
         />
+        <Text style={styles.texto}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+        Cras bibendum felis at laoreet tincidunt. 
+        Ut hendrerit velit id pellentesque hendrerit.</Text>
+        
         <View style={styles.espacio}></View>
         <Button style={styles.boton}
 
           title="Volver"
           color="#212778"
-          onPress={changeMantencion}
+          onPress={changeNosotros}
         />
       </View>
 
