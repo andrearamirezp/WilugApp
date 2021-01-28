@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image,Button } from 'react-native';
 import colors from '../utils/colors';
+import Productos from './Productos';
 
 export default function LoginForm(props) {
     
@@ -8,10 +9,20 @@ export default function LoginForm(props) {
     const login = () => {
         console.log("Iniciando sesión...");
     }
+    const [isProductos, setIsProductos] = useState(true);
+    const changeProductos = () => {
+        setIsProductos(!isProductos);
+    }
 
   
     return (
         <>  
+            {isProductos ? (
+                <>
+                </>
+            ) : (
+                    <Productos changeProductos={changeProductos} />
+                )}
             <Image style={styles.logo} source={require("../assets/logo.png")}/>
             <Image style={styles.logoUser} source={require("../assets/usuario.png")}/>
             <Text style={styles.textWelcome}>Bienvenid@ a WilugApp</Text>
@@ -28,7 +39,7 @@ export default function LoginForm(props) {
                 secureTextEntry={true}
             />
 
-            <TouchableOpacity onPress={login}>
+            <TouchableOpacity onPress={changeProductos}>
                 <Text style={styles.btnText}>Iniciar sesión</Text>
             </TouchableOpacity>
             <TouchableOpacity>

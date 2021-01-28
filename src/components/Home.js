@@ -1,79 +1,113 @@
-import React, {useState}from 'react';
-import {StyleSheet, View, Text, Image,TouchableOpacity, Linking} from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Text, Image, TouchableOpacity, Linking } from 'react-native';
 import colors from '../utils/colors';
 import LoginForm from "./LoginForm";
 import Contactanos from "./Contactanos";
 import Mantencion from "./Mantencion";
+import Nosotros from "./Nosotros";
+import Informacion from "./Informacion";
+import OtrosServicios from "./OtrosServicios";
+
 /* import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
  */
-export default function Home(props){
-    const {changeForm} = props;
+export default function Home(props) {
+    const { changeForm } = props;
     const [isContactanos, setIsContactanos] = useState(true);
     const [isMantencion, setIsMantencion] = useState(true);
-
+    const [isNosotros, setIsNosotros] = useState(true);
+    const [isInformacion, setInformacion] = useState(true);
+    const [isServicios, setServicios] = useState(true);
     const changeContactanos = () => {
         setIsContactanos(!isContactanos);
     }
     const changeMantencion = () => {
         setIsMantencion(!isMantencion);
     }
-    const abrirlink = ()=>{
+    const changeNosotros = () => {
+        setIsNosotros(!isNosotros);
+    }
+    const changeInformacion = () => {
+        setInformacion(!isInformacion);
+    }
+    const changeServicio = () => {
+        setServicios(!isServicios);
+    }
+    const abrirlink = () => {
         Linking.openURL('https://www.wilug.cl/tienda/')
     }
-    return(
+    return (
         <View style={styles.view}>
             {isContactanos ? (
-                    <>
-                    </>
-                ) : (
-                    <Contactanos changeContactanos={changeContactanos}/>
+                <>
+                </>
+            ) : (
+                    <Contactanos changeContactanos={changeContactanos} />
                 )}
             {isMantencion ? (
-                    <>
-                    </>
-                ) : (
-                    <Mantencion changeMantencion={changeMantencion}/>
-                )}    
-            <Image style={styles.logo} source={require("../assets/logo.png")}/>
-            
-            <TouchableOpacity style={styles.maintenanceboton} onPress={changeMantencion} > 
-            <Image style={styles.icono} source={require("../assets/maintenanceicon.png")}/>
+                <>
+                </>
+            ) : (
+                    <Mantencion changeMantencion={changeMantencion} />
+                )}
+            {isNosotros ? (
+                <>
+                </>
+            ) : (
+                    <Nosotros changeNosotros={changeNosotros} />
+                )}
+            {isInformacion ? (
+                <>
+                </>
+            ) : (
+                    <Informacion changeInformacion={changeInformacion} />
+                )}
+            {isServicios ? (
+                <>
+                </>
+            ) : (
+                    <OtrosServicios changeServicio={changeServicio} />
+                )}
+
+            <Image style={styles.logo} source={require("../assets/logo.png")} />
+
+            <TouchableOpacity style={styles.maintenanceboton} onPress={changeMantencion} >
+                <Image style={styles.icono} source={require("../assets/maintenanceicon.png")} />
                 <Text style={styles.text}>Mantención</Text>
-            </TouchableOpacity>       
+            </TouchableOpacity>
 
-            <TouchableOpacity style={styles.botonOtro}> 
-            <Image style={styles.icono} source={require("../assets/otro.png")}/>
+            <TouchableOpacity style={styles.botonOtro}onPress={changeServicio}>
+                <Image style={styles.icono} source={require("../assets/otro.png")} />
                 <Text style={styles.text}>Otros servicios</Text>
-            </TouchableOpacity> 
-            
-            <TouchableOpacity style={styles.botonNosotros}> 
-            <Image style={styles.icono} source={require("../assets/nosotros.png")}/>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.botonNosotros} onPress={changeNosotros}>
+                <Image style={styles.icono} source={require("../assets/nosotros.png")} />
                 <Text style={styles.text}>Nosotros</Text>
-            </TouchableOpacity> 
+            </TouchableOpacity>
 
-            <TouchableOpacity style={styles.botonTienda} onPress={abrirlink}> 
-            <Image style={styles.icono} source={require("../assets/tienda.png")}/>
+            <TouchableOpacity style={styles.botonTienda} onPress={abrirlink}>
+                <Image style={styles.icono} source={require("../assets/tienda.png")} />
                 <Text style={styles.text}>Tienda</Text>
-            </TouchableOpacity> 
+            </TouchableOpacity>
 
-            <TouchableOpacity style={styles.botonExtintor}> 
-            <Image style={styles.icono} source={require("../assets/extintor.png")}/>
+            <TouchableOpacity style={styles.botonExtintor} onPress={changeInformacion}>
+                <Image style={styles.icono} source={require("../assets/extintor.png")} />
                 <Text style={styles.text}>Informacion</Text>
-            </TouchableOpacity> 
+            </TouchableOpacity>
 
-            <TouchableOpacity style={styles.botonContacto} onPress={changeContactanos}> 
-            <Image style={styles.icono} source={require("../assets/contacto.png")}/>
+            <TouchableOpacity style={styles.botonContacto} onPress={changeContactanos}>
+                <Image style={styles.icono} source={require("../assets/contacto.png")} />
                 <Text style={styles.text}>Contacto</Text>
-            </TouchableOpacity> 
+            </TouchableOpacity>
 
             <View>
-                <TouchableOpacity style={styles.boton} onPress={changeForm}> 
+                <TouchableOpacity style={styles.boton} onPress={changeForm}>
                     <Text style={styles.textLogin}>Iniciar sesión</Text>
                 </TouchableOpacity>
             </View>
-            
-            <TouchableOpacity> 
+
+            <TouchableOpacity>
                 <Text style={styles.textRegistrar}>Registrarse</Text>
             </TouchableOpacity>
 
@@ -93,7 +127,7 @@ const styles = StyleSheet.create({
         marginTop: 50,
         marginBottom: 50,
     },
-    icono:{
+    icono: {
         width: 80,
         height: 80
     },
@@ -104,7 +138,7 @@ const styles = StyleSheet.create({
         marginLeft: 210,
         marginTop: -100
     },
-    botonNosotros:{
+    botonNosotros: {
         marginLeft: 200,
         marginTop: 20,
     },
@@ -129,7 +163,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         color: "#fff"
     },
-    textRegistrar:{
+    textRegistrar: {
         fontSize: 18,
         marginTop: 20
     },
