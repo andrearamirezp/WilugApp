@@ -4,7 +4,7 @@ import { StyleSheet, View, Text, SafeAreaView, Image, TextInput, Button } from "
 
 
 export default function OtrosServicios(props) {
-    const { changeServicio } = props;
+    
     return (
         <>
             <SafeAreaView style={styles.safeArea}>
@@ -27,12 +27,7 @@ export default function OtrosServicios(props) {
                 source={require('../assets/servicio2.png')}
                 />
                 <View style={styles.espacio}></View>
-                <Button style={styles.boton}
-
-                    title="Volver"
-                    color="#212778"
-                    onPress={changeServicio}
-                />
+                
             </View>
 
         </>

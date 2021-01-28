@@ -1,28 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image,Button } from 'react-native';
 import colors from '../utils/colors';
-import Productos from './Productos';
 
 export default function LoginForm(props) {
+    const {navigation} = props;
     
-
-    const login = () => {
-        console.log("Iniciando sesión...");
-    }
-    const [isProductos, setIsProductos] = useState(true);
-    const changeProductos = () => {
-        setIsProductos(!isProductos);
-    }
-
-  
     return (
         <>  
-            {isProductos ? (
-                <>
-                </>
-            ) : (
-                    <Productos changeProductos={changeProductos} />
-                )}
+        <View style={styles.view}>
             <Image style={styles.logo} source={require("../assets/logo.png")}/>
             <Image style={styles.logoUser} source={require("../assets/usuario.png")}/>
             <Text style={styles.textWelcome}>Bienvenid@ a WilugApp</Text>
@@ -39,7 +24,7 @@ export default function LoginForm(props) {
                 secureTextEntry={true}
             />
 
-            <TouchableOpacity onPress={changeProductos}>
+            <TouchableOpacity onPress={() => navigation.navigate('productos')}>
                 <Text style={styles.btnText}>Iniciar sesión</Text>
             </TouchableOpacity>
             <TouchableOpacity>
@@ -51,6 +36,7 @@ export default function LoginForm(props) {
                     <Text style={styles.btnText}>Registrarse</Text>
                 </TouchableOpacity>
             </View>
+        </View>               
 
             
         </>
@@ -58,6 +44,10 @@ export default function LoginForm(props) {
 }
 
 const styles = StyleSheet.create({
+    view: {
+        flex: 1,
+        alignItems: 'center'
+    },
     logo: {
         resizeMode: "center",
         height: 140,

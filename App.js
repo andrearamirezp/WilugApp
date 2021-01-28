@@ -2,13 +2,14 @@ import React from "react";
 import {StyleSheet,SafeAreaView, Text, View}from "react-native";
 import Home from "./src/components/Home";
 import Auth from "./src/components/Auth";
-import Contactanos from "./src/components/Contactanos";
+import { NavigationContainer} from "@react-navigation/native";
+import Navigation from './src/Navigation/Navigation';
 
 export default function App() {
   return(
-    <SafeAreaView style = {styles.background}>
-      <Auth/>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Navigation/>
+    </NavigationContainer>
   )
 }
 
