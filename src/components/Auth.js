@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { View, Text,StyleSheet, Image } from 'react-native';
 import LoginForm from "./LoginForm";
-import Home from "./Home";
+// import Home from "./Home";
 
 export default function Auth() {
 
@@ -18,7 +18,7 @@ export default function Auth() {
                 {isLogin ? (
                     <LoginForm />
                 ) : (
-                    <Home changeForm={changeForm}/>
+                    <Text> Hola </Text>
                 )}
             </View>
             

@@ -1,184 +1,127 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity, Linking } from 'react-native';
-import colors from '../utils/colors';
-import LoginForm from "./LoginForm";
-import Contactanos from "./Contactanos";
-import Mantencion from "./Mantencion";
-import Nosotros from "./Nosotros";
-import Informacion from "./Informacion";
-import OtrosServicios from "./OtrosServicios";
+import React from 'react';
+import {StyleSheet, TouchableOpacity, Image, View, Text} from 'react-native';
 
-/* import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
- */
-export default function Home(props) {
-    const { changeForm } = props;
-    const [isContactanos, setIsContactanos] = useState(true);
-    const [isMantencion, setIsMantencion] = useState(true);
-    const [isNosotros, setIsNosotros] = useState(true);
-    const [isInformacion, setInformacion] = useState(true);
-    const [isServicios, setServicios] = useState(true);
-    const changeContactanos = () => {
-        setIsContactanos(!isContactanos);
-    }
-    const changeMantencion = () => {
-        setIsMantencion(!isMantencion);
-    }
-    const changeNosotros = () => {
-        setIsNosotros(!isNosotros);
-    }
-    const changeInformacion = () => {
-        setInformacion(!isInformacion);
-    }
-    const changeServicio = () => {
-        setServicios(!isServicios);
-    }
-    const abrirlink = () => {
-        Linking.openURL('https://www.wilug.cl/tienda/')
-    }
-    return (
-        <View style={styles.view}>
-            {isContactanos ? (
-                <>
-                </>
-            ) : (
-                    <Contactanos changeContactanos={changeContactanos} />
-                )}
-            {isMantencion ? (
-                <>
-                </>
-            ) : (
-                    <Mantencion changeMantencion={changeMantencion} />
-                )}
-            {isNosotros ? (
-                <>
-                </>
-            ) : (
-                    <Nosotros changeNosotros={changeNosotros} />
-                )}
-            {isInformacion ? (
-                <>
-                </>
-            ) : (
-                    <Informacion changeInformacion={changeInformacion} />
-                )}
-            {isServicios ? (
-                <>
-                </>
-            ) : (
-                    <OtrosServicios changeServicio={changeServicio} />
-                )}
-
-            <Image style={styles.logo} source={require("../assets/logo.png")} />
-
-            <TouchableOpacity style={styles.maintenanceboton} onPress={changeMantencion} >
-                <Image style={styles.icono} source={require("../assets/maintenanceicon.png")} />
-                <Text style={styles.text}>Mantención</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.botonOtro}onPress={changeServicio}>
-                <Image style={styles.icono} source={require("../assets/otro.png")} />
-                <Text style={styles.text}>Otros servicios</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.botonNosotros} onPress={changeNosotros}>
-                <Image style={styles.icono} source={require("../assets/nosotros.png")} />
-                <Text style={styles.text}>Nosotros</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.botonTienda} onPress={abrirlink}>
-                <Image style={styles.icono} source={require("../assets/tienda.png")} />
-                <Text style={styles.text}>Tienda</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.botonExtintor} onPress={changeInformacion}>
-                <Image style={styles.icono} source={require("../assets/extintor.png")} />
-                <Text style={styles.text}>Informacion</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.botonContacto} onPress={changeContactanos}>
-                <Image style={styles.icono} source={require("../assets/contacto.png")} />
-                <Text style={styles.text}>Contacto</Text>
-            </TouchableOpacity>
-
-            <View>
-                <TouchableOpacity style={styles.boton} onPress={changeForm}>
-                    <Text style={styles.textLogin}>Iniciar sesión</Text>
-                </TouchableOpacity>
-            </View>
-
-            <TouchableOpacity>
-                <Text style={styles.textRegistrar}>Registrarse</Text>
-            </TouchableOpacity>
-
+export default function Home() {
+  return (
+    <View>
+      <View style={styles.menu}>
+        <View style={styles.menuItem}>
+          <TouchableOpacity>
+            <Image
+              source={require('../assets/mantencion.png')}
+              style={styles.image}
+            />
+            <Text style={styles.cardText}>Solicitar mantención</Text>
+          </TouchableOpacity>
         </View>
 
-    );
+        <View style={styles.menuItem}>
+          <TouchableOpacity>
+            <Image
+              source={require('../assets/otro.png')}
+              style={styles.image}
+            />
+            <Text style={styles.cardText}>Otros servicios</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.menuItem}>
+          <TouchableOpacity>
+            <Image
+              source={require('../assets/extintor.png')}
+              style={styles.image}
+            />
+            <Text style={styles.cardText}>Manejo de extintores</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.menuItem}>
+          <TouchableOpacity>
+            <Image
+              source={require('../assets/nosotros.png')}
+              style={styles.image}
+            />
+            <Text style={styles.cardText}>Nosotros</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.menuItem}>
+          <TouchableOpacity>
+            <Image
+              source={require('../assets/contacto.png')}
+              style={styles.image}
+            />
+            <Text style={styles.cardText}>Contáctanos</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.menuItem}>
+          <TouchableOpacity>
+            <Image
+              source={require('../assets/tienda.png')}
+              style={styles.image}
+            />
+            <Text style={styles.cardText}>Tienda</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={styles.viewBoton}>
+        <TouchableOpacity style={styles.boton}>
+          <Text style={styles.textLogin}>Iniciar sesión</Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Text style={styles.textRegistrar}>Registrarse</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    view: {
-        flex: 1,
-        alignItems: 'center'
-    },
-    logo: {
-        resizeMode: "center",
-        height: 140,
-        marginTop: 50,
-        marginBottom: 50,
-    },
-    icono: {
-        width: 80,
-        height: 80
-    },
-    maintenanceboton: {
-        marginRight: 200,
-    },
-    botonOtro: {
-        marginLeft: 210,
-        marginTop: -100
-    },
-    botonNosotros: {
-        marginLeft: 200,
-        marginTop: 20,
-    },
-    botonTienda: {
-        marginLeft: 200,
-        marginTop: 20,
-    },
-    botonExtintor: {
-        marginRight: 200,
-        marginTop: -240
-    },
-    botonContacto: {
-        marginRight: 200,
-        marginTop: 15,
-    },
-    text: {
-        fontSize: 18,
-    },
-    textLogin: {
-        fontSize: 18,
-        marginTop: 50,
-        textAlign: "center",
-        color: "#fff"
-    },
-    textRegistrar: {
-        fontSize: 18,
-        marginTop: 20
-    },
-    viewLogin: {
-        backgroundColor: colors.PRIMARY_COLOR_DARK,
-        paddingVertical: 5,
-        paddingHorizontal: 30,
-        borderRadius: 20
-    },
-    boton: {
-        color: '#fff',
-        fontSize: 18,
-        backgroundColor: colors.PRIMARY_COLOR_DARK,
-        borderRadius: 5,
-        paddingVertical: 10,
-        paddingHorizontal: 5
-    }
+  menuItem: {
+    width: '33.33333%',
+    height: '40%',
+    padding: 20,
+  },
+  menu: {
+      marginTop: 40,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  image: {
+    width: '100%',
+    height: '70%',
+    opacity: 0.8,
+    resizeMode: 'center',
+  },
+  cardText: {
+    fontSize: 15,
+    textAlign: 'center',
+  },
+  boton: {
+    color: '#fff',
+    fontSize: 18,
+    height: 50,
+    backgroundColor: '#212778',
+    borderRadius: 5,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+  },
+  textLogin: {
+    fontSize: 18,
+    textAlign: 'center',
+    color: '#fff',
+  },
+  viewBoton: {
+    position: 'absolute',
+    width: '100%',
+    height: 100,
+    bottom: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textRegistrar: {
+    fontSize: 16,
+    marginTop: 20,
+  },
 });
