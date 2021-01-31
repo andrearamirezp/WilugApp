@@ -4,7 +4,7 @@ import { StyleSheet, View, Text, SafeAreaView, Image, TextInput, Button } from "
 
 
 export default function Mantencion(props) {
-  const { changeMantencion } = props;
+  
   return (
     <>
       <SafeAreaView style={styles.safeArea}>
@@ -34,12 +34,7 @@ export default function Mantencion(props) {
 
         />
         <View style={styles.espacio}></View>
-        <Button style={styles.boton}
-
-          title="Volver"
-          color="#212778"
-          onPress={changeMantencion}
-        />
+        
       </View>
 
     </>

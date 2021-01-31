@@ -4,7 +4,7 @@ import {StyleSheet, View, Text, SafeAreaView, Image,TextInput, Button} from "rea
 
 
 export default function Contactanos (props) {
-  const {changeContactanos} = props;
+  
   return (
    <> 
     <SafeAreaView style={styles.safeArea}>
@@ -34,12 +34,7 @@ export default function Contactanos (props) {
         
       />
       <View style= {styles.espaciochico}></View>
-      <Button style={styles.boton}
-        
-        title="Volver"
-        color="#212778"
-        onPress={changeContactanos}
-      />
+      
     </View>
     
    </> 

@@ -4,7 +4,7 @@ import { StyleSheet, View, Text, SafeAreaView, Image, TextInput, Button } from "
 
 
 export default function Informacion(props) {
-    const { changeInformacion } = props;
+    
     return (
         <>
             <SafeAreaView style={styles.safeArea}>
@@ -23,12 +23,7 @@ export default function Informacion(props) {
                 source={require('../assets/Youtube.png')}
                 />
                 <View style={styles.espacio}></View>
-                <Button style={styles.boton}
-
-                    title="Volver"
-                    color="#212778"
-                    onPress={changeInformacion}
-                />
+                
             </View>
 
         </>

@@ -4,7 +4,7 @@ import { StyleSheet, View, Text, SafeAreaView, Image, TextInput, Button } from "
 
 
 export default function Nosotros(props) {
-  const { changeNosotros } = props;
+  
   return (
     <>
       <SafeAreaView style={styles.safeArea}>
@@ -32,12 +32,7 @@ export default function Nosotros(props) {
         Ut hendrerit velit id pellentesque hendrerit.</Text>
         
         <View style={styles.espacio}></View>
-        <Button style={styles.boton}
-
-          title="Volver"
-          color="#212778"
-          onPress={changeNosotros}
-        />
+        
       </View>
 
     </>

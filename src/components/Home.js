@@ -1,87 +1,28 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, Linking } from 'react-native';
 import colors from '../utils/colors';
-import LoginForm from "./LoginForm";
-import Contactanos from "./Contactanos";
-import Mantencion from "./Mantencion";
-import Nosotros from "./Nosotros";
-import Informacion from "./Informacion";
-import OtrosServicios from "./OtrosServicios";
 
-/* import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
- */
 export default function Home(props) {
-    const { changeForm } = props;
-    const [isContactanos, setIsContactanos] = useState(true);
-    const [isMantencion, setIsMantencion] = useState(true);
-    const [isNosotros, setIsNosotros] = useState(true);
-    const [isInformacion, setInformacion] = useState(true);
-    const [isServicios, setServicios] = useState(true);
-    const changeContactanos = () => {
-        setIsContactanos(!isContactanos);
-    }
-    const changeMantencion = () => {
-        setIsMantencion(!isMantencion);
-    }
-    const changeNosotros = () => {
-        setIsNosotros(!isNosotros);
-    }
-    const changeInformacion = () => {
-        setInformacion(!isInformacion);
-    }
-    const changeServicio = () => {
-        setServicios(!isServicios);
-    }
+    const {navigation} = props;
+    
     const abrirlink = () => {
         Linking.openURL('https://www.wilug.cl/tienda/')
     }
     return (
         <View style={styles.view}>
-            {isContactanos ? (
-                <>
-                </>
-            ) : (
-                    <Contactanos changeContactanos={changeContactanos} />
-                )}
-            {isMantencion ? (
-                <>
-                </>
-            ) : (
-                    <Mantencion changeMantencion={changeMantencion} />
-                )}
-            {isNosotros ? (
-                <>
-                </>
-            ) : (
-                    <Nosotros changeNosotros={changeNosotros} />
-                )}
-            {isInformacion ? (
-                <>
-                </>
-            ) : (
-                    <Informacion changeInformacion={changeInformacion} />
-                )}
-            {isServicios ? (
-                <>
-                </>
-            ) : (
-                    <OtrosServicios changeServicio={changeServicio} />
-                )}
+           <Image style={styles.logo} source={require("../assets/logo.png")} />
 
-            <Image style={styles.logo} source={require("../assets/logo.png")} />
-
-            <TouchableOpacity style={styles.maintenanceboton} onPress={changeMantencion} >
+            <TouchableOpacity style={styles.maintenanceboton} onPress={() => navigation.navigate('mantencion')} >
                 <Image style={styles.icono} source={require("../assets/maintenanceicon.png")} />
                 <Text style={styles.text}>Mantención</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.botonOtro}onPress={changeServicio}>
+            <TouchableOpacity style={styles.botonOtro}onPress={() => navigation.navigate('otrosServicios')} >
                 <Image style={styles.icono} source={require("../assets/otro.png")} />
                 <Text style={styles.text}>Otros servicios</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.botonNosotros} onPress={changeNosotros}>
+            <TouchableOpacity style={styles.botonNosotros} onPress={() => navigation.navigate('nosotros')}>
                 <Image style={styles.icono} source={require("../assets/nosotros.png")} />
                 <Text style={styles.text}>Nosotros</Text>
             </TouchableOpacity>
@@ -91,18 +32,18 @@ export default function Home(props) {
                 <Text style={styles.text}>Tienda</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.botonExtintor} onPress={changeInformacion}>
+            <TouchableOpacity style={styles.botonExtintor} onPress={() => navigation.navigate('informacion')}>
                 <Image style={styles.icono} source={require("../assets/extintor.png")} />
                 <Text style={styles.text}>Informacion</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.botonContacto} onPress={changeContactanos}>
+            <TouchableOpacity style={styles.botonContacto} onPress={() => navigation.navigate('contacto')}>
                 <Image style={styles.icono} source={require("../assets/contacto.png")} />
                 <Text style={styles.text}>Contacto</Text>
             </TouchableOpacity>
 
             <View>
-                <TouchableOpacity style={styles.boton} onPress={changeForm}>
+                <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate('loginForm')}>
                     <Text style={styles.textLogin}>Iniciar sesión</Text>
                 </TouchableOpacity>
             </View>
