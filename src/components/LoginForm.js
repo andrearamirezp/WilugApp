@@ -38,11 +38,10 @@ export default function LayoutBase() {
           placeholderTextColor="#969696"
           secureTextEntry={true}
         />
-      </View>
-      <View style={[styles.box, styles.box3]}>
-        <TouchableOpacity>
+        <TouchableOpacity style={styles.boton}>
           <Text style={styles.btnText}>Iniciar sesión</Text>
         </TouchableOpacity>
+
         <TouchableOpacity>
           <Text style={styles.textUnder}>¿Olvidaste tu contraseña?</Text>
         </TouchableOpacity>
@@ -60,7 +59,7 @@ const styles = StyleSheet.create({
     height: box_height,
   },
   box1: {
-    flex: 5,
+    flex: 3,
     // backgroundColor: '#2196F3',
     alignItems: 'center',
     justifyContent: 'center',
@@ -105,21 +104,25 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#212778',
   },
-  text: {
-    fontSize: 16,
-    marginBottom: 10,
-  },
   btnText: {
     color: '#fff',
     fontSize: 18,
+    textAlign: 'center',
+  },
+  textUnder: {
+    marginTop: 50,
+    textDecorationLine: 'underline',
+    color: '#0000FF',
+  },
+  boton: {
+    color: '#fff',
+    fontSize: 18,
+    height: 50,
     backgroundColor: '#212778',
     borderRadius: 5,
     paddingVertical: 10,
-    paddingHorizontal: 5,
-  },
-  textUnder: {
-    marginTop: 20,
-    textDecorationLine: 'underline',
-    color: '#0000FF',
+    paddingHorizontal: 10,
+    position: 'relative',
+    top: 20,
   },
 });
