@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   menu: {
-    marginTop: 40,
+    marginTop: 20,
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
