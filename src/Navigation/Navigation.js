@@ -16,7 +16,7 @@ export default function navigation(){
     return(
         <Stack.Navigator>
             <Stack.Screen name="home" component={Home} options={{title:'Wilug'}}/> 
-            <Stack.Screen name="mantencion" component={Mantencion} options={{title:'Mantención'}}/> 
+            <Stack.Screen name="mantencion" component={Mantencion} options={{title:'Solicitar Mantención'}}/> 
             <Stack.Screen name="otrosServicios" component={OtrosServicios} options={{title:'Otros Servicios'}}/> 
             <Stack.Screen name="informacion" component={ManejoExtintor} options={{title:'Manejo de Extintores'}}/> 
             <Stack.Screen name="nosotros" component={Nosotros} options={{title:'Nosotros'}}/>
