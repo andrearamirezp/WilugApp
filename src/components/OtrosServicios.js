@@ -6,6 +6,10 @@ import {
   Image,
 } from 'react-native';
 import OtroServicio from './FormOtroServicio';  
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from 'react-native-responsive-screen';
 
 var {height} = Dimensions.get('window');
 
@@ -53,7 +57,8 @@ const styles = StyleSheet.create({
   },
   logo: {
     resizeMode: 'center',
-    height: 100,
+    height: hp('100%'), // 70% of height device screen
+    width: wp('70%'),
     marginTop: 20,
     marginBottom: 20,
   },
