@@ -1,98 +1,125 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image,Button } from 'react-native';
-import colors from '../utils/colors';
+import React from 'react';
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  Image,
+  Text,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
+// import Header from './src/components/Header';
 
-export default function LoginForm(props) {
-    const {navigation} = props;
-    
-    return (
-        <>  
-        <View style={styles.view}>
-            <Image style={styles.logo} source={require("../assets/logo.png")}/>
-            <Image style={styles.logoUser} source={require("../assets/usuario.png")}/>
-            <Text style={styles.textWelcome}>Bienvenid@ a WilugApp</Text>
-            <TextInput 
-                style={styles.input}
-                placeholder="Correo electrónico"
-                placeholderTextColor="#969696"
-            />
+var {height} = Dimensions.get('window');
 
-            <TextInput 
-                style={styles.input}
-                placeholder="Contraseña"
-                placeholderTextColor="#969696"
-                secureTextEntry={true}
-            />
+var box_count = 3;
+var box_height = height / box_count;
 
-            <TouchableOpacity onPress={() => navigation.navigate('productos')}>
-                <Text style={styles.btnText}>Iniciar sesión</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-                <Text style={styles.text}>¿Olvidaste tu contraseña?</Text>
-            </TouchableOpacity>
-            
-            <View style={styles.register}>
-                <TouchableOpacity>
-                    <Text style={styles.btnText}>Registrarse</Text>
-                </TouchableOpacity>
-            </View>
-        </View>               
-
-            
-        </>
-    );
+export default function LayoutBase() {
+  return (
+    <View style={styles.container}>
+      <View style={[styles.box, styles.box1]}>
+        <Image style={styles.logo} source={require('../assets/logo.png')} />
+      </View>
+      <View style={[styles.box, styles.box2]}>
+        <Image
+          style={styles.logoUser}
+          source={require('../assets/usuario.png')}
+        />
+        <Text style={styles.textWelcome}>Bienvenid@ a WilugApp</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="email@email.com"
+          placeholderTextColor="#969696"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Contraseña"
+          placeholderTextColor="#969696"
+          secureTextEntry={true}
+        />
+      </View>
+      <View style={[styles.box, styles.box3]}>
+        <TouchableOpacity>
+          <Text style={styles.btnText}>Iniciar sesión</Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Text style={styles.textUnder}>¿Olvidaste tu contraseña?</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    view: {
-        flex: 1,
-        alignItems: 'center'
-    },
-    logo: {
-        resizeMode: "center",
-        height: 140,
-        marginTop: 50,
-        marginBottom: 30,
-    },
-    logoUser: {
-        width: 140,
-        height: 140,
-        marginTop: 5,
-        marginBottom: 20,
-    },
-    textWelcome: {
-        color: colors.PRIMARY_COLOR_DARK,
-        fontSize: 20,
-        marginBottom: 20,
-    },
-    text: {
-        marginTop: 20,
-        textDecorationLine: "underline",
-        color: "#0000FF"
-    },
-    input: {
-        height: 50,
-        color: '#2b2926',
-        width: '80%',
-        marginBottom: 25,
-        backgroundColor: '#fff',
-        paddingHorizontal: 20,
-        borderRadius: 50,
-        fontSize: 18,
-        borderWidth: 2,
-        borderColor:colors.PRIMARY_COLOR_DARK
-    }, 
-    btnText: {
-        color: '#fff',
-        fontSize: 18,
-        backgroundColor: colors.PRIMARY_COLOR_DARK,
-        borderRadius: 5,
-        paddingVertical: 10,
-        paddingHorizontal: 5
-    },
-    register:{
-        flex:1,
-        justifyContent: 'flex-end',
-        marginBottom: 30
-    }
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+  box: {
+    height: box_height,
+  },
+  box1: {
+    flex: 5,
+    // backgroundColor: '#2196F3',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  box2: {
+    flex: 10,
+    // backgroundColor: '#8BC34A',
+    alignItems: 'center',
+  },
+  box3: {
+    flex: 3,
+    // backgroundColor: '#e3aa1a',
+    alignItems: 'center',
+  },
+  logo: {
+    resizeMode: 'center',
+    height: 150,
+    marginTop: 40,
+    marginBottom: 20,
+  },
+  logoUser: {
+    width: 140,
+    height: 140,
+    marginTop: 5,
+    marginBottom: 30,
+    alignItems: 'center',
+  },
+  textWelcome: {
+    color: '#212778',
+    fontSize: 20,
+    marginBottom: 40,
+  },
+  input: {
+    height: 50,
+    color: '#2b2926',
+    width: '80%',
+    marginBottom: 20,
+    backgroundColor: '#fff',
+    paddingHorizontal: 20,
+    borderRadius: 50,
+    fontSize: 18,
+    borderWidth: 2,
+    borderColor: '#212778',
+  },
+  text: {
+    fontSize: 16,
+    marginBottom: 10,
+  },
+  btnText: {
+    color: '#fff',
+    fontSize: 18,
+    backgroundColor: '#212778',
+    borderRadius: 5,
+    paddingVertical: 10,
+    paddingHorizontal: 5,
+  },
+  textUnder: {
+    marginTop: 20,
+    textDecorationLine: 'underline',
+    color: '#0000FF',
+  },
 });

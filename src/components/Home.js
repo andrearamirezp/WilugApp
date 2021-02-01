@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Linking,
 } from 'react-native';
-import Header from './Header';
+// import Header from './Header';
 
 export default function Home(props) {
   const {navigation} = props;
@@ -17,7 +17,10 @@ export default function Home(props) {
   };
   return (
     <View style={styles.view}>
-      <Header />
+      {/* <Header /> */}
+      <View style={styles.header}>
+        <Image style={styles.logo} source={require('../assets/logo.png')} />
+      </View>
       <View style={styles.menu}>
         <View style={styles.menuItem}>
           <TouchableOpacity onPress={() => navigation.navigate('mantencion')}>
@@ -30,7 +33,8 @@ export default function Home(props) {
         </View>
 
         <View style={styles.menuItem}>
-          <TouchableOpacity onPress={() => navigation.navigate('otrosServicios')} >
+          <TouchableOpacity
+            onPress={() => navigation.navigate('otrosServicios')}>
             <Image
               source={require('../assets/otro.png')}
               style={styles.image}
@@ -80,7 +84,9 @@ export default function Home(props) {
         </View>
       </View>
       <View style={styles.viewBoton}>
-        <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate('loginForm')}>
+        <TouchableOpacity
+          style={styles.boton}
+          onPress={() => navigation.navigate('loginForm')}>
           <Text style={styles.textLogin}>Iniciar sesión</Text>
         </TouchableOpacity>
         <TouchableOpacity>
@@ -141,5 +147,16 @@ const styles = StyleSheet.create({
   textRegistrar: {
     fontSize: 16,
     marginTop: 20,
+  },
+  header: {
+    height: '25%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  logo: {
+    resizeMode: 'center',
+    height: 150,
+    marginTop: 40,
+    marginBottom: 20,
   },
 });
