@@ -4,10 +4,6 @@ import {
   View,
   Dimensions,
   Image,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
 } from 'react-native';
 import FormMantencion from './FormMantencion';
 
@@ -42,7 +38,7 @@ const styles = StyleSheet.create({
   },
   box1: {
     flex: 5,
-    marginTop: 20,
+    marginTop: 10,
     marginBottom: 20,
     alignItems: 'center',
     justifyContent: 'center',

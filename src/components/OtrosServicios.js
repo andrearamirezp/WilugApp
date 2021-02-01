@@ -40,6 +40,8 @@ const styles = StyleSheet.create({
   },
   box1: {
     flex: 5,
+    marginTop: 10,
+    marginBottom: 20,
     // backgroundColor: '#2196F3',
     alignItems: 'center',
     justifyContent: 'center',

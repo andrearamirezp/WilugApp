@@ -87,7 +87,7 @@ export default function Home(props) {
         <TouchableOpacity
           style={styles.boton}
           onPress={() => navigation.navigate('loginForm')}>
-          <Text style={styles.textLogin}>Hola</Text>
+          <Text style={styles.textLogin}>Ir a tu sesión</Text>
         </TouchableOpacity>
         <TouchableOpacity>
           <Text style={styles.textRegistrar}>Registrarse</Text>
