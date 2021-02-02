@@ -8,6 +8,10 @@ import {
   Linking,
 } from 'react-native';
 // import Header from './Header';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from 'react-native-responsive-screen';
 
 export default function Home(props) {
   const {navigation} = props;
@@ -155,7 +159,8 @@ const styles = StyleSheet.create({
   },
   logo: {
     resizeMode: 'center',
-    height: 150,
+    height: hp('100%'), // 70% of height device screen
+    width: wp('90%'),
     marginTop: 40,
     marginBottom: 20,
   },

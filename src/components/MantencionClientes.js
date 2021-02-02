@@ -6,7 +6,7 @@ export default function Productos(props){
     
     return (
         <View>
-            <Text>Estamos en Mis productos</Text>
+            <Text>Estamos en Mantencion </Text>
             
         </View>
     )

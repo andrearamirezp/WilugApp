@@ -8,6 +8,7 @@ import Nosotros from "../components/Nosotros";
 import Contactanos from "../components/Contactanos";
 import LoginForm from "../components/LoginForm";
 import Productos from "../components/Productos";
+import ClienteRegistrado from "../components/ClienteRegistrado";
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,7 @@ export default function navigation(){
             <Stack.Screen name="contacto" component={Contactanos} options={{title:'Contáctanos'}}/>
             <Stack.Screen name="loginForm" component={LoginForm} options={{title:'LoginForm'}}/>
             <Stack.Screen name="productos" component={Productos} options={{title:'Mis productos'}}/>
+            <Stack.Screen name="clienteRegistrado" component={ClienteRegistrado} options={{title:'Menu'}}/>
         </Stack.Navigator>
     )
 }

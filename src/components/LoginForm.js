@@ -9,13 +9,19 @@ import {
   TouchableOpacity,
 } from 'react-native';
 // import Header from './src/components/Header';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from 'react-native-responsive-screen';
 
 var {height} = Dimensions.get('window');
 
 var box_count = 3;
 var box_height = height / box_count;
 
-export default function LayoutBase() {
+export default function LayoutBase(props) {
+  const {navigation} = props;
+
   return (
     <View style={styles.container}>
       <View style={[styles.box, styles.box1]}>
@@ -38,7 +44,9 @@ export default function LayoutBase() {
           placeholderTextColor="#969696"
           secureTextEntry={true}
         />
-        <TouchableOpacity style={styles.boton}>
+        <TouchableOpacity 
+          style={styles.boton}
+          onPress={() => navigation.navigate('clienteRegistrado')}>
           <Text style={styles.btnText}>Iniciar sesión</Text>
         </TouchableOpacity>
 
@@ -76,7 +84,8 @@ const styles = StyleSheet.create({
   },
   logo: {
     resizeMode: 'center',
-    height: 150,
+    height: hp('100%'), // 70% of height device screen
+    width: wp('80%'),
     marginTop: 40,
     marginBottom: 20,
   },
