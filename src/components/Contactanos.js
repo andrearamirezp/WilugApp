@@ -1,10 +1,17 @@
 import React from "react";
 import {StyleSheet, View, Text, SafeAreaView, Image,TextInput, Button} from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from 'react-native-responsive-screen';
 
 
 
 export default function Contactanos (props) {
-  
+
+  const alerta = () => {
+    alert('Enviado');
+  };
   return (
    <> 
     <SafeAreaView style={styles.safeArea}>
@@ -27,7 +34,7 @@ export default function Contactanos (props) {
       <Text style={styles.texto}>Mensaje</Text>
       <TextInput style={styles.TamañoVentana} placeholder="Motivo del contacto"/>
       <View style= {styles.espaciochico}></View>
-      <Button style={styles.boton}
+      <Button style={styles.boton} onPress={alerta}
         
         title="Enviar"
         color="#212778"
@@ -52,9 +59,10 @@ const styles = StyleSheet.create ({
   },
 
   imgStyle:{
-    width:200,
-    height:70,
-    marginTop:30,
+    resizeMode: 'center',
+        height: hp('15%'), // 70% of height device screen
+        width: wp('60%'),
+        marginTop: 10,
     
   },
 

@@ -9,6 +9,10 @@ import {
   TouchableOpacity,
   ScrollView
 } from 'react-native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from 'react-native-responsive-screen';
 
 var {height} = Dimensions.get('window');
 
@@ -41,8 +45,8 @@ const styles = StyleSheet.create({
   },
   logo: {
     resizeMode: 'center',
-    height: 120,
-    marginTop: 50,
-    marginBottom: 50,
+    height: hp('100%'), // 70% of height device screen
+    width: wp('60%'),
+    
   },
 });
