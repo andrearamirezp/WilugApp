@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useState, useCallback, useRef } from "react";
 import { StyleSheet, View, Text, SafeAreaView, Image, TextInput, Button } from "react-native";
-
+import YoutubePlayer from "react-native-youtube-iframe";
+import {
+    widthPercentageToDP as wp,
+    heightPercentageToDP as hp
+  } from 'react-native-responsive-screen';
 
 
 export default function Informacion(props) {
+    const [playing, setPlaying] = useState(false);
+
+    const onStateChange = useCallback((state) => {
+        if (state === "ended") {
+          setPlaying(false);
+          
+        }
+      }, []);
+
+    const togglePlaying = useCallback(() => {
+          setPlaying((prev) => !prev);
+      }, []);
+      
     
     return (
         <>
@@ -18,14 +35,21 @@ export default function Informacion(props) {
                 <Text style={styles.TituloSeccion}>Informacion</Text>
             </View>
             <View style={styles.cuerpo}>
-                <Text style={styles.texto}>Como usar un extintor</Text>
-                <Image style={styles.Youtube}
-                source={require('../assets/Youtube.png')}
-                />
-                <View style={styles.espacio}></View>
-                
+                <Text style={styles.texto}>Tipos de extintores</Text>
+                <YoutubePlayer
+                height={300}
+                play={playing}
+                videoId={"Ow51yqK70TY"}
+                onChangeState={onStateChange}
+            />    
             </View>
-
+            <YoutubePlayer
+                height={300}
+                play={playing}
+                videoId={"Ow51yqK70TY"}
+                onChangeState={onStateChange}
+            />
+            
         </>
     );
 }
@@ -41,9 +65,10 @@ const styles = StyleSheet.create({
     },
 
     imgStyle: {
-        width: 200,
-        height: 70,
-        marginTop: 30,
+        resizeMode: 'center',
+        height: hp('15%'), // 70% of height device screen
+        width: wp('60%'),
+        marginTop: 10,
 
     },
     Youtube: {
@@ -61,7 +86,7 @@ const styles = StyleSheet.create({
     },
     cuerpo: {
         backgroundColor: '#FFFFFF',
-        height: '77%',
+        height: '10%',
         alignItems: "center",
     },
     texto: {
