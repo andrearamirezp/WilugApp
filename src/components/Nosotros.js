@@ -1,108 +1,248 @@
-import React from "react";
-import { StyleSheet, View, Text, SafeAreaView, Image, TextInput, Button } from "react-native";
+import React from 'react';
+import {
+  View,
+  StyleSheet,
+  Text,
+  TextInput,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+  ImageBackground,
+  Linking,
+} from 'react-native';
+import Base from './Base';
 
-
-
-export default function Nosotros(props) {
-  
+export default function FormMantencion() {
+  const abrirlink = () => {
+    Linking.openURL('https://www.wilug.cl/tienda/');
+  };
   return (
     <>
-      <SafeAreaView style={styles.safeArea}>
-        <Image style={styles.imgStyle}
-          source={require('../assets/logo.png')}
-        />
+      <Base />
+      <ScrollView style={[styles.box4]}>
+        <Text style={styles.titulo3}>Nos destacamos por</Text>
+        <View
+          style={{
+            backgroundColor: 'white',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+          }}>
+          <View style={{width: '33.33%'}}>
+            <Image
+              style={styles.icono2}
+              source={require('../assets/icono1.png')}
+            />
+            <Text style={styles.textIcono}>
+              27% DE NUESTRAS TRABAJADORAS SON MUJERES
+            </Text>
+          </View>
+          <View style={{width: '33.33%'}}>
+            <Image
+              style={styles.icono2}
+              source={require('../assets/icono2.png')}
+            />
+            <Text style={styles.textIcono}>
+              40% DE NUESTRO DIRECTORIO SON MUJERES
+            </Text>
+          </View>
 
-
-      </SafeAreaView>
-      <View style={styles.TituloSeccion}>
-        <Text style={styles.TituloSeccion}>Nosotros</Text>
-      </View>
-      <View style={styles.cuerpo}>
-        <Text style={styles.texto}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-        Cras bibendum felis at laoreet tincidunt. 
-        Ut hendrerit velit id pellentesque hendrerit. 
-        Maecenas convallis, augue sollicitudin dictum mollis, 
-        odio eros fermentum ante, a vestibulum ipsum odio eu velit. 
-        Ut a blandit nibh. Sed mattis quis risus eu consectetur.</Text>
-        <Image style={styles.imgStyle}
-          source={require('../assets/nosotros.jpg')}
-        />
-        <Text style={styles.texto}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-        Cras bibendum felis at laoreet tincidunt. 
-        Ut hendrerit velit id pellentesque hendrerit.</Text>
-        
-        <View style={styles.espacio}></View>
-        
-      </View>
-
+          <View style={{width: '33.33%'}}>
+            <Image
+              style={styles.icono2}
+              source={require('../assets/icono3.png')}
+            />
+            <Text style={styles.textIcono}>
+              33% DE LA GERENCIA ESTA COMPUESTA POR MUJERES
+            </Text>
+          </View>
+          <View style={{width: '33.33%'}}>
+            <Image
+              style={styles.icono2}
+              source={require('../assets/icono4.png')}
+            />
+            <Text style={styles.textIcono}>
+              9% DE NUESTROS TRABAJADORES SON ADULTOS MAYORES
+            </Text>
+          </View>
+          <View style={{width: '33.33%'}}>
+            <Image
+              style={styles.icono2}
+              source={require('../assets/icono5.png')}
+            />
+            <Text style={styles.textIcono}>
+              1% DE NUESTROS TRABAJADORES TIENEN CAPACIDADES DIFERENTES
+            </Text>
+          </View>
+          <View style={{width: '33.33%'}}>
+            <Image
+              style={styles.icono2}
+              source={require('../assets/icono6.png')}
+            />
+            <Text style={styles.textIcono}>
+              7% DE NUESTROS TRABAJADORES SON DE PUEBLOS ORIGINARIOS Y
+              EXTRANJEROS
+            </Text>
+          </View>
+        </View>
+        <ImageBackground
+          style={styles.box3}
+          source={require('../assets/fondo.png')}>
+          <View style={{backgroundColor: 'rgba(47,163,218, .6)'}}>
+            <Text style={styles.titulo2}>¿Quienes somos?</Text>
+            <Text style={styles.texto}>
+              Wilug es una empresa de ingeniería de proyectos, diseño,
+              mantención y montaje, que se especializa en los ámbitos
+              relacionados con la protección y control de incendios; manejo de
+              fluidos, hidráulica, mecánica y neumática general, capacitación y
+              entrenamiento.
+            </Text>
+            <Text style={styles.texto}>
+              Fundada en 1989, Wilug ha sido reconocida, como una empresa
+              confiable y preocupada por sus clientes, con un énfasis en la
+              innovación y nuevas tecnologías, situándola como un protagonista
+              de la industria de la Seguridad.
+            </Text>
+            <Image
+              style={styles.imagen}
+              source={require('../assets/wilug1.png')}
+            />
+          </View>
+        </ImageBackground>
+        <View
+          style={{
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: 'white',
+          }}>
+          <Text style={styles.titulo}>Marcas Representadas</Text>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+          }}>
+          <View style={styles.viewMarcas}>
+            <TouchableOpacity>
+              <Image
+                style={styles.icono}
+                source={require('../assets/marca1.png')}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.viewMarcas}>
+            <TouchableOpacity>
+              <Image
+                style={styles.icono}
+                source={require('../assets/marca2.png')}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.viewMarcas}>
+            <TouchableOpacity>
+              <Image
+                style={styles.icono}
+                source={require('../assets/marca3.png')}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.viewMarcas}>
+            <TouchableOpacity>
+              <Image
+                style={styles.icono}
+                source={require('../assets/marca4.png')}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.viewMarcas}>
+            <TouchableOpacity>
+              <Image
+                style={styles.icono}
+                source={require('../assets/marca5.png')}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.viewMarcas}>
+            <TouchableOpacity>
+              <Image
+                style={styles.icono}
+                source={require('../assets/marca6.png')}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.viewMarcas}>
+            <TouchableOpacity>
+              <Image
+                style={styles.icono}
+                source={require('../assets/marca7.png')}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ScrollView>
     </>
   );
 }
 
-
 const styles = StyleSheet.create({
-  safeArea: {
-    backgroundColor: '#FFFFFF',
-    height: '23%',
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
-    alignItems: "center",
+  box4: {
+    height: '60%',
+    backgroundColor: 'white',
   },
-
-  imgStyle: {
-    width: 200,
-    height: 70,
-    marginTop: 30,
-
-  },
-
-  titulo: {
-
-    height: 140,
-    marginTop: 50,
-    marginBottom: 30,
-  },
-  cuerpo: {
-    backgroundColor: '#FFFFFF',
-    height: '77%',
-    alignItems: "center",
+  box3: {
+    resizeMode: 'contain',
   },
   texto: {
     fontSize: 16,
-    marginTop: 30,
-
+    textAlign: 'justify',
+    marginTop: 10,
+    marginHorizontal: 20,
+    color: 'white',
+    fontWeight: 'bold',
   },
-  fondoInput: {
-    height: 50,
-    color: '#2b2926',
-    width: '80%',
-    backgroundColor: '#fff',
-    paddingHorizontal: 20,
-    borderRadius: 50,
-    fontSize: 18,
-    borderWidth: 2,
-    borderColor: '#212778'
+  imagen: {
+    width: '100%',
+    height: 400,
+    marginBottom: 20,
   },
-  TamañoVentana: {
-    height: 110,
-    color: '#2b2926',
-    width: '80%',
-    marginBottom: 25,
-    backgroundColor: '#fff',
-    paddingHorizontal: 20,
-    borderRadius: 50,
-    fontSize: 18,
-    borderWidth: 2,
-    borderColor: '#212778'
+  titulo: {
+    fontSize: 25,
+    textAlign: 'center',
   },
-  espacio: {
-    marginTop: 20,
-
+  icono: {
+    width: '90%',
+    height: 90,
+    resizeMode: 'center',
+    marginLeft: 10,
   },
-  TituloSeccion: {
-    fontSize: 30,
-    backgroundColor: '#FFFFFF',
-    alignItems: "center",
-
+  titulo2: {
+    fontSize: 25,
+    textAlign: 'center',
+    marginBottom: 20,
+    color: 'white',
+    marginTop: 10,
+  },
+  titulo3: {
+    fontSize: 25,
+    textAlign: 'center',
+    marginBottom: 10,
+    color: '#2FA3DA',
+    marginTop: 10,
+  },
+  icono2: {
+    resizeMode: 'center',
+    height: 100,
+    width: '100%',
+    marginBottom: 20,
+  },
+  textIcono: {
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  boton: {
+    alignItems: 'flex-start',
+  },
+  viewMarcas: {
+    width: '25%',
+    height: 80,
   },
 });

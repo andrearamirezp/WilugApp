@@ -4,12 +4,11 @@ import {
   View,
   Dimensions,
   Image,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  ScrollView
 } from 'react-native';
-import OtroServicio from './FormOtroServicio';  
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp
-} from 'react-native-responsive-screen';
 
 var {height} = Dimensions.get('window');
 
@@ -22,10 +21,6 @@ export default function LayoutBase() {
             <View style={[styles.box, styles.box1]}>
         <Image style={styles.logo} source={require('../assets/logo.png')} />
       </View>
-      <View style={[styles.box, styles.box2]}>
-          <OtroServicio/>
-      </View>
-      
       
     </View>
   );
@@ -36,30 +31,18 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
   },
-  scroll:{
-    backgroundColor: 'pink',
-  },
   box: {
     height: box_height,
   },
   box1: {
-    flex: 5,
-    marginTop: 10,
-    marginBottom: 20,
-    // backgroundColor: '#2196F3',
+    flex: 2,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  box2: {
-    flex: 30,
-    // backgroundColor: '#8BC34A',
-    alignItems: 'center',
-  },
   logo: {
     resizeMode: 'center',
-    height: hp('100%'), // 70% of height device screen
-    width: wp('70%'),
-    marginTop: 20,
-    marginBottom: 20,
+    height: 120,
+    marginTop: 50,
+    marginBottom: 50,
   },
 });

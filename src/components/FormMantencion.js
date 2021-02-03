@@ -8,11 +8,16 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import Base from './Base';
+
 export default function FormMantencion() {
   return (
+
+    <>
+    <Base/>
     <View style={[styles.box4]}>
       <ScrollView>
-        {/* <Text style={styles.titulo}>Solicitar Mantención</Text> */}
+        <Text style={styles.titulo}>Solicitar Mantención</Text>
         <Text>Nombre Completo</Text>
         <TextInput
           style={styles.input}
@@ -62,13 +67,15 @@ export default function FormMantencion() {
         </TouchableOpacity>
       </ScrollView>
     </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   box4: {
-    width: '90%',
-    height: '100%',
+    width: '95%',
+    height: '80%',
+    marginLeft: 10,
   },
   input: {
     height: 50,
