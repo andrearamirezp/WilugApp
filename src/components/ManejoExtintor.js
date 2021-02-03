@@ -36,12 +36,7 @@ export default function Informacion(props) {
             </View>
             <View style={styles.cuerpo}>
                 <Text style={styles.texto}>Tipos de extintores</Text>
-                <YoutubePlayer
-                height={300}
-                play={playing}
-                videoId={"Ow51yqK70TY"}
-                onChangeState={onStateChange}
-            />    
+                  
             </View>
             <YoutubePlayer
                 height={300}
