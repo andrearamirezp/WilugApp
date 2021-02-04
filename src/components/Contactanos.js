@@ -6,9 +6,8 @@ import {
   TextInput,
   ScrollView,
   TouchableOpacity,
-  Image,
   ImageBackground,
-  Linking,
+
 } from 'react-native';
 import Base from './Base';
 
@@ -121,7 +120,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   input: {
-    height: 40,
+    height: 50,
     color: '#2b2926',
     marginBottom: 10,
     marginTop: 10,
@@ -138,7 +137,7 @@ const styles = StyleSheet.create({
     marginLeft: 30,
   },
   inputMSJ: {
-    height: 120,
+    height: 150,
     color: '#2b2926',
     marginTop: 10,
     marginHorizontal: 20,
