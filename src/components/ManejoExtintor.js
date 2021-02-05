@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, useCallback,useRef} from 'react';
 import {
   View,
   StyleSheet,
@@ -7,22 +7,26 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  Linking,
 } from 'react-native';
 import Base from './Base';
-import YoutubePlayer from 'react-native-youtube-iframe';
+import YoutubePlayer, {YoutubeIframeRef} from 'react-native-youtube-iframe';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from 'react-native-responsive-screen';
 
 export default function ManejoExtintor() {
-  const [playing, setPlaying] = useState(false);
-
-  const onStateChange = useCallback((state) => {
-    if (state === 'ended') {
-      setPlaying(false);
-    }
-  }, []);
-
-  const togglePlaying = useCallback(() => {
-    setPlaying((prev) => !prev);
-  }, []);
+  const playerRef = useRef();
+  const linkFacebook = () => {
+    Linking.openURL('https://www.facebook.com/wilugchile/');
+  };
+  const linkInstagram = () => {
+    Linking.openURL('https://www.instagram.com/wilugchile/?hl=es-la');
+  };
+  const linkTwitter = () => {
+    Linking.openURL('https://twitter.com/wilugchile?lang=es');
+  };
 
   return (
     <>
@@ -35,9 +39,8 @@ export default function ManejoExtintor() {
           </Text>
           <YoutubePlayer
             height={250}
-            play={playing}
+            ref={playerRef}
             videoId={'Ow51yqK70TY'}
-            onChangeState={onStateChange}
           />
           <Text style={styles.titulo2}>Tipos de fuego</Text>
           <View
@@ -114,7 +117,7 @@ export default function ManejoExtintor() {
                   flexWrap: 'wrap',
                 }}>
                 <View style={[styles.viewRedes, {marginLeft: 80}]}>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={linkFacebook}>
                     <Image
                       style={styles.icono2}
                       source={require('../assets/facebook.png')}></Image>
@@ -122,14 +125,14 @@ export default function ManejoExtintor() {
                   
                 </View>
                 <View style={styles.viewRedes}>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={linkInstagram}>
                     <Image
                       style={styles.icono2}
                       source={require('../assets/instagram.png')}></Image>
                   </TouchableOpacity>
                 </View>
                 <View style={styles.viewRedes}>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={linkTwitter}>
                     <Image
                       style={styles.icono2}
                       source={require('../assets/twitter.png')}></Image>
@@ -151,12 +154,13 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   imagen: {
-    width: '100%',
-    height: 500,
+    
+    height: hp('70%'), // 70% of height device screen
+    width: wp('100%'),
   },
   imagen2: {
-    width: '100%',
-    height: 350,
+    height: hp('40%'), // 70% of height device screen
+    width: wp('100%'),
   },
   TituloSeccion: {
     fontSize: 30,
