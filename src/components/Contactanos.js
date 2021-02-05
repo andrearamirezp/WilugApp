@@ -31,7 +31,9 @@ export default function Contactanos() {
             placeholderTextColor="#969696"
           />
           <Text style={styles.texto}>Teléfono</Text>
-          <TextInput style={styles.input} placeholderTextColor="#969696" />
+          <TextInput style={styles.input}
+           placeholder="9 1234 5678"
+           placeholderTextColor="#969696" />
           <Text style={styles.texto}>Mensaje</Text>
           <TextInput
             style={styles.inputMSJ}
