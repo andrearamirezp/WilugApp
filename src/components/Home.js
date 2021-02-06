@@ -93,7 +93,7 @@ export default function Home(props) {
           onPress={() => navigation.navigate('loginForm')}>
           <Text style={styles.textLogin}>Ir a tu sesión</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('registrar')}>
           <Text style={styles.textRegistrar}>Registrarse</Text>
         </TouchableOpacity>
       </View>
