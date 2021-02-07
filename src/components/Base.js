@@ -45,8 +45,8 @@ const styles = StyleSheet.create({
   },
   logo: {
     resizeMode: 'center',
-    height: hp('100%'),
-    width: wp('60%'),
-    
+    height: 120,
+    marginTop: 50,
+    marginBottom: 50,
   },
 });

@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   menuItem: {
     width: '33.33333%',
     height: '40%',
-    padding: 20,
+    padding: 15,
   },
   menu: {
     marginTop: 20,
