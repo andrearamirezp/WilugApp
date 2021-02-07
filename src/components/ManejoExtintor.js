@@ -3,7 +3,6 @@ import {
   View,
   StyleSheet,
   Text,
-  TextInput,
   ScrollView,
   TouchableOpacity,
   Image,
@@ -18,14 +17,19 @@ import {
 
 export default function ManejoExtintor() {
   const playerRef = useRef();
-  const linkFacebook = () => {
-    Linking.openURL('https://www.facebook.com/wilugchile/');
-  };
-  const linkInstagram = () => {
-    Linking.openURL('https://www.instagram.com/wilugchile/?hl=es-la');
-  };
-  const linkTwitter = () => {
-    Linking.openURL('https://twitter.com/wilugchile?lang=es');
+
+  const goToUrl = type => {
+    switch(type){
+      case "facebook":
+        Linking.openURL('https://www.facebook.com/wilugchile/');
+        break;
+      case "instagram":
+        Linking.openURL('https://www.instagram.com/wilugchile/?hl=es-la');
+        break;
+      case "twitter":
+        Linking.openURL('https://twitter.com/wilugchile?lang=es');
+        break;
+    }
   };
 
   return (
@@ -39,7 +43,7 @@ export default function ManejoExtintor() {
           </Text>
           <YoutubePlayer
             height={250}
-            ref={playerRef}
+            //ref={playerRef}
             videoId={'Ow51yqK70TY'}
           />
           <Text style={styles.titulo2}>Tipos de fuego</Text>
@@ -117,7 +121,7 @@ export default function ManejoExtintor() {
                   flexWrap: 'wrap',
                 }}>
                 <View style={[styles.viewRedes, {marginLeft: 80}]}>
-                  <TouchableOpacity onPress={linkFacebook}>
+                  <TouchableOpacity onPress={() => goToUrl("facebook")}>
                     <Image
                       style={styles.icono2}
                       source={require('../assets/facebook.png')}></Image>
@@ -125,14 +129,14 @@ export default function ManejoExtintor() {
                   
                 </View>
                 <View style={styles.viewRedes}>
-                  <TouchableOpacity onPress={linkInstagram}>
+                  <TouchableOpacity onPress={() => goToUrl("instagram")}>
                     <Image
                       style={styles.icono2}
                       source={require('../assets/instagram.png')}></Image>
                   </TouchableOpacity>
                 </View>
                 <View style={styles.viewRedes}>
-                  <TouchableOpacity onPress={linkTwitter}>
+                  <TouchableOpacity onPress={() =>goToUrl("twitter")}>
                     <Image
                       style={styles.icono2}
                       source={require('../assets/twitter.png')}></Image>
@@ -155,11 +159,11 @@ const styles = StyleSheet.create({
   },
   imagen: {
     
-    height: hp('70%'), // 70% of height device screen
+    height: hp('70%'),
     width: wp('100%'),
   },
   imagen2: {
-    height: hp('40%'), // 70% of height device screen
+    height: hp('40%'), 
     width: wp('100%'),
   },
   TituloSeccion: {
