@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
@@ -8,17 +8,37 @@ import {
   Dimensions,
   TextInput,
 } from 'react-native';
+import { useSelector, useDispatch } from "react-redux";
+import { registerClient } from '../actions/client';
 
-var {height} = Dimensions.get('window');
+var { height } = Dimensions.get('window');
 
 var box_count = 3;
 var box_height = height / box_count;
 
-export default function RegistrarContactoEmpresa(props) {
-    const {navigation}= props
-  state = {
-    language: 'java',
+export default function RegistrarCliente({ navigation }) {
+  const [data, setData] = useState({
+    nombre: '',
+    razonSocial: '',
+    rut: '',
+    direccion: '',
+    ciudad: '',
+    telefono: '',
+    email: '',
+    tipo: '',
+    password: ''
+  });
+
+  const dispatch = useDispatch();
+  const { reciveRegister, successRegister, errorRegister } = useSelector((state) => state.client);
+
+  const handleChange =  (name) => (value) => {
+    setData({ ...data, [name]: value });
   };
+  const doRequest = useCallback(async () => {
+    dispatch(registerClient(data));
+  }, [dispatch]);
+
   return (
     <View style={[styles.box, styles.box1]}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
@@ -29,24 +49,32 @@ export default function RegistrarContactoEmpresa(props) {
           style={styles.input}
           placeholder="Ej: Diego López"
           placeholderTextColor="#969696"
+          value={data.nombre}
+          onChangeText={handleChange("nombre")}
         />
         <Text style={styles.texto}>Rut</Text>
         <TextInput
           style={styles.input}
           placeholder="12.345.678-9"
           placeholderTextColor="#969696"
+          value={data.rut}
+          onChangeText={handleChange("rut")}
         />
         <Text style={styles.texto}>Correo electrónico</Text>
         <TextInput
           style={styles.input}
           placeholder="Ej: email@email.com"
           placeholderTextColor="#969696"
+          value={data.email}
+          onChangeText={handleChange("email")}
         />
         <Text style={styles.texto}>Teléfono</Text>
         <TextInput
           style={styles.input}
           placeholder="9 1234 5678"
           placeholderTextColor="#969696"
+          value={data.telefono}
+          onChangeText={handleChange("telefono")}
         />
         <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate('crearContraseña')}>
           <Text style={styles.btnText}>Continuar</Text>

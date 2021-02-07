@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -7,20 +7,59 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  AsyncStorage,
+  Alert
 } from 'react-native';
-// import Header from './src/components/Header';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from 'react-native-responsive-screen';
+import { useSelector, useDispatch } from "react-redux";
+import { login } from '../actions/auth';
 
-var {height} = Dimensions.get('window');
+var { height } = Dimensions.get('window');
 
 var box_count = 3;
 var box_height = height / box_count;
 
-export default function LayoutBase(props) {
-  const {navigation} = props;
+export default function LayoutBase({ navigation }) {
+  const dispatch = useDispatch();
+  const { token, authenticating, isAuthenticated, authenticateError, user } = useSelector((state) => state.auth);
+
+  const [data, setData] = useState({
+    rut: '',
+    password: ''
+  });
+
+  const handleChange = (name) => (value) => {
+    setData({ ...data, [name]: value });
+  };
+
+  const handleSubmit = () => {
+    dispatch(login(data));
+  };
+
+  useEffect(() => {
+    if (token !== '' && isAuthenticated && user) {
+      console.log(token, isAuthenticated, user);
+      Alert.alert('Inicio de sesión', 'inicio sesión exitoso');
+      AsyncStorage.setItem('token', token);
+      AsyncStorage.setItem('user', JSON.stringify(user));
+      navigation.navigate('clienteRegistrado')
+    }
+  }, [token, isAuthenticated])
+
+  useEffect(() => {
+    if(authenticateError) {
+      Alert.alert('Inicio de sesión', 'Error al iniciar sesión');
+    }
+  }, [authenticateError])
+
+  useEffect(() => {
+    if(authenticating) {
+      console.log('cargando .....')
+    }
+  }, [authenticating])
 
   return (
     <View style={styles.container}>
@@ -37,16 +76,20 @@ export default function LayoutBase(props) {
           style={styles.input}
           placeholder="email@email.com"
           placeholderTextColor="#969696"
+          value={data.rut}
+          onChangeText={handleChange("rut")}
         />
         <TextInput
           style={styles.input}
           placeholder="Contraseña"
           placeholderTextColor="#969696"
           secureTextEntry={true}
+          value={data.password}
+          onChangeText={handleChange("password")}
         />
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.boton}
-          onPress={() => navigation.navigate('clienteRegistrado')}>
+          onPress={handleSubmit}>
           <Text style={styles.btnText}>Iniciar sesión</Text>
         </TouchableOpacity>
 

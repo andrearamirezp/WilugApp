@@ -1,31 +1,49 @@
+import { url } from '../../config.json';
 
 // ACTIONS
-export const RECIVE_AUTH = "RECIVE_AUTH";
-export const SUCCESS_AUTH = "SUCCESS_AUTH";
-export const ERROR_AUTH = "ERROR_AUTH";
+export const RECIVE_LOGIN = "RECIVE_LOGIN";
+export const SUCCESS_LOGIN = "SUCCESS_LOGIN";
+export const ERROR_LOGIN = "ERROR_LOGIN";
 
-const reciveAuth = () => {
+const reciveLogin = () => {
     return {
-        type: RECIVE_AUTH
+        type: RECIVE_LOGIN
     };
 };
 
-const successAuth = () => {
+const successLogin = (user, token) => {
     return {
-        type: SUCCESS_AUTH
+        type: SUCCESS_LOGIN,
+        user,
+        token
     };
 };
 
-const errorAuth = () => {
+const errorLogin = () => {
     return {
-        type: ERROR_AUTH
+        type: ERROR_LOGIN
     };
 };
 
-export const login = () => async (dispatch) => {
+export const login = (data) => async (dispatch) => {
     try {
-        
+        dispatch(reciveLogin());
+
+        const config = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `data=${encodeURIComponent(JSON.stringify(data))}`,
+        };
+
+        const rawResponse = await fetch(`${url}auth/login`, config);
+        console.log(rawResponse)
+        if (rawResponse.status === 200) {
+            const { token, user } = await rawResponse.json();
+            dispatch(successLogin(user, token));
+        }
     } catch (error) {
-        
+        dispatch(errorLogin());
     }
-}
+};
