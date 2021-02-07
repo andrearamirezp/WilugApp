@@ -1,15 +1,17 @@
 import React from "react";
-import {StyleSheet,SafeAreaView, Text, View}from "react-native";
-import Home from "./src/components/Home";
-import Auth from "./src/components/Auth";
-import { NavigationContainer} from "@react-navigation/native";
+import { StyleSheet } from "react-native";
+import { Provider } from "react-redux";
+import { NavigationContainer } from "@react-navigation/native";
 import Navigation from './src/Navigation/Navigation';
+import store from "./src/store";
 
 export default function App() {
-  return(
-    <NavigationContainer>
-      <Navigation/>
-    </NavigationContainer>
+  return (
+    <Provider store={store}>
+      <NavigationContainer>
+        <Navigation />
+      </NavigationContainer>
+    </Provider>
   )
 }
 
@@ -18,7 +20,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     height: "100%"
   }
-
-})
+});
 
 
