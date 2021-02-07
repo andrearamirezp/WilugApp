@@ -86,8 +86,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   container: {
-    width: '100%',
-    height: '80%',
+    height: hp('100%'),
+    width: wp('100%'),
   },
   input: {
     height: 45,

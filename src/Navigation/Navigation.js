@@ -19,8 +19,15 @@ const Stack = createStackNavigator();
 
 export default function navigation() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="home" component={Home} options={{title: 'Wilug'}} />
+    <Stack.Navigator
+    screenOptions={{
+        headerShown: false
+      }}
+    >
+      <Stack.Screen 
+        name="home"
+        component={Home} 
+        options={{title: 'Wilug'}} />
       <Stack.Screen
         name="mantencion"
         component={Mantencion}

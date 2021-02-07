@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     resizeMode: 'center',
-    height: hp('100%'), // 70% of height device screen
+    height: hp('100%'),
     width: wp('60%'),
     
   },

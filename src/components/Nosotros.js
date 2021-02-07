@@ -11,30 +11,38 @@ import {
   Linking,
 } from 'react-native';
 import Base from './Base';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from 'react-native-responsive-screen';
 
 export default function FormMantencion() {
-  const linkKidde = () => {
-    Linking.openURL('https://www.kidde-fenwal.com/Public/Kidde');
+  
+  const goToUrl = type => {
+    switch(type){
+      case "kidde":
+        Linking.openURL('https://www.kidde-fenwal.com/Public/Kidde');
+        break;
+      case "thermasteror":
+        Linking.openURL('https://www.thermarestor.co.uk/');
+        break;
+      case "edwards":
+        Linking.openURL('https://www.edwardsfiresafety.com/');
+        break;
+      case "buckeye":
+        Linking.openURL('http://www.buckeyedetects.com/');
+        break;
+      case "apollo":
+        Linking.openURL('https://www.apollo-fire.com/');
+        break;
+      case "firetrace":
+        Linking.openURL('https://www.firetrace.com/');
+        break;
+      case "comm":
+        Linking.openURL('https://www.comm-port.com/');
+        break;
+    }
   };
-  const linkThermasteror = () => {
-    Linking.openURL('https://www.thermarestor.co.uk/');
-  };
-  const linkEdwards = () => {
-    Linking.openURL('https://www.edwardsfiresafety.com/');
-  };
-  const linkBuckeye = () => {
-    Linking.openURL('http://www.buckeyedetects.com/');
-  };
-  const linkApollo = () => {
-    Linking.openURL('https://www.apollo-fire.com/');
-  };
-  const linkFiretrace = () => {
-    Linking.openURL('https://www.firetrace.com/');
-  };
-  const linkComm = () => {
-    Linking.openURL('https://www.comm-port.com/');
-  };
-
   return (
     <>
       <Base />
@@ -141,7 +149,7 @@ export default function FormMantencion() {
             flexWrap: 'wrap',
           }}>
           <View style={styles.viewMarcas}>
-            <TouchableOpacity onPress={linkKidde}>
+            <TouchableOpacity onPress={() =>goToUrl("kidde")}>
               <Image
                 style={styles.icono}
                 source={require('../assets/marca1.png')}
@@ -149,7 +157,7 @@ export default function FormMantencion() {
             </TouchableOpacity>
           </View>
           <View style={styles.viewMarcas}>
-            <TouchableOpacity onPress={linkThermasteror}>
+            <TouchableOpacity onPress={() =>goToUrl("thermasteror")}>
               <Image
                 style={styles.icono}
                 source={require('../assets/marca2.png')}
@@ -157,7 +165,7 @@ export default function FormMantencion() {
             </TouchableOpacity>
           </View>
           <View style={styles.viewMarcas}>
-            <TouchableOpacity onPress={linkEdwards}>
+            <TouchableOpacity onPress={() =>goToUrl("edwards")}>
               <Image
                 style={styles.icono}
                 source={require('../assets/marca3.png')}
@@ -165,7 +173,7 @@ export default function FormMantencion() {
             </TouchableOpacity>
           </View>
           <View style={styles.viewMarcas}>
-            <TouchableOpacity onPress={linkBuckeye}>
+            <TouchableOpacity onPress={() =>goToUrl("buckeye")}>
               <Image
                 style={styles.icono}
                 source={require('../assets/marca4.png')}
@@ -173,7 +181,7 @@ export default function FormMantencion() {
             </TouchableOpacity>
           </View>
           <View style={styles.viewMarcas}>
-            <TouchableOpacity onPress={linkApollo}>
+            <TouchableOpacity onPress={() =>goToUrl("apollo")}>
               <Image
                 style={styles.icono}
                 source={require('../assets/marca5.png')}
@@ -181,7 +189,7 @@ export default function FormMantencion() {
             </TouchableOpacity>
           </View>
           <View style={styles.viewMarcas}>
-            <TouchableOpacity onPress={linkFiretrace}>
+            <TouchableOpacity onPress={() =>goToUrl("firetrace")}>
               <Image
                 style={styles.icono}
                 source={require('../assets/marca6.png')}
@@ -189,7 +197,7 @@ export default function FormMantencion() {
             </TouchableOpacity>
           </View>
           <View style={styles.viewMarcas}>
-            <TouchableOpacity onPress={linkComm}>
+            <TouchableOpacity onPress={() =>goToUrl("comm")}>
               <Image
                 style={styles.icono}
                 source={require('../assets/marca7.png')}
@@ -219,9 +227,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   imagen: {
-    width: '100%',
-    height: 400,
-    marginBottom: 20,
+    height: hp('57%'),
+    width: wp('100%'),
+    
   },
   titulo: {
     fontSize: 25,
