@@ -82,12 +82,12 @@ const styles = StyleSheet.create({
   logo: {
     resizeMode: 'center',
     height: 120,
-    marginTop: 20,
-    marginBottom: 20,
+    marginTop: 50,
+    marginBottom: 30,
   },
   container: {
-    height: hp('100%'),
-    width: wp('100%'),
+    width: '100%',
+    height: '80%',
   },
   input: {
     height: 45,
