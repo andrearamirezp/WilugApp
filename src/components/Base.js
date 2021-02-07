@@ -4,17 +4,13 @@ import {
   View,
   Dimensions,
   Image,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  ScrollView
 } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from 'react-native-responsive-screen';
 
-var {height} = Dimensions.get('window');
+var { height } = Dimensions.get('window');
 
 var box_count = 3;
 var box_height = height / box_count;
@@ -22,10 +18,10 @@ var box_height = height / box_count;
 export default function LayoutBase() {
   return (
     <View style={styles.container}>
-            <View style={[styles.box, styles.box1]}>
+      <View style={[styles.box, styles.box1]}>
         <Image style={styles.logo} source={require('../assets/logo.png')} />
       </View>
-      
+
     </View>
   );
 }
@@ -47,6 +43,6 @@ const styles = StyleSheet.create({
     resizeMode: 'center',
     height: hp('100%'),
     width: wp('60%'),
-    
+
   },
 });
