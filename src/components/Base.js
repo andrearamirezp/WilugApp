@@ -15,7 +15,7 @@ var { height } = Dimensions.get('window');
 var box_count = 3;
 var box_height = height / box_count;
 
-export default function LayoutBase() {
+export default function Base() {
   return (
     <View style={styles.container}>
       <View style={[styles.box, styles.box1]}>

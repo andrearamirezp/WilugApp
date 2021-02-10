@@ -7,7 +7,13 @@ import {
   View,
   Dimensions,
   TextInput,
+  ScrollView
 } from 'react-native';
+import {Picker} from '@react-native-picker/picker';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from 'react-native-responsive-screen';
 import { useSelector, useDispatch } from "react-redux";
 import { registerClient } from '../actions/client';
 
@@ -42,7 +48,7 @@ export default function RegistrarCliente({ navigation }) {
   return (
     <View style={[styles.box, styles.box1]}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Text style={styles.titulo}>Datos personales</Text>
         <Text style={styles.texto}>Nombre y apellido</Text>
         <TextInput
@@ -76,10 +82,31 @@ export default function RegistrarCliente({ navigation }) {
           value={data.telefono}
           onChangeText={handleChange("telefono")}
         />
+        <Text style={styles.texto}>Región</Text>
+        <View style={styles.picker}>
+          <Picker style={{height: 45, marginLeft: 10}}>
+            <Picker.Item label="Seleccione región" value="0" color="#969696" />
+            <Picker.Item label="JavaScript" value="js" />
+          </Picker>
+        </View>
+
+        <Text style={styles.texto}> Comuna</Text>
+        <View style={styles.picker}>
+          <Picker style={{height: 45, marginLeft: 10}}>
+            <Picker.Item label="Seleccione comuna" value="0" color="#969696" />
+            <Picker.Item label="JavaScript" value="js" />
+          </Picker>
+        </View>
+        <Text style={styles.texto}>Dirección</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Dirección"
+          placeholderTextColor="#969696"
+        />
         <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate('crearContraseña')}>
           <Text style={styles.btnText}>Continuar</Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -87,6 +114,7 @@ export default function RegistrarCliente({ navigation }) {
 const styles = StyleSheet.create({
   box: {
     height: box_height,
+    backgroundColor: '#D7DBDD'
   },
   box1: {
     flex: 2,
@@ -100,9 +128,8 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   container: {
-    width: '100%',
-    height: '80%',
-    // backgroundColor: 'red',
+    width: wp('100%'),
+    height: hp('80%'),
   },
   input: {
     height: 45,
@@ -141,5 +168,15 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  picker: {
+    height: 45,
+    backgroundColor: '#fff',
+    marginHorizontal: 20,
+    borderWidth: 2,
+    borderColor: '#212778',
+    borderRadius: 50,
+    marginBottom: 10,
+    marginTop: 10,
   },
 });

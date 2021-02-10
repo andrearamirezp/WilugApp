@@ -21,7 +21,7 @@ export default function Contactanos() {
           <Text style={styles.texto}>Nombre Completo</Text>
           <TextInput
             style={styles.input}
-            placeholder="Nombre completo"
+            placeholder="Ej: Diego López"
             placeholderTextColor="#969696"
           />
           <Text style={styles.texto}>Correo electrónico</Text>
@@ -79,7 +79,7 @@ export default function Contactanos() {
                 <Text style={{textAlign: 'center'}}>+569 6494 7726</Text>
               </View>
               <View style={{width: '35%', marginLeft: 60}}>
-                <Text style={styles.titulo}>Copaipó</Text>
+                <Text style={styles.titulo}>Copiapó</Text>
                 <Text style={{textAlign: 'center'}}>Los Aromos #1705</Text>
                 <Text style={{textAlign: 'center', color: 'blue'}}>mescobar@wilug.cl</Text>
                 <Text style={{textAlign: 'center'}}>+569 5012 5338</Text>

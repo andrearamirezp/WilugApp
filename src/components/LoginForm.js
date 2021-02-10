@@ -22,7 +22,7 @@ var { height } = Dimensions.get('window');
 var box_count = 3;
 var box_height = height / box_count;
 
-export default function LayoutBase({ navigation }) {
+export default function LoginForm({ navigation }) {
   const dispatch = useDispatch();
   const { token, authenticating, isAuthenticated, authenticateError, user } = useSelector((state) => state.auth);
 
@@ -93,7 +93,7 @@ export default function LayoutBase({ navigation }) {
           <Text style={styles.btnText}>Iniciar sesión</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity>
+        <TouchableOpacity style={{height: '5%'}}>
           <Text style={styles.textUnder}>¿Olvidaste tu contraseña?</Text>
         </TouchableOpacity>
       </View>
@@ -105,24 +105,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
+    backgroundColor: '#D7DBDD'
   },
   box: {
     height: box_height,
   },
   box1: {
     flex: 3,
-    // backgroundColor: '#2196F3',
     alignItems: 'center',
     justifyContent: 'center',
   },
   box2: {
     flex: 10,
-    // backgroundColor: '#8BC34A',
     alignItems: 'center',
   },
   box3: {
     flex: 3,
-    // backgroundColor: '#e3aa1a',
     alignItems: 'center',
   },
   logo: {
@@ -162,7 +160,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   textUnder: {
-    marginTop: 50,
     textDecorationLine: 'underline',
     color: '#0000FF',
   },
@@ -175,6 +172,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 10,
     position: 'relative',
-    top: 20,
+    top: 25,
+    marginBottom: 50
   },
 });

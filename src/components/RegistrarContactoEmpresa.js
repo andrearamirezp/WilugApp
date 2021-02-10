@@ -7,7 +7,12 @@ import {
   View,
   Dimensions,
   TextInput,
+  ScrollView
 } from 'react-native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from 'react-native-responsive-screen';
 
 var {height} = Dimensions.get('window');
 
@@ -22,7 +27,7 @@ export default function RegistrarContactoEmpresa(props) {
   return (
     <View style={[styles.box, styles.box1]}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Text style={styles.titulo}>Datos personales</Text>
         <Text style={{marginLeft: 15, marginBottom: 10}}>
           Datos de la persona encargada en la empresa
@@ -54,7 +59,7 @@ export default function RegistrarContactoEmpresa(props) {
         <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate('crearContraseña')}>
           <Text style={styles.btnText}>Continuar</Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -62,6 +67,7 @@ export default function RegistrarContactoEmpresa(props) {
 const styles = StyleSheet.create({
   box: {
     height: box_height,
+    backgroundColor: '#D7DBDD'
   },
   box1: {
     flex: 2,
@@ -75,9 +81,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   container: {
-    width: '100%',
-    height: '80%',
-    // backgroundColor: 'red',
+    width: wp('100%'),
+    height: hp('80%'),
   },
   input: {
     height: 45,

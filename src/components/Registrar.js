@@ -58,6 +58,7 @@ export default function Registrar(props) {
 const styles = StyleSheet.create({
   box: {
     height: box_height,
+    backgroundColor: '#D7DBDD'
   },
   box1: {
     flex: 2,
