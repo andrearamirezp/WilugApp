@@ -7,6 +7,7 @@ import {
   View,
   Dimensions,
   TextInput,
+  ScrollView
 } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import {
@@ -27,7 +28,7 @@ export default function RegistrarEmpresa(props) {
   return (
     <View style={[styles.box, styles.box1]}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Text style={styles.titulo}>Datos de la empresa</Text>
         <Text style={styles.texto}>Empresa</Text>
         <TextInput
@@ -41,6 +42,13 @@ export default function RegistrarEmpresa(props) {
           placeholder="12.345.678-9"
           placeholderTextColor="#969696"
         />
+        <Text style={styles.texto}>Giro</Text>
+        <View style={styles.picker}>
+          <Picker style={{height: 45, marginLeft: 10}}>
+            <Picker.Item label="Seleccione giro" value="0" color="#969696" />
+            <Picker.Item label="JavaScript" value="js" />
+          </Picker>
+        </View>
         <Text style={styles.texto}>Región</Text>
         <View style={styles.picker}>
           <Picker style={{height: 45, marginLeft: 10}}>
@@ -65,7 +73,7 @@ export default function RegistrarEmpresa(props) {
         <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate('registrarContactoEmpresa')}>
           <Text style={styles.btnText}>Continuar</Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -73,6 +81,7 @@ export default function RegistrarEmpresa(props) {
 const styles = StyleSheet.create({
   box: {
     height: box_height,
+    backgroundColor: '#D7DBDD' 
   },
   box1: {
     flex: 2,
@@ -86,8 +95,8 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   container: {
-    width: '100%',
-    height: '80%',
+    width: wp('100%'),
+    height: hp('80%'),
   },
   input: {
     height: 45,

@@ -3,7 +3,6 @@ import {
   View,
   StyleSheet,
   Text,
-  TextInput,
   ScrollView,
   TouchableOpacity,
   Image,
@@ -16,7 +15,7 @@ import {
   heightPercentageToDP as hp
 } from 'react-native-responsive-screen';
 
-export default function FormMantencion() {
+export default function Nosotros() {
   
   const goToUrl = type => {
     switch(type){
