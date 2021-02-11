@@ -29,11 +29,6 @@ export default function navigation() {
         component={Home} 
         options={{title: 'Wilug'}} />
       <Stack.Screen
-        name="mantencion"
-        component={Mantencion}
-        options={{title: 'Solicitar Mantención'}}
-      />
-      <Stack.Screen
         name="otrosServicios"
         component={OtrosServicios}
         options={{title: 'Otros Servicios'}}
@@ -91,6 +86,11 @@ export default function navigation() {
       <Stack.Screen
         name="registrarCliente"
         component={RegistrarCliente}
+        options={{title: 'Registrar Cliente'}}
+      />
+      <Stack.Screen
+        name="mantencion"
+        component={Mantencion}
         options={{title: 'Registrar Cliente'}}
       />
     </Stack.Navigator>

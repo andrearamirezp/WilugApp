@@ -78,22 +78,13 @@ const styles = StyleSheet.create({
   },
   boxCard: {
     marginTop: 30,
-    backgroundColor: '#f5fcff',
-    
+    backgroundColor: 'red',
     width: '80%',
   },
   card: {
     backgroundColor: '#fff',
     borderColor: '#212778',
-    borderWidth: 1,
-    marginBottom: 10,
-    shadowColor: '#000',
-    shadowOpacity: 0.2,
-    shadowRadius: 1,
-    shadowOffset: {
-      width: 3,
-      height: 3,
-    },
+    borderWidth: 2,
     flexDirection: 'row',
     flexWrap: 'wrap',
   },

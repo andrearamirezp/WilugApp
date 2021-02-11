@@ -1,8 +1,8 @@
 import React from "react";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import Productos from "../components/Productos";
+import ListaProductos from "../components/ListaProductos";
 import Historial from "../components/Historial";
-import MantencionClientes from "../components/MantencionClientes";
+import Servicios from "../components/Servicios";
 /* import About from "../screens/About";
 import Contact from "../screens/Contact";
 import HomeStack from "./HomeStack"; */
@@ -10,10 +10,16 @@ import HomeStack from "./HomeStack"; */
 const Tab = createBottomTabNavigator();
 export default function navigation() {
     return (
-        <Tab.Navigator>
-            <Tab.Screen name="productos" component={Productos} options={{title:'Productos'}}/>
+        <Tab.Navigator
+        tabBarOptions={{
+            activeTintColor: "#FFF",
+            activeBackgroundColor: "#212778",
+            inactiveTintColor: "#000",
+          }}>
+            <Tab.Screen name="productos" component={ListaProductos} options={{title:'Productos'}}/>
+            <Tab.Screen name="servicios" component={Servicios} options={{title:'Servicios'}}/>
             <Tab.Screen name="historial" component={Historial} options={{title:'Historial'}}/>
-            <Tab.Screen name="mantencion" component={MantencionClientes} options={{title:'Mantencion'}}/>
+            
         </Tab.Navigator>
     )
     
