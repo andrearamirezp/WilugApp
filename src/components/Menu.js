@@ -4,18 +4,15 @@ import {
   Image,
   Dimensions,
   StyleSheet,
-  Text,
-  ScrollView,
   ImageBackground,
 } from 'react-native';
-import {DataTable} from 'react-native-paper';
 
 var {height} = Dimensions.get('window');
 
 var box_count = 3;
 var box_height = height / box_count;
 
-export default function Servicios(props) {
+export default function Menu(props) {
   return (
     <View style={[styles.box, styles.box1]}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
@@ -29,25 +26,7 @@ export default function Servicios(props) {
               width: '100%',
               height: '100%',
             }}>
-            <DataTable style={{backgroundColor: 'rgba(255,255,255, .5)'}}>
-              <DataTable.Header>
-                <DataTable.Title style={{justifyContent: 'center'}}>SERVICIO</DataTable.Title>
-                <DataTable.Title style={{justifyContent: 'flex-end'}}>FECHA SOLICITUD</DataTable.Title>
-                <DataTable.Title style={{justifyContent: 'flex-end'}}>FECHA VISITA</DataTable.Title>
-              </DataTable.Header>
-              <ScrollView>
-                <DataTable.Row >
-                  <DataTable.Cell >Frozen yogurt</DataTable.Cell>
-                  <DataTable.Cell numeric>159</DataTable.Cell>
-                  <DataTable.Cell numeric>6.0</DataTable.Cell>
-                </DataTable.Row>
-                <DataTable.Row>
-                  <DataTable.Cell>Frozen yogurt</DataTable.Cell>
-                  <DataTable.Cell numeric>159</DataTable.Cell>
-                  <DataTable.Cell numeric>6.0</DataTable.Cell>
-                </DataTable.Row>
-              </ScrollView>
-            </DataTable>
+            
           </View>
         </ImageBackground>
       </View>
