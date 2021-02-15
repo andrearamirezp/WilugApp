@@ -14,6 +14,7 @@ import RegistrarEmpresa from '../components/RegistrarEmpresa';
 import RegistrarContactoEmpresa from '../components/RegistrarContactoEmpresa';
 import CrearContraseña from '../components/CrearContraseña';
 import RegistrarCliente from '../components/RegistrarCliente';
+import CambiarDatos from '../components/CambiarDatos';
 
 const Stack = createStackNavigator();
 
@@ -92,6 +93,11 @@ export default function navigation() {
         name="mantencion"
         component={Mantencion}
         options={{title: 'Registrar Cliente'}}
+      />
+      <Stack.Screen
+        name="cambiarDatos"
+        component={CambiarDatos}
+        options={{title: 'Cambiar Datos'}}
       />
     </Stack.Navigator>
   );

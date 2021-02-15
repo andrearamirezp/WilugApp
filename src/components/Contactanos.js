@@ -37,6 +37,8 @@ export default function Contactanos() {
           <Text style={styles.texto}>Mensaje</Text>
           <TextInput
             style={styles.inputMSJ}
+            multiline
+            numberOfLines={5}
             placeholder=""
             placeholderTextColor="#969696"
           />

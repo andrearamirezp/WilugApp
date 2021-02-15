@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -8,31 +8,38 @@ import {
   TextInput,
   TouchableOpacity,
   AsyncStorage,
-  Alert
+  Alert,
+  ScrollView,
 } from 'react-native';
 import {
   widthPercentageToDP as wp,
-  heightPercentageToDP as hp
+  heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import { useSelector, useDispatch } from "react-redux";
-import { login } from '../actions/auth';
+import {useSelector, useDispatch} from 'react-redux';
+import {login} from '../actions/auth';
 
-var { height } = Dimensions.get('window');
+var {height} = Dimensions.get('window');
 
 var box_count = 3;
 var box_height = height / box_count;
 
-export default function LoginForm({ navigation }) {
+export default function LoginForm({navigation}) {
   const dispatch = useDispatch();
-  const { token, authenticating, isAuthenticated, authenticateError, user } = useSelector((state) => state.auth);
+  const {
+    token,
+    authenticating,
+    isAuthenticated,
+    authenticateError,
+    user,
+  } = useSelector((state) => state.auth);
 
   const [data, setData] = useState({
     rut: '',
-    password: ''
+    password: '',
   });
 
   const handleChange = (name) => (value) => {
-    setData({ ...data, [name]: value });
+    setData({...data, [name]: value});
   };
 
   const handleSubmit = () => {
@@ -45,79 +52,83 @@ export default function LoginForm({ navigation }) {
       Alert.alert('Inicio de sesión', 'inicio sesión exitoso');
       AsyncStorage.setItem('token', token);
       AsyncStorage.setItem('user', JSON.stringify(user));
-      navigation.navigate('clienteRegistrado')
+      navigation.navigate('clienteRegistrado');
     }
-  }, [token, isAuthenticated])
+  }, [token, isAuthenticated]);
 
   useEffect(() => {
-    if(authenticateError) {
+    if (authenticateError) {
       Alert.alert('Inicio de sesión', 'Error al iniciar sesión');
     }
-  }, [authenticateError])
+  }, [authenticateError]);
 
   useEffect(() => {
-    if(authenticating) {
-      console.log('cargando .....')
+    if (authenticating) {
+      console.log('cargando .....');
     }
-  }, [authenticating])
+  }, [authenticating]);
 
   return (
-    <View style={styles.container}>
-      <View style={[styles.box, styles.box1]}>
-        <Image style={styles.logo} source={require('../assets/logo.png')} />
-      </View>
-      <View style={[styles.box, styles.box2]}>
-        <Image
-          style={styles.logoUser}
-          source={require('../assets/usuario.png')}
-        />
-        <Text style={styles.textWelcome}>Bienvenid@ a WilugApp</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="email@email.com"
-          placeholderTextColor="#969696"
-          value={data.rut}
-          onChangeText={handleChange("rut")}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Contraseña"
-          placeholderTextColor="#969696"
-          secureTextEntry={true}
-          value={data.password}
-          onChangeText={handleChange("password")}
-        />
-        <TouchableOpacity
-          style={styles.boton}
-          onPress={handleSubmit, () => navigation.navigate('clienteRegistrado')}>
-          <Text style={styles.btnText}>Iniciar sesión</Text>
-        </TouchableOpacity>
+    <View style={[styles.box, styles.box1]}>
+      <Image style={styles.logo} source={require('../assets/logo.png')} />
 
-        <TouchableOpacity style={{height: '5%'}}>
-          <Text style={styles.textUnder}>¿Olvidaste tu contraseña?</Text>
-        </TouchableOpacity>
-      </View>
+      <ScrollView style={styles.container}>
+        <View style={styles.box1}>
+          <Image
+            style={styles.logoUser}
+            source={require('../assets/usuario.png')}
+          />
+          <Text style={styles.textWelcome}>Bienvenid@ a WilugApp</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="email@email.com"
+            placeholderTextColor="#969696"
+            value={data.rut}
+            onChangeText={handleChange('rut')}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Contraseña"
+            placeholderTextColor="#969696"
+            secureTextEntry={true}
+            value={data.password}
+            onChangeText={handleChange('password')}
+          />
+          <TouchableOpacity
+            style={styles.boton}
+            onPress={
+              (handleSubmit, () => navigation.navigate('clienteRegistrado'))
+            }>
+            <Text style={styles.btnText}>Iniciar sesión</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{height: '5%'}}>
+            <Text style={styles.textUnder}>¿Olvidaste tu contraseña?</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#D7DBDD'
+    width: wp('100%'),
+    height: hp('80%'),
   },
   box: {
     height: box_height,
+    backgroundColor: '#D7DBDD',
   },
   box1: {
-    flex: 3,
+    flex: 2,
     alignItems: 'center',
     justifyContent: 'center',
   },
   box2: {
     flex: 10,
-    alignItems: 'center',
+    // alignItems: 'center',
+    backgroundColor: 'red',
   },
   box3: {
     flex: 3,
@@ -125,10 +136,9 @@ const styles = StyleSheet.create({
   },
   logo: {
     resizeMode: 'center',
-    height: hp('100%'), // 70% of height device screen
-    width: wp('80%'),
-    marginTop: 40,
-    marginBottom: 20,
+    height: 120,
+    marginTop: 50,
+    marginBottom: 30,
   },
   logoUser: {
     width: 140,
@@ -173,6 +183,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     position: 'relative',
     top: 25,
-    marginBottom: 50
+    marginBottom: 50,
   },
 });
