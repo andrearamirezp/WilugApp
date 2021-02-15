@@ -27,7 +27,7 @@ export default function Home(props) {
         <View style={styles.menuItem}>
           <TouchableOpacity onPress={() => navigation.navigate('informacion')}>
             <Image
-              source={require('../assets/extintor.png')}
+              source={require('../assets/extintor2.png')}
               style={styles.image}
             />
             <Text style={styles.cardText}>Manejo de extintores</Text>

@@ -29,6 +29,8 @@ export default function ManejoExtintor() {
       case "twitter":
         Linking.openURL('https://twitter.com/wilugchile?lang=es');
         break;
+      case "youtube":
+        Linking.openURL('https://www.youtube.com/watch?v=Ow51yqK70TY')
     }
   };
 
@@ -41,11 +43,13 @@ export default function ManejoExtintor() {
           <Text style={styles.cuerpo1}>
             Te ayudamos a conocer los tipos de extintores
           </Text>
-          <YoutubePlayer
-            height={250}
-            //ref={playerRef}
-            videoId={'Ow51yqK70TY'}
-          />
+          <TouchableOpacity onPress={() =>goToUrl("youtube")}>
+              <Image
+              style={styles.imagenY}
+              source={require('../assets/YoutubeVideo.png')}>
+
+              </Image>
+          </TouchableOpacity>  
           <Text style={styles.titulo2}>Tipos de fuego</Text>
           <View
             style={{
@@ -160,6 +164,11 @@ const styles = StyleSheet.create({
   imagen: {
     
     height: hp('70%'),
+    width: wp('100%'),
+  },
+  imagenY: {
+    
+    height: hp('30%'),
     width: wp('100%'),
   },
   imagen2: {
