@@ -39,7 +39,7 @@ export default function Menu(props) {
             </View>
             <Text style={styles.text}>Catálogo</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.card}>
+          <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('cambiarDatos')}>
             <View style={styles.listMenu}>
               <Image
                 source={require('../assets/boligrafo.png')}

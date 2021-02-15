@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
   },
   boxCard: {
     marginTop: 30,
-    backgroundColor: 'red',
     width: '80%',
   },
   card: {

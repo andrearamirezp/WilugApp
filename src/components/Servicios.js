@@ -36,7 +36,7 @@ export default function Servicios(props) {
                 </TouchableOpacity>
               </View>
               <View style={styles.menuItem}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('otrosServicios')}>
                   <Image
                     source={require('../assets/innovacion.png')}
                     style={styles.image}
