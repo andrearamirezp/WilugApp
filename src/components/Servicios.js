@@ -41,7 +41,7 @@ export default function Servicios(props) {
                     source={require('../assets/innovacion.png')}
                     style={styles.image}
                   />
-                  <Text style={styles.cardText}>Otros servicios</Text>
+                  <Text style={styles.cardText}>Ingeniería y sistemas</Text>
                 </TouchableOpacity>
               </View>
             </View>
