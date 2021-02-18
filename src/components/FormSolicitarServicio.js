@@ -8,6 +8,7 @@ import {
   Dimensions,
   TextInput,
   ScrollView,
+  Alert
 } from 'react-native';
 import {
   widthPercentageToDP as wp,
@@ -20,6 +21,20 @@ var box_count = 3;
 var box_height = height / box_count;
 
 export default function FormSolicitarServicio() {
+  const Alerta = () =>
+    Alert.alert(
+      "Solicitar Servicio",
+      "¿Esta seguro solicitar este servicio?",
+      [
+        {
+          text: "Volver",
+          onPress: () => console.log("Cancelar Presionado"),
+          style: "cancel"
+        },
+        { text: "SI", onPress: () => console.log("Si presionado") }
+      ],
+      { cancelable: false }
+    );
   return (
     <View style={[styles.box, styles.box1]}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
@@ -39,7 +54,7 @@ export default function FormSolicitarServicio() {
           placeholder=""
           placeholderTextColor="#969696"
         />
-        <TouchableOpacity style={styles.boton}>
+        <TouchableOpacity style={styles.boton} onPress={Alerta}>
           <Text style={styles.btnText}>Enviar</Text>
         </TouchableOpacity>
       </ScrollView>

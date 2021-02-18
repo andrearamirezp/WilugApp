@@ -32,7 +32,14 @@ export default function RegistrarContactoEmpresa(props) {
         <Text style={{marginLeft: 15, marginBottom: 10}}>
           Datos de la persona encargada en la empresa
         </Text>
-        <Text style={styles.texto}>Nombre y apellido</Text>
+        <Text style={styles.texto}>Nombre y apellido cliente</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Ej: Diego López"
+          placeholderTextColor="#969696"
+        />
+
+        <Text style={styles.texto}>Nombre y apellido persona de conctacto</Text>
         <TextInput
           style={styles.input}
           placeholder="Ej: Diego López"
