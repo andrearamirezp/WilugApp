@@ -16,6 +16,7 @@ import CrearContraseña from '../components/CrearContraseña';
 import RegistrarCliente from '../components/RegistrarCliente';
 import CambiarDatos from '../components/CambiarDatos';
 import FormSolicitarServicio from '../components/FormSolicitarServicio';
+import RecuperarContraseña from '../components/RecuperarContraseña';
 
 const Stack = createStackNavigator();
 
@@ -104,6 +105,11 @@ export default function navigation() {
         name="formSolicitarservicio"
         component={FormSolicitarServicio}
         options={{title: 'formSolicitarservicio'}}
+      />
+      <Stack.Screen
+        name="recuperarContraseña"
+        component={RecuperarContraseña}
+        options={{title: 'recuperarContraseña'}}
       />
     </Stack.Navigator>
   );
