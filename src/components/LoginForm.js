@@ -102,7 +102,9 @@ export default function LoginForm({navigation}) {
             <Text style={styles.btnText}>Iniciar sesión</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={{height: '5%'}}>
+          <TouchableOpacity
+            style={{height: '5%'}}
+            onPress={() => navigation.navigate('recuperarContraseña')}>
             <Text style={styles.textUnder}>¿Olvidaste tu contraseña?</Text>
           </TouchableOpacity>
         </View>
