@@ -20,7 +20,8 @@ var {height} = Dimensions.get('window');
 var box_count = 3;
 var box_height = height / box_count;
 
-export default function FormSolicitarServicio() {
+export default function FormSolicitarServicio({route,navigation}) {
+  const { tituloCabecera } = route.params;
   const Alerta = () =>
     Alert.alert(
       "Solicitar Servicio",
@@ -39,7 +40,7 @@ export default function FormSolicitarServicio() {
     <View style={[styles.box, styles.box1]}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
       <ScrollView style={styles.container}>
-        <Text style={styles.titulo}>Nombre del sistema</Text>
+        <Text style={styles.titulo}>{tituloCabecera}</Text>
         <Text style={[styles.texto, {marginBottom: 10}]}>
           Desarrollo de la Ingeniaría de Sistemas contra incendio por un equipo
           profesional técnicamente experimentado.
