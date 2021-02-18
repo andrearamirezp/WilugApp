@@ -82,6 +82,14 @@ export default function RegistrarCliente({ navigation }) {
           value={data.telefono}
           onChangeText={handleChange("telefono")}
         />
+        <Text style={styles.texto}>Giro</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Ej: Particular"
+          placeholderTextColor="#969696"
+          value={data.nombre}
+          onChangeText={handleChange("giro")}
+        />
         <Text style={styles.texto}>Región</Text>
         <View style={styles.picker}>
           <Picker style={{height: 45, marginLeft: 10}}>
@@ -97,6 +105,12 @@ export default function RegistrarCliente({ navigation }) {
             <Picker.Item label="JavaScript" value="js" />
           </Picker>
         </View>
+        <Text style={styles.texto}>Ciudad</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Ej: Coquimbo"
+          placeholderTextColor="#969696"
+        />
         <Text style={styles.texto}>Dirección</Text>
         <TextInput
           style={styles.input}

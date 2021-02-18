@@ -7,7 +7,8 @@ import {
   View,
   Dimensions,
   TextInput,
-  ScrollView
+  ScrollView,
+  Alert
 } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import {
@@ -44,6 +45,20 @@ export default function RegistrarCliente({ navigation }) {
   const doRequest = useCallback(async () => {
     dispatch(registerClient(data));
   }, [dispatch]);
+  const Alerta = () =>
+    Alert.alert(
+      "Cambiar Datos",
+      "¿Esta seguro de cambiar los datos?",
+      [
+        {
+          text: "Volver",
+          onPress: () => console.log("Cancelar Presionado"),
+          style: "cancel"
+        },
+        { text: "SI", onPress: () => console.log("Si presionado") }
+      ],
+      { cancelable: false }
+    );
 
   return (
     <View style={[styles.box, styles.box1]}>
@@ -86,7 +101,7 @@ export default function RegistrarCliente({ navigation }) {
           placeholderTextColor="#969696"
           secureTextEntry={true}
         />
-        <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate('crearContraseña')}>
+        <TouchableOpacity style={styles.boton} onPress={Alerta}>
           <Text style={styles.btnText}>Finalizar</Text>
         </TouchableOpacity>
       </ScrollView>

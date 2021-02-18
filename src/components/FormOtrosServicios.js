@@ -12,6 +12,7 @@ import Base from './Base';
 
 export default function FormMantencion(props) {
   const {navigation} = props;
+
   return (
     <>
       <Base />

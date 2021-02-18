@@ -7,11 +7,26 @@ import {
   ScrollView,
   TouchableOpacity,
   ImageBackground,
+  Alert
 
 } from 'react-native';
 import Base from './Base';
 
 export default function Contactanos() {
+  const Alerta = () =>
+    Alert.alert(
+      "Contacto",
+      "¿Esta seguro de enviar este mensaje?",
+      [
+        {
+          text: "Volver",
+          onPress: () => console.log("Cancelar Presionado"),
+          style: "cancel"
+        },
+        { text: "SI", onPress: () => console.log("Si presionado") }
+      ],
+      { cancelable: false }
+    );
   return (
     <>
       <Base />
@@ -42,7 +57,7 @@ export default function Contactanos() {
             placeholder=""
             placeholderTextColor="#969696"
           />
-          <TouchableOpacity style={styles.boton}>
+          <TouchableOpacity style={styles.boton} onPress={Alerta}>
             <Text style={styles.btnText}>Enviar</Text>
           </TouchableOpacity>
         </View>
