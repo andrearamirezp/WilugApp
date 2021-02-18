@@ -13,6 +13,10 @@ export default function navigation() {
   return (
     <Tab.Navigator
       tabBarOptions={{
+        labelStyle:{
+          fontSize:13,
+          margin: 15,
+        },
         activeTintColor: '#FFF',
         activeBackgroundColor: '#212778',
         inactiveTintColor: '#000',

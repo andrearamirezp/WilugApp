@@ -12,7 +12,7 @@ import Base from './Base';
 
 export default function FormMantencion(props) {
   const {navigation} = props;
-
+  
   return (
     <>
       <Base />
@@ -33,7 +33,11 @@ export default function FormMantencion(props) {
               <Text style={styles.texto}>
                 Sistema de detección y alarma contra incendio
               </Text>
-              <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate('formSolicitarservicio')}>
+              <TouchableOpacity style={styles.boton} onPress={
+                () => navigation.navigate('formSolicitarservicio',{
+                      tituloCabecera:'Sistema de deteccion y alarma contra incendio',
+                    })
+                }>
                 <Text style={styles.text}>Solicitar</Text>
               </TouchableOpacity>
             </View>
@@ -54,7 +58,11 @@ export default function FormMantencion(props) {
               <Text style={styles.texto}>
                 Sistema de extinción contra incendio en base a agua
               </Text>
-              <TouchableOpacity style={styles.boton}>
+              <TouchableOpacity style={styles.boton} onPress={
+                () => navigation.navigate('formSolicitarservicio',{
+                      tituloCabecera:'Sistema de extinción contra incendio en base a agua',
+                    })
+                }>
                 <Text style={styles.text}>Solicitar</Text>
               </TouchableOpacity>
             </View>
@@ -75,7 +83,11 @@ export default function FormMantencion(props) {
               <Text style={styles.texto}>
                 Sistema de extinción contra incendio en base de gas
               </Text>
-              <TouchableOpacity style={styles.boton}>
+              <TouchableOpacity style={styles.boton} onPress={
+                () => navigation.navigate('formSolicitarservicio',{
+                      tituloCabecera:'Sistema de extinción contra incendio en base de gas',
+                    })
+                }>
                 <Text style={styles.text}>Solicitar</Text>
               </TouchableOpacity>
             </View>
@@ -96,7 +108,11 @@ export default function FormMantencion(props) {
               <Text style={styles.texto}>
                 Sistema de extinción contra incendio en base a polvo químico
               </Text>
-              <TouchableOpacity style={styles.boton}>
+              <TouchableOpacity style={styles.boton} onPress={
+                () => navigation.navigate('formSolicitarservicio',{
+                      tituloCabecera:'Sistema de extinción contra incendio en base a polvo químico',
+                    })
+                }>
                 <Text style={styles.text}>Solicitar</Text>
               </TouchableOpacity>
             </View>
@@ -117,7 +133,11 @@ export default function FormMantencion(props) {
               <Text style={styles.texto}>
                 Sistema de extinción contra incendio para cocinas
               </Text>
-              <TouchableOpacity style={styles.boton}>
+              <TouchableOpacity style={styles.boton} onPress={
+                () => navigation.navigate('formSolicitarservicio',{
+                      tituloCabecera:'Sistema de extinción contra incendio para cocinas',
+                    })
+                }>
                 <Text style={styles.text}>Solicitar</Text>
               </TouchableOpacity>
             </View>
