@@ -7,15 +7,15 @@ import {
   View,
   Dimensions,
   TextInput,
-  ScrollView
+  ScrollView,
 } from 'react-native';
-import {Picker} from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker';
 import {
   widthPercentageToDP as wp,
-  heightPercentageToDP as hp
+  heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import { useSelector, useDispatch } from "react-redux";
-import { registerClient } from '../actions/client';
+import { useDispatch } from 'react-redux';
+import { setDataClient } from '../actions/client';
 
 var { height } = Dimensions.get('window');
 
@@ -31,19 +31,25 @@ export default function RegistrarCliente({ navigation }) {
     ciudad: '',
     telefono: '',
     email: '',
-    tipo: '',
-    password: ''
+    tipo: 'cl',
+    password: '',
+    nombreContacto: '',
+    direccionFactura: '',
+    giro: '',
+    secondTelefono: '',
+    comuna: 1,
   });
 
   const dispatch = useDispatch();
-  const { reciveRegister, successRegister, errorRegister } = useSelector((state) => state.client);
 
-  const handleChange =  (name) => (value) => {
+  const handleChange = (name) => (value) => {
     setData({ ...data, [name]: value });
   };
-  const doRequest = useCallback(async () => {
-    dispatch(registerClient(data));
-  }, [dispatch]);
+
+  const handleSubmit = () => {
+    dispatch(setDataClient(data));
+    navigation.navigate('crearContraseña');
+  };
 
   return (
     <View style={[styles.box, styles.box1]}>
@@ -56,7 +62,7 @@ export default function RegistrarCliente({ navigation }) {
           placeholder="Ej: Diego López"
           placeholderTextColor="#969696"
           value={data.nombre}
-          onChangeText={handleChange("nombre")}
+          onChangeText={handleChange('nombre')}
         />
         <Text style={styles.texto}>Rut</Text>
         <TextInput
@@ -64,7 +70,7 @@ export default function RegistrarCliente({ navigation }) {
           placeholder="12.345.678-9"
           placeholderTextColor="#969696"
           value={data.rut}
-          onChangeText={handleChange("rut")}
+          onChangeText={handleChange('rut')}
         />
         <Text style={styles.texto}>Correo electrónico</Text>
         <TextInput
@@ -72,7 +78,7 @@ export default function RegistrarCliente({ navigation }) {
           placeholder="Ej: email@email.com"
           placeholderTextColor="#969696"
           value={data.email}
-          onChangeText={handleChange("email")}
+          onChangeText={handleChange('email')}
         />
         <Text style={styles.texto}>Teléfono</Text>
         <TextInput
@@ -80,19 +86,19 @@ export default function RegistrarCliente({ navigation }) {
           placeholder="9 1234 5678"
           placeholderTextColor="#969696"
           value={data.telefono}
-          onChangeText={handleChange("telefono")}
+          onChangeText={handleChange('telefono')}
         />
         <Text style={styles.texto}>Giro</Text>
         <TextInput
           style={styles.input}
           placeholder="Ej: Particular"
           placeholderTextColor="#969696"
-          value={data.nombre}
-          onChangeText={handleChange("giro")}
+          value={data.giro}
+          onChangeText={handleChange('giro')}
         />
         <Text style={styles.texto}>Región</Text>
         <View style={styles.picker}>
-          <Picker style={{height: 45, marginLeft: 10}}>
+          <Picker style={{ height: 45, marginLeft: 10 }}>
             <Picker.Item label="Seleccione región" value="0" color="#969696" />
             <Picker.Item label="JavaScript" value="js" />
           </Picker>
@@ -100,7 +106,7 @@ export default function RegistrarCliente({ navigation }) {
 
         <Text style={styles.texto}> Comuna</Text>
         <View style={styles.picker}>
-          <Picker style={{height: 45, marginLeft: 10}}>
+          <Picker style={{ height: 45, marginLeft: 10 }}>
             <Picker.Item label="Seleccione comuna" value="0" color="#969696" />
             <Picker.Item label="JavaScript" value="js" />
           </Picker>
@@ -110,14 +116,20 @@ export default function RegistrarCliente({ navigation }) {
           style={styles.input}
           placeholder="Ej: Coquimbo"
           placeholderTextColor="#969696"
+          value={data.ciudad}
+          onChangeText={handleChange('ciudad')}
         />
         <Text style={styles.texto}>Dirección</Text>
         <TextInput
           style={styles.input}
           placeholder="Dirección"
           placeholderTextColor="#969696"
+          value={data.direccion}
+          onChangeText={handleChange('direccion')}
         />
-        <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate('crearContraseña')}>
+        <TouchableOpacity
+          style={styles.boton}
+          onPress={handleSubmit}>
           <Text style={styles.btnText}>Continuar</Text>
         </TouchableOpacity>
       </ScrollView>
@@ -128,7 +140,7 @@ export default function RegistrarCliente({ navigation }) {
 const styles = StyleSheet.create({
   box: {
     height: box_height,
-    backgroundColor: '#D7DBDD'
+    backgroundColor: '#D7DBDD',
   },
   box1: {
     flex: 2,

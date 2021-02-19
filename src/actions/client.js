@@ -4,6 +4,7 @@ import { url } from '../../config.json';
 export const RECIVE_REGISTER = "RECIVE_REGISTER";
 export const FINISH_REGISTER = "FINISH_REGISTER";
 export const ERROR_REGISTER = "ERROR_REGISTER";
+export const SET_DATA = "SET_DATA";
 
 const reciveRegister = () => {
     return {
@@ -13,14 +14,20 @@ const reciveRegister = () => {
 
 const finishRegister = () => {
     return {
-        type: FINISH_REGISTER,
-        data
+        type: FINISH_REGISTER
     };
 };
 
 const errorRegister = () => {
     return {
         type: ERROR_REGISTER
+    };
+};
+
+const setData = (data) => {
+    return {
+        type: SET_DATA,
+        data
     };
 };
 
@@ -37,7 +44,7 @@ export const registerClient = (data) => async (dispatch) => {
         };
 
         const rawResponse = await fetch(`${url}clients/newClient`, config);
-        if (rawResponse.status === 201) {
+        if (rawResponse.status === 200) {
             dispatch(finishRegister());
         } else {
             dispatch(errorRegister());
@@ -45,4 +52,14 @@ export const registerClient = (data) => async (dispatch) => {
     } catch (error) {
         dispatch(errorRegister());
     }
+};
+
+export const setDataClient = data => async (dispatch) => {
+    if(data.tipo == 'cl') {
+        data.razonSocial = data.nombre;
+        data.nombreContacto = data.nombre;
+        data.direccionFactura = data.direccion;
+        data.secondTelefono = data.telefono;
+    }
+    dispatch(setData(data));
 };

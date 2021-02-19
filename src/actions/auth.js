@@ -28,7 +28,6 @@ const errorLogin = () => {
 export const login = (data) => async (dispatch) => {
     try {
         dispatch(reciveLogin());
-
         const config = {
             method: 'POST',
             headers: {
@@ -38,10 +37,11 @@ export const login = (data) => async (dispatch) => {
         };
 
         const rawResponse = await fetch(`${url}auth/login`, config);
-        console.log(rawResponse)
         if (rawResponse.status === 200) {
             const { token, user } = await rawResponse.json();
             dispatch(successLogin(user, token));
+        } else {
+            dispatch(errorLogin());
         }
     } catch (error) {
         dispatch(errorLogin());

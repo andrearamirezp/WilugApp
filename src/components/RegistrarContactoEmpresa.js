@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
@@ -13,23 +13,58 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from 'react-native-responsive-screen';
+import { useSelector, useDispatch } from 'react-redux';
+import { setDataClient } from '../actions/client';
 
-var {height} = Dimensions.get('window');
+var { height } = Dimensions.get('window');
 
 var box_count = 3;
 var box_height = height / box_count;
 
 export default function RegistrarContactoEmpresa(props) {
-    const {navigation} = props
-  state = {
-    language: 'java',
+  const { navigation } = props
+  const dispatch = useDispatch();
+
+  const [data, setData] = useState({
+    nombre: '',
+    razonSocial: '',
+    rut: '',
+    direccion: '',
+    ciudad: '',
+    telefono: '',
+    email: '',
+    tipo: '',
+    password: '',
+    nombreContacto: '',
+    direccionFactura: '',
+    giro: '',
+    secondTelefono: '',
+    comuna: ''
+  });
+
+  const {
+    dataClient
+  } = useSelector((state) => state.client);
+
+  useEffect(() => {
+    setData({ ...dataClient });
+  }, []);
+
+  const handleChange = (name) => (value) => {
+    setData({ ...data, [name]: value });
   };
+
+  const handleSubmit = () => {
+    dispatch(setDataClient(data));
+    navigation.navigate('crearContraseña')
+  };
+
   return (
     <View style={[styles.box, styles.box1]}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
       <ScrollView style={styles.container}>
         <Text style={styles.titulo}>Datos personales</Text>
-        <Text style={{marginLeft: 15, marginBottom: 10}}>
+        <Text style={{ marginLeft: 15, marginBottom: 10 }}>
           Datos de la persona encargada en la empresa
         </Text>
         <Text style={styles.texto}>Nombre y apellido cliente</Text>
@@ -37,6 +72,8 @@ export default function RegistrarContactoEmpresa(props) {
           style={styles.input}
           placeholder="Ej: Diego López"
           placeholderTextColor="#969696"
+          value={data.nombre}
+          onChangeText={handleChange('nombre')}
         />
 
         <Text style={styles.texto}>Nombre y apellido persona de conctacto</Text>
@@ -44,26 +81,34 @@ export default function RegistrarContactoEmpresa(props) {
           style={styles.input}
           placeholder="Ej: Diego López"
           placeholderTextColor="#969696"
+          value={data.nombreContacto}
+          onChangeText={handleChange('nombreContacto')}
         />
         <Text style={styles.texto}>Correo electrónico</Text>
         <TextInput
           style={styles.input}
           placeholder="Ej: email@email.com"
           placeholderTextColor="#969696"
+          value={data.email}
+          onChangeText={handleChange('email')}
         />
         <Text style={styles.texto}>Teléfono</Text>
         <TextInput
           style={styles.input}
           placeholder="9 1234 5678"
           placeholderTextColor="#969696"
+          value={data.telefono}
+          onChangeText={handleChange('telefono')}
         />
         <Text style={styles.texto}>Otro teléfono</Text>
         <TextInput
           style={styles.input}
           placeholder="9 1234 5678"
           placeholderTextColor="#969696"
+          value={data.secondTelefono}
+          onChangeText={handleChange('secondTelefono')}
         />
-        <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate('crearContraseña')}>
+        <TouchableOpacity style={styles.boton} onPress={handleSubmit}>
           <Text style={styles.btnText}>Continuar</Text>
         </TouchableOpacity>
       </ScrollView>

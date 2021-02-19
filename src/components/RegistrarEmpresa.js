@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
@@ -9,22 +9,49 @@ import {
   TextInput,
   ScrollView
 } from 'react-native';
-import {Picker} from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from 'react-native-responsive-screen';
+import { useDispatch } from 'react-redux';
+import { setDataClient } from '../actions/client';
 
-var {height} = Dimensions.get('window');
+var { height } = Dimensions.get('window');
 
 var box_count = 3;
 var box_height = height / box_count;
 
 export default function RegistrarEmpresa(props) {
-  const {navigation} = props
-  state = {
-    language: 'java',
+  const { navigation } = props
+  const dispatch = useDispatch();
+
+  const [data, setData] = useState({
+    nombre: '',
+    razonSocial: '',
+    rut: '',
+    direccion: '',
+    ciudad: '',
+    telefono: '',
+    email: '',
+    tipo: 'E',
+    password: '',
+    nombreContacto: '',
+    direccionFactura: '',
+    giro: '',
+    secondTelefono: '',
+    comuna: 1,
+  });
+
+  const handleChange = (name) => (value) => {
+    setData({ ...data, [name]: value });
   };
+
+  const handleSubmit = () => {
+    dispatch(setDataClient(data));
+    navigation.navigate('registrarContactoEmpresa');
+  };
+
   return (
     <View style={[styles.box, styles.box1]}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
@@ -35,22 +62,28 @@ export default function RegistrarEmpresa(props) {
           style={styles.input}
           placeholder="Razon social"
           placeholderTextColor="#969696"
+          value={data.razonSocial}
+          onChangeText={handleChange('razonSocial')}
         />
         <Text style={styles.texto}>Rut</Text>
         <TextInput
           style={styles.input}
           placeholder="12.345.678-9"
           placeholderTextColor="#969696"
+          value={data.rut}
+          onChangeText={handleChange('rut')}
         />
         <Text style={styles.texto}>Giro</Text>
         <TextInput
           style={styles.input}
           placeholder="Particular"
           placeholderTextColor="#969696"
+          value={data.giro}
+          onChangeText={handleChange('giro')}
         />
         <Text style={styles.texto}>Región</Text>
         <View style={styles.picker}>
-          <Picker style={{height: 45, marginLeft: 10}}>
+          <Picker style={{ height: 45, marginLeft: 10 }}>
             <Picker.Item label="Seleccione región" value="0" color="#969696" />
             <Picker.Item label="JavaScript" value="js" />
           </Picker>
@@ -58,7 +91,7 @@ export default function RegistrarEmpresa(props) {
 
         <Text style={styles.texto}> Comuna</Text>
         <View style={styles.picker}>
-          <Picker style={{height: 45, marginLeft: 10}}>
+          <Picker style={{ height: 45, marginLeft: 10 }}>
             <Picker.Item label="Seleccione comuna" value="0" color="#969696" />
             <Picker.Item label="JavaScript" value="js" />
           </Picker>
@@ -68,20 +101,26 @@ export default function RegistrarEmpresa(props) {
           style={styles.input}
           placeholder="Ej: Coquimbo"
           placeholderTextColor="#969696"
+          value={data.ciudad}
+          onChangeText={handleChange('ciudad')}
         />
         <Text style={styles.texto}>Dirección empresa</Text>
         <TextInput
           style={styles.input}
           placeholder="Dirección"
           placeholderTextColor="#969696"
+          value={data.direccion}
+          onChangeText={handleChange('direccion')}
         />
         <Text style={styles.texto}>Dirección factura</Text>
         <TextInput
           style={styles.input}
           placeholder="Dirección"
           placeholderTextColor="#969696"
+          value={data.direccionFactura}
+          onChangeText={handleChange('direccionFactura')}
         />
-        <TouchableOpacity style={styles.boton} onPress={() => navigation.navigate('registrarContactoEmpresa')}>
+        <TouchableOpacity style={styles.boton} onPress={handleSubmit}>
           <Text style={styles.btnText}>Continuar</Text>
         </TouchableOpacity>
       </ScrollView>
@@ -92,7 +131,7 @@ export default function RegistrarEmpresa(props) {
 const styles = StyleSheet.create({
   box: {
     height: box_height,
-    backgroundColor: '#D7DBDD' 
+    backgroundColor: '#D7DBDD'
   },
   box1: {
     flex: 2,

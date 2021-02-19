@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -15,15 +15,15 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {useSelector, useDispatch} from 'react-redux';
-import {login} from '../actions/auth';
+import { useSelector, useDispatch } from 'react-redux';
+import { login } from '../actions/auth';
 
-var {height} = Dimensions.get('window');
+var { height } = Dimensions.get('window');
 
 var box_count = 3;
 var box_height = height / box_count;
 
-export default function LoginForm({navigation}) {
+export default function LoginForm({ navigation }) {
   const dispatch = useDispatch();
   const {
     token,
@@ -39,16 +39,15 @@ export default function LoginForm({navigation}) {
   });
 
   const handleChange = (name) => (value) => {
-    setData({...data, [name]: value});
+    setData({ ...data, [name]: value });
   };
 
   const handleSubmit = () => {
-    // dispatch(login(data));
+    dispatch(login(data));
   };
 
   useEffect(() => {
     if (token !== '' && isAuthenticated && user) {
-      console.log(token, isAuthenticated, user);
       Alert.alert('Inicio de sesión', 'inicio sesión exitoso');
       AsyncStorage.setItem('token', token);
       AsyncStorage.setItem('user', JSON.stringify(user));
@@ -81,7 +80,7 @@ export default function LoginForm({navigation}) {
           <Text style={styles.textWelcome}>Bienvenid@ a WilugApp</Text>
           <TextInput
             style={styles.input}
-            placeholder="email@email.com"
+            placeholder="11.111.111-1"
             placeholderTextColor="#969696"
             value={data.rut}
             onChangeText={handleChange('rut')}
@@ -97,13 +96,13 @@ export default function LoginForm({navigation}) {
           <TouchableOpacity
             style={styles.boton}
             onPress={
-              (handleSubmit, () => navigation.navigate('clienteRegistrado'))
+              (handleSubmit)
             }>
             <Text style={styles.btnText}>Iniciar sesión</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={{height: '5%'}}
+            style={{ height: '5%' }}
             onPress={() => navigation.navigate('recuperarContraseña')}>
             <Text style={styles.textUnder}>¿Olvidaste tu contraseña?</Text>
           </TouchableOpacity>
