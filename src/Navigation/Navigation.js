@@ -18,6 +18,7 @@ import CambiarDatos from '../components/CambiarDatos';
 import FormSolicitarServicio from '../components/FormSolicitarServicio';
 import RecuperarContraseña from '../components/RecuperarContraseña';
 import AñadirProducto from '../components/AñadirProducto';
+import PreguntasFrecuentes from '../components/PreguntasFrecuentes';
 
 const Stack = createStackNavigator();
 
@@ -116,6 +117,11 @@ export default function navigation() {
         name="añadirProducto"
         component={AñadirProducto}
         options={{title: 'Añadir Producto'}}
+      />
+      <Stack.Screen
+        name="preguntasFrecuentes"
+        component={PreguntasFrecuentes}
+        options={{title: 'Preguntas Frecuentes'}}
       />
     </Stack.Navigator>
   );

@@ -75,7 +75,7 @@ export default function Menu(props) {
             </View>
             <Text style={styles.text}>Contáctanos</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.card}>
+          <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('preguntasFrecuentes')}>
             <View style={styles.listMenu}>
               <Image
                 source={require('../assets/ayudar.png')}

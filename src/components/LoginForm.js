@@ -43,7 +43,7 @@ export default function LoginForm({ navigation }) {
   };
 
   const handleSubmit = () => {
-    dispatch(login(data));
+    // dispatch(login(data));
   };
 
   useEffect(() => {
@@ -96,7 +96,7 @@ export default function LoginForm({ navigation }) {
           <TouchableOpacity
             style={styles.boton}
             onPress={
-              (handleSubmit)
+              (handleSubmit), () => navigation.navigate('clienteRegistrado')
             }>
             <Text style={styles.btnText}>Iniciar sesión</Text>
           </TouchableOpacity>
