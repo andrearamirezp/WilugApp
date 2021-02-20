@@ -7,6 +7,8 @@ import {
   Text,
   ScrollView,
   ImageBackground,
+  TouchableOpacity,
+  Touchable,
 } from 'react-native';
 import Productos from './Productos';
 
@@ -27,14 +29,39 @@ export default function ListaProductos(props) {
         <ImageBackground
           style={styles.box3}
           source={require('../assets/extintor.jpg')}>
-          <View style={{backgroundColor: 'rgba(209,217,222, .8)', width:'100%', height:'100%'}}>
-            {showlist ? (
-              <ScrollView style={styles.scrollView}>
-                <Productos/>
-              </ScrollView>
-            ) : (
-              console.log('Hola')
-            )}
+          <View
+            style={{
+              backgroundColor: 'rgba(209,217,222, .8)',
+              width: '100%',
+              height: '100%',
+            }}>
+            <ScrollView style={styles.scrollView}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  flexWrap: 'wrap',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }}>
+                <Text style={styles.titulo}>Mis productos</Text>
+                <View style={styles.añadir}>
+                  <TouchableOpacity  onPress={() => navigation.navigate('añadirProducto')}>
+                    <Image
+                      style={styles.icono2}
+                      source={require('../assets/mas.png')}
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+              {showlist ? (
+                <>
+                  <Productos />
+                </>
+              ) : (
+                console.log('Hola')
+              )}
+            </ScrollView>
           </View>
         </ImageBackground>
       </View>
@@ -46,7 +73,6 @@ const styles = StyleSheet.create({
   box4: {
     width: '100%',
     height: '80%',
-    
   },
   box3: {
     width: '100%',
@@ -70,5 +96,35 @@ const styles = StyleSheet.create({
   scrollView: {
     width: '100%',
     marginBottom: 50,
+  },
+  btnText: {
+    color: '#fff',
+    fontSize: 18,
+    backgroundColor: '#212778',
+    borderRadius: 5,
+    paddingVertical: 5,
+    paddingHorizontal: 5,
+    textAlign: 'center',
+  },
+  titulo: {
+    fontSize: 24,
+    marginLeft: 20,
+    color: '#0A6DD3',
+    textAlign: 'center',
+  },
+  boton: {
+    marginRight: 10,
+    marginTop: 15,
+  },
+  añadir: {
+    width: '20%',
+    height: 50,
+    marginTop: 10,
+  },
+  icono2: {
+    width: '60%',
+    height: 40, 
+    resizeMode: 'center',
+    marginTop: 10
   },
 });
