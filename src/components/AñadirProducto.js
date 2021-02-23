@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Image,
@@ -9,18 +9,18 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
-import {Picker} from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 
-var {height} = Dimensions.get('window');
+var { height } = Dimensions.get('window');
 
 var box_count = 3;
 var box_height = height / box_count;
 
 export default function AñadirProducto(props) {
   const [formData, setFormData] = useState({});
-  const {navigation} = props;
+  const { navigation } = props;
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
 
   const hideDatePicker = () => {
@@ -36,7 +36,7 @@ export default function AñadirProducto(props) {
     dateFabricacion.setHours(0);
     dateFabricacion.setMinutes(0);
     dateFabricacion.setSeconds(0);
-    setFormData({...formData, dateFabricacion});
+    setFormData({ ...formData, dateFabricacion });
     hideDatePicker();
   };
 
@@ -59,7 +59,7 @@ export default function AñadirProducto(props) {
                 <Text style={styles.titulo}>Agregar producto externo</Text>
                 <Text style={styles.texto}>Tipo de agente</Text>
                 <View style={styles.picker}>
-                  <Picker style={{height: 45, marginLeft: 10}}>
+                  <Picker style={{ height: 45, marginLeft: 10 }}>
                     <Picker.Item
                       label="Seleccione agente"
                       value="0"
@@ -70,7 +70,7 @@ export default function AñadirProducto(props) {
                 </View>
                 <Text style={styles.texto}>Capacidad</Text>
                 <View style={styles.picker}>
-                  <Picker style={{height: 45, marginLeft: 10}}>
+                  <Picker style={{ height: 45, marginLeft: 10 }}>
                     <Picker.Item
                       label="Seleccione capacidad"
                       value="0"
