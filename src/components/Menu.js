@@ -30,6 +30,15 @@ export default function Menu(props) {
             </View>
             <Text style={styles.text}>Notificaciones</Text>
           </TouchableOpacity>
+          <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('nosotros')}>
+            <View style={styles.listMenu}>
+              <Image
+                source={require('../assets/grupo.png')}
+                style={styles.image}
+              />
+            </View>
+            <Text style={styles.text}>¿Quienes somos?</Text>
+          </TouchableOpacity>
           <TouchableOpacity style={styles.card}>
             <View style={styles.listMenu}>
               <Image
@@ -38,15 +47,6 @@ export default function Menu(props) {
               />
             </View>
             <Text style={styles.text}>Catálogo</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('cambiarDatos')}>
-            <View style={styles.listMenu}>
-              <Image
-                source={require('../assets/boligrafo.png')}
-                style={styles.image}
-              />
-            </View>
-            <Text style={styles.text}>Cambiar mis datos</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('informacion')}>
             <View style={styles.listMenu}>
@@ -57,14 +57,24 @@ export default function Menu(props) {
             </View>
             <Text style={styles.text}>Manejo de extintores</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('nosotros')}>
+          
+          <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('preguntasFrecuentes')}>
             <View style={styles.listMenu}>
               <Image
-                source={require('../assets/grupo.png')}
+                source={require('../assets/ayudar.png')}
                 style={styles.image}
               />
             </View>
-            <Text style={styles.text}>¿Quienes somos?</Text>
+            <Text style={styles.text}>Preguntas frecuentes</Text>
+          </TouchableOpacity> 
+          <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('cambiarDatos')}>
+            <View style={styles.listMenu}>
+              <Image
+                source={require('../assets/boligrafo.png')}
+                style={styles.image}
+              />
+            </View>
+            <Text style={styles.text}>Modificar mis datos</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('contacto')}>
             <View style={styles.listMenu}>
@@ -74,15 +84,6 @@ export default function Menu(props) {
               />
             </View>
             <Text style={styles.text}>Contáctanos</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('preguntasFrecuentes')}>
-            <View style={styles.listMenu}>
-              <Image
-                source={require('../assets/ayudar.png')}
-                style={styles.image}
-              />
-            </View>
-            <Text style={styles.text}>Preguntas frecuentes</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.card}>
             <View style={styles.listMenu}>
