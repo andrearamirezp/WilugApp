@@ -9,9 +9,9 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
-import {Picker} from '@react-native-picker/picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
+import RNPickerSelect from 'react-native-picker-select';
 
 var {height} = Dimensions.get('window');
 
@@ -59,28 +59,34 @@ export default function AñadirProducto(props) {
                 <Text style={styles.titulo}>Agregar producto externo</Text>
                 <Text style={styles.texto}>Tipo de agente</Text>
                 <View style={styles.picker}>
-                  <Picker style={{height: 45, marginLeft: 10}}>
-                    <Picker.Item
-                      label="Seleccione agente"
-                      value="0"
-                      color="#969696"
-                    />
-                    <Picker.Item label="JavaScript" value="js" />
-                  </Picker>
+                  <RNPickerSelect
+                  placeholder={{ label: "Seleccione un agente", value: null }}
+                 onValueChange={(value) => console.log(value)}
+                 items={[
+                     { label: "JavaScript", value: "JavaScript" },
+                     { label: "TypeStript", value: "TypeStript" },
+                     { label: "Python", value: "Python" },
+                     { label: "Java", value: "Java" },
+                     { label: "C++", value: "C++" },
+                     { label: "C", value: "C" },
+                 ]}
+             />
                 </View>
                 <Text style={styles.texto}>Capacidad</Text>
                 <View style={styles.picker}>
-                  <Picker style={{height: 45, marginLeft: 10}}>
-                    <Picker.Item
-                      label="Seleccione capacidad"
-                      value="0"
-                      color="#969696"
-                    />
-                    <Picker.Item label="2 KG" value="2" />
-                    <Picker.Item label="4 KG" value="4" />
-                    <Picker.Item label="6 KG" value="6" />
-                    <Picker.Item label="10 KG" value="1" />
-                  </Picker>
+                <RNPickerSelect
+                  placeholder={{ label: "Seleccione capacidad", value: null }}
+                 onValueChange={(value) => console.log(value)}
+                 items={[
+                     { label: "1 KG", value: "1" },
+                     { label: "2 KG", value: "2" },
+                     { label: "4 KG", value: "4" },
+                     { label: "5 KG", value: "5" },
+                     { label: "6 KG", value: "6" },
+                     { label: "10 KG", value: "10" },
+                     { label: "50 KG", value: "50" },
+                 ]}
+             />
                 </View>
 
                 <Text style={styles.texto}>Fecha fabricación</Text>
