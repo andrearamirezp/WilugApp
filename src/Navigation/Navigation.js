@@ -1,5 +1,5 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../components/Home';
 import Mantencion from '../components/FormMantencion';
 import OtrosServicios from '../components/FormOtrosServicios';
@@ -25,103 +25,103 @@ const Stack = createStackNavigator();
 export default function navigation() {
   return (
     <Stack.Navigator
-    screenOptions={{
+      screenOptions={{
         headerShown: false
       }}
     >
-      <Stack.Screen 
+      <Stack.Screen
         name="home"
-        component={Home} 
-        options={{title: 'Wilug'}} />
+        component={Home}
+        options={{ title: 'Wilug' }} />
       <Stack.Screen
         name="otrosServicios"
         component={OtrosServicios}
-        options={{title: 'Otros Servicios'}}
+        options={{ title: 'Otros Servicios' }}
       />
       <Stack.Screen
         name="informacion"
         component={ManejoExtintor}
-        options={{title: 'Manejo de Extintores'}}
+        options={{ title: 'Manejo de Extintores' }}
       />
       <Stack.Screen
         name="nosotros"
         component={Nosotros}
-        options={{title: 'Nosotros'}}
+        options={{ title: 'Nosotros' }}
       />
       <Stack.Screen
         name="contacto"
         component={Contactanos}
-        options={{title: 'Contáctanos'}}
+        options={{ title: 'Contáctanos' }}
       />
       <Stack.Screen
         name="loginForm"
         component={LoginForm}
-        options={{title: 'LoginForm'}}
+        options={{ title: 'LoginForm' }}
       />
       <Stack.Screen
         name="productos"
         component={Productos}
-        options={{title: 'Mis productos'}}
+        options={{ title: 'Mis productos' }}
       />
       <Stack.Screen
         name="clienteRegistrado"
         component={ClienteRegistrado}
-        options={{title: 'Menu'}}
+        options={{ title: 'Menu' }}
       />
       <Stack.Screen
         name="registrar"
         component={Registrar}
-        options={{title: 'Registrar'}}
+        options={{ title: 'Registrar' }}
       />
       <Stack.Screen
         name="registrarEmpresa"
         component={RegistrarEmpresa}
-        options={{title: 'Datos Empresa'}}
+        options={{ title: 'Datos Empresa' }}
       />
       <Stack.Screen
         name="registrarContactoEmpresa"
         component={RegistrarContactoEmpresa}
-        options={{title: 'Datos personales'}}
+        options={{ title: 'Datos personales' }}
       />
       <Stack.Screen
         name="crearContraseña"
         component={CrearContraseña}
-        options={{title: 'Contraseña'}}
+        options={{ title: 'Contraseña' }}
       />
       <Stack.Screen
         name="registrarCliente"
         component={RegistrarCliente}
-        options={{title: 'Registrar Cliente'}}
+        options={{ title: 'Registrar Cliente' }}
       />
       <Stack.Screen
         name="mantencion"
         component={Mantencion}
-        options={{title: 'Registrar Cliente'}}
+        options={{ title: 'Registrar Cliente' }}
       />
       <Stack.Screen
         name="cambiarDatos"
         component={CambiarDatos}
-        options={{title: 'Cambiar Datos'}}
+        options={{ title: 'Cambiar Datos' }}
       />
       <Stack.Screen
         name="formSolicitarservicio"
         component={FormSolicitarServicio}
-        options={{title: 'formSolicitarservicio'}}
+        options={{ title: 'formSolicitarservicio' }}
       />
       <Stack.Screen
         name="recuperarContraseña"
         component={RecuperarContraseña}
-        options={{title: 'recuperarContraseña'}}
+        options={{ title: 'recuperarContraseña' }}
       />
       <Stack.Screen
         name="añadirProducto"
         component={AñadirProducto}
-        options={{title: 'Añadir Producto'}}
+        options={{ title: 'Añadir Producto' }}
       />
       <Stack.Screen
         name="preguntasFrecuentes"
         component={PreguntasFrecuentes}
-        options={{title: 'Preguntas Frecuentes'}}
+        options={{ title: 'Preguntas Frecuentes' }}
       />
     </Stack.Navigator>
   );
