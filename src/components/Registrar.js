@@ -45,7 +45,7 @@ export default function Registrar(props) {
               />
             </View>
             <View style={styles.viewImage}>
-              <Text style={styles.subtitulo}>Cliente persona</Text>
+              <Text style={styles.subtitulo}>Cliente particular</Text>
               <Text>No cuento con giro comercial.</Text>
             </View>
           </TouchableOpacity>

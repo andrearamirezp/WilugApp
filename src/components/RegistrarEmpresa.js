@@ -104,7 +104,7 @@ export default function RegistrarEmpresa(props) {
           value={data.ciudad}
           onChangeText={handleChange('ciudad')}
         />
-        <Text style={styles.texto}>Dirección empresa</Text>
+        <Text style={styles.texto}>Dirección de trabajo</Text>
         <TextInput
           style={styles.input}
           placeholder="Dirección"

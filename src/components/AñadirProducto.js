@@ -76,7 +76,10 @@ export default function AñadirProducto(props) {
                       value="0"
                       color="#969696"
                     />
-                    <Picker.Item label="JavaScript" value="js" />
+                    <Picker.Item label="2 KG" value="2" />
+                    <Picker.Item label="4 KG" value="4" />
+                    <Picker.Item label="6 KG" value="6" />
+                    <Picker.Item label="10 KG" value="10" />
                   </Picker>
                 </View>
 
