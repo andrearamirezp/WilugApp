@@ -60,6 +60,7 @@ export const setDataClient = data => async (dispatch) => {
         data.nombreContacto = data.nombre;
         data.direccionFactura = data.direccion;
         data.secondTelefono = data.telefono;
+        data.giro = 'Particular';
     }
     dispatch(setData(data));
 };
