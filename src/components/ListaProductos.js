@@ -35,7 +35,7 @@ export default function ListaProductos(props) {
               width: '100%',
               height: '100%',
             }}>
-            <ScrollView style={styles.scrollView}>
+            <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
               <View
                 style={{
                   flexDirection: 'row',

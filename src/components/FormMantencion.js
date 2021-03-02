@@ -30,7 +30,7 @@ export default function FormMantencion() {
           style={styles.box3}
           source={require('../assets/fondo2.jpg')}>
           <View style={{backgroundColor: 'rgba(235,245,250, .6)'}}>
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
               <Text style={styles.titulo}>Solicita aquí tu mantención.</Text>
               <Text style={{marginLeft: 30, marginBottom: 15}}>
                 Necesitamos saber algunas cosas para brindarte un excelente

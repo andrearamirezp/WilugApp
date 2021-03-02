@@ -62,7 +62,7 @@ export default function RegistrarContactoEmpresa(props) {
   return (
     <View style={[styles.box, styles.box1]}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <Text style={styles.titulo}>Datos personales</Text>
         <Text style={{ marginLeft: 15, marginBottom: 10 }}>
           Datos de la persona encargada en la empresa

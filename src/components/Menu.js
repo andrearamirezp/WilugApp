@@ -20,7 +20,7 @@ export default function Menu(props) {
     <View style={[styles.box, styles.box1]}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
       
-        <ScrollView style={styles.box4}>
+        <ScrollView style={styles.box4} showsVerticalScrollIndicator={false}>
           <TouchableOpacity style={styles.card}>
             <View style={styles.listMenu}>
               <Image

@@ -17,7 +17,7 @@ export default function FormMantencion(props) {
     <>
       <Base />
       <View style={[styles.box4]}>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View
             style={{
               flexDirection: 'row',

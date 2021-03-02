@@ -30,7 +30,7 @@ export default function Contactanos() {
   return (
     <>
       <Base />
-      <ScrollView style={[styles.box4]}>
+      <ScrollView style={[styles.box4]} showsVerticalScrollIndicator={false}>
         <View>
           <Text style={styles.titulo2}>Habla con nosotros</Text>
           <Text style={styles.texto}>Nombre Completo</Text>

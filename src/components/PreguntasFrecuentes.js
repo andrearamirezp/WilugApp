@@ -24,7 +24,7 @@ export default function AñadirProducto(props) {
         <Image style={styles.logo} source={require('../assets/logo.png')} />
 
         <View style={styles.box4}>
-          <ScrollView>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <Text style={styles.titulo}>Preguntas Frecuentes</Text>
             <Text style={styles.subTitulo}>¿QUÉ ES UN EXTINTOR?</Text>
             <Text style={styles.texto}>
