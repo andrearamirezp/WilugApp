@@ -55,7 +55,7 @@ export default function AñadirProducto(props) {
                 width: '100%',
                 height: '100%',
               }}>
-              <ScrollView style={styles.scrollView}>
+              <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
                 <Text style={styles.titulo}>Agregar producto externo</Text>
                 <Text style={styles.texto}>Tipo de agente</Text>
                 <View style={styles.picker}>

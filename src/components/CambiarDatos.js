@@ -63,7 +63,7 @@ export default function RegistrarCliente({ navigation }) {
   return (
     <View style={[styles.box, styles.box1]}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <Text style={styles.titulo}>Felipe Castro blahblah</Text>
         <Text style={[styles.texto, {marginBottom: 10}]}>A continuación puedes modificar tus datos.</Text>
         

@@ -55,7 +55,7 @@ export default function RegistrarEmpresa(props) {
   return (
     <View style={[styles.box, styles.box1]}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <Text style={styles.titulo}>Datos de la empresa</Text>
         <Text style={styles.texto}>Empresa</Text>
         <TextInput

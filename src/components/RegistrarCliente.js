@@ -54,7 +54,7 @@ export default function RegistrarCliente({ navigation }) {
   return (
     <View style={[styles.box, styles.box1]}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <Text style={styles.titulo}>Datos personales</Text>
         <Text style={styles.texto}>Nombre y apellido</Text>
         <TextInput

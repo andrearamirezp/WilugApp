@@ -45,7 +45,7 @@ export default function Nosotros() {
   return (
     <>
       <Base />
-      <ScrollView style={[styles.box4]}>
+      <ScrollView style={[styles.box4]} showsVerticalScrollIndicator={false}>
         <Text style={styles.titulo3}>Nos destacamos por</Text>
         <View
           style={{
