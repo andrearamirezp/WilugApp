@@ -7,21 +7,26 @@ import {
   Text,
   ScrollView,
   ImageBackground,
+  TextInput,
   TouchableOpacity,
+  Touchable,
 } from 'react-native';
+import {Picker} from '@react-native-picker/picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
-import RNPickerSelect from 'react-native-picker-select';
 
 var {height} = Dimensions.get('window');
 
 var box_count = 3;
 var box_height = height / box_count;
 
-export default function AñadirProducto(props) {
+export default function AñadirProducto() {
   const [formData, setFormData] = useState({});
-  const {navigation} = props;
+  const [formDataCarga, setFormDataCarga] = useState({});
+  const [formDataMantencion, setFormDataMantencion] = useState({});
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
+  const [isVisibleCarga, setIsVisibleCarga] = useState(false);
+  const [isVisibleMantencion, setIsVisibleMantencion] = useState(false);
 
   const hideDatePicker = () => {
     setIsDatePickerVisible(false);
@@ -40,6 +45,40 @@ export default function AñadirProducto(props) {
     hideDatePicker();
   };
 
+  const hideDatePickerCarga = () => {
+    setIsVisibleCarga(false);
+  };
+
+  const showDatePickerCarga = () => {
+    setIsVisibleCarga(true);
+  };
+
+  const handlerConfirmCarga = (date) => {
+    const dateCarga = date;
+    dateCarga.setHours(0);
+    dateCarga.setMinutes(0);
+    dateCarga.setSeconds(0);
+    setFormDataCarga({...formDataCarga, dateCarga});
+    hideDatePickerCarga();
+  };
+
+  const hideDatePickerMantencion = () => {
+    setIsVisibleMantencion(false);
+  };
+
+  const showDatePickerMantencion = () => {
+    setIsVisibleMantencion(true);
+  };
+
+  const handlerConfirmMantencion = (date) => {
+    const dateMantencion = date;
+    dateMantencion.setHours(0);
+    dateMantencion.setMinutes(0);
+    dateMantencion.setSeconds(0);
+    setFormDataMantencion({...formDataMantencion, dateMantencion});
+    hideDatePickerMantencion();
+  };
+
   return (
     <>
       <View style={[styles.box, styles.box1]}>
@@ -55,38 +94,29 @@ export default function AñadirProducto(props) {
                 width: '100%',
                 height: '100%',
               }}>
-              <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+              <ScrollView style={styles.scrollView}>
                 <Text style={styles.titulo}>Agregar producto externo</Text>
                 <Text style={styles.texto}>Tipo de agente</Text>
                 <View style={styles.picker}>
-                  <RNPickerSelect
-                  placeholder={{ label: "Seleccione un agente", value: null }}
-                 onValueChange={(value) => console.log(value)}
-                 items={[
-                     { label: "JavaScript", value: "JavaScript" },
-                     { label: "TypeStript", value: "TypeStript" },
-                     { label: "Python", value: "Python" },
-                     { label: "Java", value: "Java" },
-                     { label: "C++", value: "C++" },
-                     { label: "C", value: "C" },
-                 ]}
-             />
+                  <Picker style={{height: 45, marginLeft: 10}}>
+                    <Picker.Item
+                      label="Seleccione agente"
+                      value="0"
+                      color="#969696"
+                    />
+                    <Picker.Item label="JavaScript" value="js" />
+                  </Picker>
                 </View>
                 <Text style={styles.texto}>Capacidad</Text>
                 <View style={styles.picker}>
-                <RNPickerSelect
-                  placeholder={{ label: "Seleccione capacidad", value: null }}
-                 onValueChange={(value) => console.log(value)}
-                 items={[
-                     { label: "1 KG", value: "1" },
-                     { label: "2 KG", value: "2" },
-                     { label: "4 KG", value: "4" },
-                     { label: "5 KG", value: "5" },
-                     { label: "6 KG", value: "6" },
-                     { label: "10 KG", value: "10" },
-                     { label: "50 KG", value: "50" },
-                 ]}
-             />
+                  <Picker style={{height: 45, marginLeft: 10}}>
+                    <Picker.Item
+                      label="Seleccione capacidad"
+                      value="0"
+                      color="#969696"
+                    />
+                    <Picker.Item label="JavaScript" value="js" />
+                  </Picker>
                 </View>
 
                 <Text style={styles.texto}>Fecha fabricación</Text>
@@ -108,26 +138,38 @@ export default function AñadirProducto(props) {
                   <Text
                     style={{
                       fontSize: 16,
-                      color: formData.dateFabricacion ? '#000' : '#969696',
+                      color: formDataCarga.dateCarga ? '#000' : '#969696',
                     }}
-                    onPress={showDatePicker}>
-                    {formData.dateFabricacion
-                      ? moment(formData.dateFabricacion).format('DD/MM/YYYY')
+                    onPress={showDatePickerCarga}>
+                    {formDataCarga.dateCarga
+                      ? moment(formDataCarga.dateCarga).format('DD/MM/YYYY')
                       : 'DD/MM/AA'}
                   </Text>
+                  <DateTimePickerModal
+                    isVisible={isVisibleCarga}
+                    mode="date"
+                    onConfirm={handlerConfirmCarga}
+                    onCancel={hideDatePickerCarga}
+                  />
                 </View>
                 <Text style={styles.texto}>Fecha última mantención</Text>
                 <View style={[styles.input, styles.datePicker]}>
                   <Text
                     style={{
                       fontSize: 16,
-                      color: formData.dateFabricacion ? '#000' : '#969696',
+                      color: formDataMantencion.dateMantencion ? '#000' : '#969696',
                     }}
-                    onPress={showDatePicker}>
-                    {formData.dateFabricacion
-                      ? moment(formData.dateFabricacion).format('DD/MM/YYYY')
+                    onPress={showDatePickerMantencion}>
+                    {formDataMantencion.dateMantencion
+                      ? moment(formDataMantencion.dateMantencion).format('DD/MM/YYYY')
                       : 'DD/MM/AA'}
                   </Text>
+                  <DateTimePickerModal
+                    isVisible={isVisibleMantencion}
+                    mode="date"
+                    onConfirm={handlerConfirmMantencion}
+                    onCancel={hideDatePickerMantencion}
+                  />
                 </View>
                 <TouchableOpacity style={styles.boton}>
                   <Text style={styles.btnText}>Agregar</Text>
