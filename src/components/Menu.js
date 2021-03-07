@@ -8,94 +8,104 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
+import { useDispatch } from "react-redux";
+import { logout } from '../actions/auth';
 
-var {height} = Dimensions.get('window');
+var { height } = Dimensions.get('window');
 
 var box_count = 3;
 var box_height = height / box_count;
 
 export default function Menu(props) {
-  const {navigation} = props;
+  const { navigation } = props;
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = () => {
+    dispatch(logout());
+    navigation.navigate('home');
+  };
+
   return (
     <View style={[styles.box, styles.box1]}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
-      
-        <ScrollView style={styles.box4}>
-          <TouchableOpacity style={styles.card}>
-            <View style={styles.listMenu}>
-              <Image
-                source={require('../assets/notificacion.png')}
-                style={styles.image}
-              />
-            </View>
-            <Text style={styles.text}>Notificaciones</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('nosotros')}>
-            <View style={styles.listMenu}>
-              <Image
-                source={require('../assets/grupo.png')}
-                style={styles.image}
-              />
-            </View>
-            <Text style={styles.text}>¿Quienes somos?</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.card}>
-            <View style={styles.listMenu}>
-              <Image
-                source={require('../assets/libro-abierto.png')}
-                style={styles.image}
-              />
-            </View>
-            <Text style={styles.text}>Catálogo</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('informacion')}>
-            <View style={styles.listMenu}>
-              <Image
-                source={require('../assets/extintor-de-incendios.png')}
-                style={styles.image}
-              />
-            </View>
-            <Text style={styles.text}>Manejo de extintores</Text>
-          </TouchableOpacity>
-          
-          <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('preguntasFrecuentes')}>
-            <View style={styles.listMenu}>
-              <Image
-                source={require('../assets/ayudar.png')}
-                style={styles.image}
-              />
-            </View>
-            <Text style={styles.text}>Preguntas frecuentes</Text>
-          </TouchableOpacity> 
-          <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('cambiarDatos')}>
-            <View style={styles.listMenu}>
-              <Image
-                source={require('../assets/boligrafo.png')}
-                style={styles.image}
-              />
-            </View>
-            <Text style={styles.text}>Modificar mis datos</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('contacto')}>
-            <View style={styles.listMenu}>
-              <Image
-                source={require('../assets/contacto1.png')}
-                style={styles.image}
-              />
-            </View>
-            <Text style={styles.text}>Contáctanos</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.card}>
-            <View style={styles.listMenu}>
-              <Image
-                source={require('../assets/logout.png')}
-                style={styles.image}
-              />
-            </View>
-            <Text style={styles.text}>Cerrar sesión</Text>
-          </TouchableOpacity>
-        </ScrollView>
-      
+
+      <ScrollView style={styles.box4}>
+        <TouchableOpacity style={styles.card}>
+          <View style={styles.listMenu}>
+            <Image
+              source={require('../assets/notificacion.png')}
+              style={styles.image}
+            />
+          </View>
+          <Text style={styles.text}>Notificaciones</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('nosotros')}>
+          <View style={styles.listMenu}>
+            <Image
+              source={require('../assets/grupo.png')}
+              style={styles.image}
+            />
+          </View>
+          <Text style={styles.text}>¿Quienes somos?</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.card}>
+          <View style={styles.listMenu}>
+            <Image
+              source={require('../assets/libro-abierto.png')}
+              style={styles.image}
+            />
+          </View>
+          <Text style={styles.text}>Catálogo</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('informacion')}>
+          <View style={styles.listMenu}>
+            <Image
+              source={require('../assets/extintor-de-incendios.png')}
+              style={styles.image}
+            />
+          </View>
+          <Text style={styles.text}>Manejo de extintores</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('preguntasFrecuentes')}>
+          <View style={styles.listMenu}>
+            <Image
+              source={require('../assets/ayudar.png')}
+              style={styles.image}
+            />
+          </View>
+          <Text style={styles.text}>Preguntas frecuentes</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('cambiarDatos')}>
+          <View style={styles.listMenu}>
+            <Image
+              source={require('../assets/boligrafo.png')}
+              style={styles.image}
+            />
+          </View>
+          <Text style={styles.text}>Modificar mis datos</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('contacto')}>
+          <View style={styles.listMenu}>
+            <Image
+              source={require('../assets/contacto1.png')}
+              style={styles.image}
+            />
+          </View>
+          <Text style={styles.text}>Contáctanos</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.card} onPress={() => handleSubmit()}>
+          <View style={styles.listMenu}>
+            <Image
+              source={require('../assets/logout.png')}
+              style={styles.image}
+            />
+          </View>
+          <Text style={styles.text}>Cerrar sesión</Text>
+        </TouchableOpacity>
+      </ScrollView>
+
     </View>
   );
 }
