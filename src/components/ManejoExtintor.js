@@ -38,7 +38,7 @@ export default function ManejoExtintor() {
     <>
       <Base />
       <View style={[styles.box4]}>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <Text style={styles.TituloSeccion}>¡Prevenir es la clave!</Text>
           <Text style={styles.cuerpo1}>
             Te ayudamos a conocer los tipos de extintores

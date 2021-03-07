@@ -7,21 +7,25 @@ import {
   Text,
   ScrollView,
   ImageBackground,
+  TextInput,
   TouchableOpacity,
+  Touchable,
 } from 'react-native';
+import {Picker} from '@react-native-picker/picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
-import RNPickerSelect from 'react-native-picker-select';
 
 var { height } = Dimensions.get('window');
 
 var box_count = 3;
 var box_height = height / box_count;
 
-export default function AñadirProducto(props) {
+export default function AñadirProducto() {
   const [formData, setFormData] = useState({});
   const { navigation } = props;
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
+  const [isVisibleCarga, setIsVisibleCarga] = useState(false);
+  const [isVisibleMantencion, setIsVisibleMantencion] = useState(false);
 
   const hideDatePicker = () => {
     setIsDatePickerVisible(false);
@@ -38,6 +42,40 @@ export default function AñadirProducto(props) {
     dateFabricacion.setSeconds(0);
     setFormData({ ...formData, dateFabricacion });
     hideDatePicker();
+  };
+
+  const hideDatePickerCarga = () => {
+    setIsVisibleCarga(false);
+  };
+
+  const showDatePickerCarga = () => {
+    setIsVisibleCarga(true);
+  };
+
+  const handlerConfirmCarga = (date) => {
+    const dateCarga = date;
+    dateCarga.setHours(0);
+    dateCarga.setMinutes(0);
+    dateCarga.setSeconds(0);
+    setFormDataCarga({...formDataCarga, dateCarga});
+    hideDatePickerCarga();
+  };
+
+  const hideDatePickerMantencion = () => {
+    setIsVisibleMantencion(false);
+  };
+
+  const showDatePickerMantencion = () => {
+    setIsVisibleMantencion(true);
+  };
+
+  const handlerConfirmMantencion = (date) => {
+    const dateMantencion = date;
+    dateMantencion.setHours(0);
+    dateMantencion.setMinutes(0);
+    dateMantencion.setSeconds(0);
+    setFormDataMantencion({...formDataMantencion, dateMantencion});
+    hideDatePickerMantencion();
   };
 
   return (
@@ -108,26 +146,38 @@ export default function AñadirProducto(props) {
                   <Text
                     style={{
                       fontSize: 16,
-                      color: formData.dateFabricacion ? '#000' : '#969696',
+                      color: formDataCarga.dateCarga ? '#000' : '#969696',
                     }}
-                    onPress={showDatePicker}>
-                    {formData.dateFabricacion
-                      ? moment(formData.dateFabricacion).format('DD/MM/YYYY')
+                    onPress={showDatePickerCarga}>
+                    {formDataCarga.dateCarga
+                      ? moment(formDataCarga.dateCarga).format('DD/MM/YYYY')
                       : 'DD/MM/AA'}
                   </Text>
+                  <DateTimePickerModal
+                    isVisible={isVisibleCarga}
+                    mode="date"
+                    onConfirm={handlerConfirmCarga}
+                    onCancel={hideDatePickerCarga}
+                  />
                 </View>
                 <Text style={styles.texto}>Fecha última mantención</Text>
                 <View style={[styles.input, styles.datePicker]}>
                   <Text
                     style={{
                       fontSize: 16,
-                      color: formData.dateFabricacion ? '#000' : '#969696',
+                      color: formDataMantencion.dateMantencion ? '#000' : '#969696',
                     }}
-                    onPress={showDatePicker}>
-                    {formData.dateFabricacion
-                      ? moment(formData.dateFabricacion).format('DD/MM/YYYY')
+                    onPress={showDatePickerMantencion}>
+                    {formDataMantencion.dateMantencion
+                      ? moment(formDataMantencion.dateMantencion).format('DD/MM/YYYY')
                       : 'DD/MM/AA'}
                   </Text>
+                  <DateTimePickerModal
+                    isVisible={isVisibleMantencion}
+                    mode="date"
+                    onConfirm={handlerConfirmMantencion}
+                    onCancel={hideDatePickerMantencion}
+                  />
                 </View>
                 <TouchableOpacity style={styles.boton}>
                   <Text style={styles.btnText}>Agregar</Text>
