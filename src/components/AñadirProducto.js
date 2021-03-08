@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Image,
@@ -15,15 +15,14 @@ import {Picker} from '@react-native-picker/picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 
-var {height} = Dimensions.get('window');
+var { height } = Dimensions.get('window');
 
 var box_count = 3;
 var box_height = height / box_count;
 
 export default function AñadirProducto() {
   const [formData, setFormData] = useState({});
-  const [formDataCarga, setFormDataCarga] = useState({});
-  const [formDataMantencion, setFormDataMantencion] = useState({});
+  const { navigation } = props;
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
   const [isVisibleCarga, setIsVisibleCarga] = useState(false);
   const [isVisibleMantencion, setIsVisibleMantencion] = useState(false);
@@ -41,7 +40,7 @@ export default function AñadirProducto() {
     dateFabricacion.setHours(0);
     dateFabricacion.setMinutes(0);
     dateFabricacion.setSeconds(0);
-    setFormData({...formData, dateFabricacion});
+    setFormData({ ...formData, dateFabricacion });
     hideDatePicker();
   };
 
@@ -98,25 +97,34 @@ export default function AñadirProducto() {
                 <Text style={styles.titulo}>Agregar producto externo</Text>
                 <Text style={styles.texto}>Tipo de agente</Text>
                 <View style={styles.picker}>
-                  <Picker style={{height: 45, marginLeft: 10}}>
-                    <Picker.Item
-                      label="Seleccione agente"
-                      value="0"
-                      color="#969696"
-                    />
-                    <Picker.Item label="JavaScript" value="js" />
-                  </Picker>
+                  <RNPickerSelect
+                    placeholder={{ label: "Seleccione un agente", value: null }}
+                    onValueChange={(value) => console.log(value)}
+                    items={[
+                      { label: "JavaScript", value: "JavaScript" },
+                      { label: "TypeStript", value: "TypeStript" },
+                      { label: "Python", value: "Python" },
+                      { label: "Java", value: "Java" },
+                      { label: "C++", value: "C++" },
+                      { label: "C", value: "C" },
+                    ]}
+                  />
                 </View>
                 <Text style={styles.texto}>Capacidad</Text>
                 <View style={styles.picker}>
-                  <Picker style={{height: 45, marginLeft: 10}}>
-                    <Picker.Item
-                      label="Seleccione capacidad"
-                      value="0"
-                      color="#969696"
-                    />
-                    <Picker.Item label="JavaScript" value="js" />
-                  </Picker>
+                  <RNPickerSelect
+                    placeholder={{ label: "Seleccione capacidad", value: null }}
+                    onValueChange={(value) => console.log(value)}
+                    items={[
+                      { label: "1 KG", value: "1" },
+                      { label: "2 KG", value: "2" },
+                      { label: "4 KG", value: "4" },
+                      { label: "5 KG", value: "5" },
+                      { label: "6 KG", value: "6" },
+                      { label: "10 KG", value: "10" },
+                      { label: "50 KG", value: "50" },
+                    ]}
+                  />
                 </View>
 
                 <Text style={styles.texto}>Fecha fabricación</Text>

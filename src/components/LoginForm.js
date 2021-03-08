@@ -7,7 +7,6 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  AsyncStorage,
   Alert,
   ScrollView,
 } from 'react-native';
@@ -16,7 +15,8 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import { useSelector, useDispatch } from 'react-redux';
-import { login } from '../actions/auth';
+import { login, clean } from '../actions/auth';
+import Snackbar from 'react-native-snackbar';
 
 var { height } = Dimensions.get('window');
 
@@ -43,27 +43,41 @@ export default function LoginForm({ navigation }) {
   };
 
   const handleSubmit = () => {
-    // dispatch(login(data));
+    dispatch(login(data));
   };
 
   useEffect(() => {
     if (token !== '' && isAuthenticated && user) {
-      Alert.alert('Inicio de sesión', 'inicio sesión exitoso');
-      AsyncStorage.setItem('token', token);
-      AsyncStorage.setItem('user', JSON.stringify(user));
-      navigation.navigate('clienteRegistrado');
+      Snackbar.show({
+        text: 'Inicio de sesión exitosamente',
+        duration: Snackbar.LENGTH_SHORT,
+        action: {
+          text: 'continuar',
+          textColor: 'green',
+          onPress: () => {
+            navigation.navigate('clienteRegistrado');
+            dispatch(clean());
+          },
+        },
+      });
     }
   }, [token, isAuthenticated]);
 
   useEffect(() => {
     if (authenticateError) {
-      Alert.alert('Inicio de sesión', 'Error al iniciar sesión');
+      Snackbar.show({
+        text: 'Error al iniciar sesión',
+        duration: Snackbar.LENGTH_SHORT,
+      });
     }
   }, [authenticateError]);
 
   useEffect(() => {
     if (authenticating) {
-      console.log('cargando .....');
+      Snackbar.show({
+        text: 'Iniciando ....',
+        duration: Snackbar.LENGTH_SHORT,
+      });
     }
   }, [authenticating]);
 
@@ -93,11 +107,7 @@ export default function LoginForm({ navigation }) {
             value={data.password}
             onChangeText={handleChange('password')}
           />
-          <TouchableOpacity
-            style={styles.boton}
-            onPress={
-              (handleSubmit), () => navigation.navigate('clienteRegistrado')
-            }>
+          <TouchableOpacity style={styles.boton} onPress={handleSubmit}>
             <Text style={styles.btnText}>Iniciar sesión</Text>
           </TouchableOpacity>
 

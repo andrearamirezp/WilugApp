@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Image,
@@ -8,18 +8,24 @@ import {
   ScrollView,
   ImageBackground,
   TouchableOpacity,
-  Touchable,
+  AsyncStorage,
 } from 'react-native';
 import Productos from './Productos';
+import { useSelector, useDispatch } from 'react-redux';
 
-var {height} = Dimensions.get('window');
+var { height } = Dimensions.get('window');
 
 var box_count = 3;
 var box_height = height / box_count;
 
 export default function ListaProductos(props) {
-  const {navigation} = props;
+  const { navigation } = props;
   const [showlist, setShowList] = useState(true);
+
+  const {
+    token,
+    user,
+  } = useSelector((state) => state.auth);
 
   return (
     <View style={[styles.box, styles.box1]}>
@@ -45,7 +51,8 @@ export default function ListaProductos(props) {
                 }}>
                 <Text style={styles.titulo}>Mis productos</Text>
                 <View style={styles.añadir}>
-                  <TouchableOpacity  onPress={() => navigation.navigate('añadirProducto')}>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate('añadirProducto')}>
                     <Image
                       style={styles.icono2}
                       source={require('../assets/mas.png')}
@@ -123,8 +130,8 @@ const styles = StyleSheet.create({
   },
   icono2: {
     width: '60%',
-    height: 40, 
+    height: 40,
     resizeMode: 'center',
-    marginTop: 10
+    marginTop: 10,
   },
 });

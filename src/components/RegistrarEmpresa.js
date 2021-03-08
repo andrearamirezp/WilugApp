@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
@@ -9,13 +9,15 @@ import {
   TextInput,
   ScrollView
 } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from 'react-native-responsive-screen';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setDataClient } from '../actions/client';
+import RNPickerSelect from 'react-native-picker-select';
+import LoadingView from 'react-native-loading-view';
+import { getRegions, getComunas } from '../actions/client';
 
 var { height } = Dimensions.get('window');
 
@@ -25,6 +27,8 @@ var box_height = height / box_count;
 export default function RegistrarEmpresa(props) {
   const { navigation } = props
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+  const [comunasPicker, setComunasPicker] = useState([]);
 
   const [data, setData] = useState({
     nombre: '',
@@ -40,12 +44,66 @@ export default function RegistrarEmpresa(props) {
     direccionFactura: '',
     giro: '',
     secondTelefono: '',
-    comuna: 1,
+    comuna: '',
   });
+
+  const {
+    regions,
+    successRegion,
+    errorRegion,
+    successComuna,
+    errorComuna,
+    reciveComuna,
+    comunas
+  } = useSelector((state) => state.client);
 
   const handleChange = (name) => (value) => {
     setData({ ...data, [name]: value });
   };
+
+  const handleChangePicker = (name, value) => {
+    setData({ ...data, [name]: value });
+  };
+
+  const filterComuna = (value) => {
+    dispatch(getComunas(value))
+  };
+
+  useEffect(() => {
+    dispatch(getRegions())
+  }, [])
+
+  useEffect(() => {
+    if (successRegion) {
+      setLoading(false)
+    }
+  }, [successRegion])
+
+  useEffect(() => {
+    if (errorRegion) {
+      Alert.alert('Registro de cliente', 'Ocurrio un error al cargar la aplicación');
+      navigation.navigate('home');
+    }
+  }, [errorRegion])
+
+  useEffect(() => {
+    if (reciveComuna) {
+      setComunasPicker([])
+    }
+  }, [reciveComuna])
+
+  useEffect(() => {
+    if (successComuna) {
+      setComunasPicker(comunas)
+    }
+  }, [successComuna])
+
+  useEffect(() => {
+    if (errorComuna) {
+      Alert.alert('Registro de cliente', 'Ocurrio un error al cargar la aplicación');
+      navigation.navigate('home');
+    }
+  }, [errorComuna])
 
   const handleSubmit = () => {
     dispatch(setDataClient(data));
@@ -53,78 +111,83 @@ export default function RegistrarEmpresa(props) {
   };
 
   return (
-    <View style={[styles.box, styles.box1]}>
-      <Image style={styles.logo} source={require('../assets/logo.png')} />
-      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-        <Text style={styles.titulo}>Datos de la empresa</Text>
-        <Text style={styles.texto}>Empresa</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Razon social"
-          placeholderTextColor="#969696"
-          value={data.razonSocial}
-          onChangeText={handleChange('razonSocial')}
-        />
-        <Text style={styles.texto}>Rut</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="12.345.678-9"
-          placeholderTextColor="#969696"
-          value={data.rut}
-          onChangeText={handleChange('rut')}
-        />
-        <Text style={styles.texto}>Giro</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Particular"
-          placeholderTextColor="#969696"
-          value={data.giro}
-          onChangeText={handleChange('giro')}
-        />
-        <Text style={styles.texto}>Región</Text>
-        <View style={styles.picker}>
-          <Picker style={{ height: 45, marginLeft: 10 }}>
-            <Picker.Item label="Seleccione región" value="0" color="#969696" />
-            <Picker.Item label="JavaScript" value="js" />
-          </Picker>
-        </View>
+    <LoadingView text={"cargando"} loading={loading}>
+      <View style={[styles.box, styles.box1]}>
+        <Image style={styles.logo} source={require('../assets/logo.png')} />
+        <ScrollView style={styles.container}>
+          <Text style={styles.titulo}>Datos de la empresa</Text>
+          <Text style={styles.texto}>Empresa</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Razon social"
+            placeholderTextColor="#969696"
+            value={data.razonSocial}
+            onChangeText={handleChange('razonSocial')}
+          />
+          <Text style={styles.texto}>Rut</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="12.345.678-9"
+            placeholderTextColor="#969696"
+            value={data.rut}
+            onChangeText={handleChange('rut')}
+          />
+          <Text style={styles.texto}>Giro</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Particular"
+            placeholderTextColor="#969696"
+            value={data.giro}
+            onChangeText={handleChange('giro')}
+          />
+          <Text style={styles.texto}>Región</Text>
+          <View style={styles.picker}>
+            <RNPickerSelect
+              placeholder={{ label: "Seleccione una región", value: null }}
+              onValueChange={(value) => filterComuna(value)}
+              items={regions}
+            />
+          </View>
 
-        <Text style={styles.texto}> Comuna</Text>
-        <View style={styles.picker}>
-          <Picker style={{ height: 45, marginLeft: 10 }}>
-            <Picker.Item label="Seleccione comuna" value="0" color="#969696" />
-            <Picker.Item label="JavaScript" value="js" />
-          </Picker>
-        </View>
-        <Text style={styles.texto}>Ciudad</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Ej: Coquimbo"
-          placeholderTextColor="#969696"
-          value={data.ciudad}
-          onChangeText={handleChange('ciudad')}
-        />
-        <Text style={styles.texto}>Dirección de trabajo</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Dirección"
-          placeholderTextColor="#969696"
-          value={data.direccion}
-          onChangeText={handleChange('direccion')}
-        />
-        <Text style={styles.texto}>Dirección factura</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Dirección"
-          placeholderTextColor="#969696"
-          value={data.direccionFactura}
-          onChangeText={handleChange('direccionFactura')}
-        />
-        <TouchableOpacity style={styles.boton} onPress={handleSubmit}>
-          <Text style={styles.btnText}>Continuar</Text>
-        </TouchableOpacity>
-      </ScrollView>
-    </View>
+          <Text style={styles.texto}> Comuna</Text>
+          <View style={styles.picker}>
+            <RNPickerSelect
+              placeholder={{ label: "Seleccione una comuna", value: null }}
+              onValueChange={(value) => handleChangePicker('comuna', value)}
+              items={comunasPicker}
+              value={data.comuna}
+            />
+          </View>
+          <Text style={styles.texto}>Ciudad</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Ej: Coquimbo"
+            placeholderTextColor="#969696"
+            value={data.ciudad}
+            onChangeText={handleChange('ciudad')}
+          />
+          <Text style={styles.texto}>Dirección de trabajo</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Dirección"
+            placeholderTextColor="#969696"
+            value={data.direccion}
+            onChangeText={handleChange('direccion')}
+          />
+          <Text style={styles.texto}>Dirección factura</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Dirección"
+            placeholderTextColor="#969696"
+            value={data.direccionFactura}
+            onChangeText={handleChange('direccionFactura')}
+          />
+          <TouchableOpacity style={styles.boton} onPress={handleSubmit}>
+            <Text style={styles.btnText}>Continuar</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      </View>
+    </LoadingView>
   );
 }
 

@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/datetimepicker": "^3.0.9",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-picker/picker": "^1.9.11",
@@ -23,6 +24,7 @@
     "react-moment": "^1.1.1",
     "react-native": "0.63.3",
     "react-native-gesture-handler": "^1.9.0",
+    "react-native-loading-view": "^1.0.1",
     "react-native-modal-datetime-picker": "^9.1.0",
     "react-native-paper": "^4.7.1",
     "react-native-picker-select": "^8.0.4",
@@ -30,6 +32,7 @@
     "react-native-responsive-screen": "^1.4.2",
     "react-native-safe-area-context": "^3.1.9",
     "react-native-screens": "^2.17.1",
+    "react-native-snackbar": "^2.3.2",
     "react-native-vector-icons": "^8.0.0",
     "react-native-webview": "^11.2.1",
     "react-native-youtube-iframe": "^1.4.1",

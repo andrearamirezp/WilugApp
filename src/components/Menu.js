@@ -8,18 +8,27 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
+import { useDispatch } from "react-redux";
+import { logout } from '../actions/auth';
 
-var {height} = Dimensions.get('window');
+var { height } = Dimensions.get('window');
 
 var box_count = 3;
 var box_height = height / box_count;
 
 export default function Menu(props) {
-  const {navigation} = props;
+  const { navigation } = props;
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = () => {
+    dispatch(logout());
+    navigation.navigate('home');
+  };
+
   return (
     <View style={[styles.box, styles.box1]}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
-      
         <ScrollView style={styles.box4} showsVerticalScrollIndicator={false}>
           <TouchableOpacity style={styles.card}>
             <View style={styles.listMenu}>
@@ -86,7 +95,6 @@ export default function Menu(props) {
             <Text style={styles.text}>Cerrar sesión</Text>
           </TouchableOpacity>
         </ScrollView>
-      
     </View>
   );
 }
