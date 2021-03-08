@@ -39,15 +39,6 @@ export default function Menu(props) {
             </View>
             <Text style={styles.text}>¿Quienes somos?</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.card}>
-            <View style={styles.listMenu}>
-              <Image
-                source={require('../assets/libro-abierto.png')}
-                style={styles.image}
-              />
-            </View>
-            <Text style={styles.text}>Catálogo</Text>
-          </TouchableOpacity>
           <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('informacion')}>
             <View style={styles.listMenu}>
               <Image
