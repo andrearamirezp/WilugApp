@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '70%',
     opacity: 0.8,
-    resizeMode: 'center',
+    resizeMode: 'contain',
     marginHorizontal: 10,
   },
   cardText: {
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   logo: {
-    resizeMode: 'center',
+    resizeMode: 'contain',
     height: hp('100%'), // 70% of height device screen
     width: wp('90%'),
     marginTop: 40,

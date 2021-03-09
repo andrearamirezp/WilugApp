@@ -226,6 +226,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   imagen: {
+    resizeMode: 'contain',
     height: hp('57%'),
     width: wp('100%'),
     
@@ -237,7 +238,7 @@ const styles = StyleSheet.create({
   icono: {
     width: '90%',
     height: 90,
-    resizeMode: 'center',
+    resizeMode: 'contain',
     marginLeft: 10,
   },
   titulo2: {
@@ -255,7 +256,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   icono2: {
-    resizeMode: 'center',
+    resizeMode: 'contain',
     height: 100,
     width: '100%',
     marginBottom: 20,
