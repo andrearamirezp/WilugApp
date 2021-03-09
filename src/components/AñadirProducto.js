@@ -7,13 +7,11 @@ import {
   Text,
   ScrollView,
   ImageBackground,
-  TextInput,
   TouchableOpacity,
-  Touchable,
 } from 'react-native';
-import {Picker} from '@react-native-picker/picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
+import RNPickerSelect from 'react-native-picker-select';
 
 var { height } = Dimensions.get('window');
 

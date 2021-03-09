@@ -1,21 +1,66 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   Image,
   Dimensions,
   StyleSheet,
-  Text,
   ScrollView,
   ImageBackground,
 } from 'react-native';
-import {DataTable} from 'react-native-paper';
+import { DataTable } from 'react-native-paper';
+import { useSelector, useDispatch } from 'react-redux';
+import { getHistory } from '../actions/history';
+import Snackbar from 'react-native-snackbar';
 
-var {height} = Dimensions.get('window');
+var { height } = Dimensions.get('window');
 
 var box_count = 3;
 var box_height = height / box_count;
 
 export default function Servicios(props) {
+
+  const dispatch = useDispatch();
+  const {
+    reciveHistory,
+    successHistory,
+    errorHistory,
+    data
+  } = useSelector((state) => state.history);
+  const {
+    user
+  } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (successHistory) {
+      Snackbar.show({
+        text: 'Historial cargado exitosamente',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    }
+  }, [successHistory]);
+
+  useEffect(() => {
+    if (errorHistory) {
+      Snackbar.show({
+        text: 'Error al cargar el historial',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    }
+  }, [errorHistory]);
+
+  useEffect(() => {
+    if (reciveHistory) {
+      Snackbar.show({
+        text: 'Cargando ....',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    }
+  }, [reciveHistory]);
+
+  useEffect(() => {
+    dispatch(getHistory(user.cliente_id))
+  }, [])
+
   return (
     <View style={[styles.box, styles.box1]}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
@@ -29,23 +74,20 @@ export default function Servicios(props) {
               width: '100%',
               height: '100%',
             }}>
-            <DataTable style={{backgroundColor: 'rgba(255,255,255, .5)'}}>
+            <DataTable style={{ backgroundColor: 'rgba(255,255,255, .5)' }}>
               <DataTable.Header>
-                <DataTable.Title style={{justifyContent: 'center'}}>SERVICIO</DataTable.Title>
-                <DataTable.Title style={{justifyContent: 'flex-end'}}>FECHA SOLICITUD</DataTable.Title>
-                <DataTable.Title style={{justifyContent: 'flex-end'}}>FECHA VISITA</DataTable.Title>
+                <DataTable.Title style={{ justifyContent: 'center' }}>SERVICIO</DataTable.Title>
+                <DataTable.Title style={{ justifyContent: 'flex-end' }}>FECHA SOLICITUD</DataTable.Title>
+                <DataTable.Title style={{ justifyContent: 'flex-end' }}>FECHA VISITA</DataTable.Title>
               </DataTable.Header>
               <ScrollView>
-                <DataTable.Row >
-                  <DataTable.Cell >Frozen yogurt</DataTable.Cell>
-                  <DataTable.Cell numeric>159</DataTable.Cell>
-                  <DataTable.Cell numeric>6.0</DataTable.Cell>
-                </DataTable.Row>
-                <DataTable.Row>
-                  <DataTable.Cell>Frozen yogurt</DataTable.Cell>
-                  <DataTable.Cell numeric>159</DataTable.Cell>
-                  <DataTable.Cell numeric>6.0</DataTable.Cell>
-                </DataTable.Row>
+                {data.map(value => (
+                  <DataTable.Row >
+                    <DataTable.Cell >{value.nombre}</DataTable.Cell>
+                    <DataTable.Cell numeric>{value.solicitud}</DataTable.Cell>
+                    <DataTable.Cell numeric>{value.realizada}</DataTable.Cell>
+                  </DataTable.Row>
+                ))}
               </ScrollView>
             </DataTable>
           </View>
