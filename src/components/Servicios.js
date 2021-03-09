@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     height: '80%',
   },
   logo: {
-    resizeMode: 'center',
+    resizeMode: 'contain',
     height: 120,
     marginTop: 50,
     marginBottom: 30,
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '70%',
-    resizeMode: 'center',
+    resizeMode: 'contain',
     marginHorizontal: 10,
   },
   cardText: {
