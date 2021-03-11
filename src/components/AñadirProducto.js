@@ -18,8 +18,10 @@ var { height } = Dimensions.get('window');
 var box_count = 3;
 var box_height = height / box_count;
 
-export default function AñadirProducto() {
+export default function AñadirProducto(props) {
   const [formData, setFormData] = useState({});
+  const [formDataCarga, setFormDataCarga] = useState({});
+  const [formDataMantencion, setFormDataMantencion] = useState({});
   const { navigation } = props;
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
   const [isVisibleCarga, setIsVisibleCarga] = useState(false);
@@ -245,6 +247,7 @@ const styles = StyleSheet.create({
     height: 70,
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 20
   },
   texto: {
     fontSize: 16,

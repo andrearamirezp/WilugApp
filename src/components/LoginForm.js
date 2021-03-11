@@ -51,15 +51,8 @@ export default function LoginForm({ navigation }) {
       Snackbar.show({
         text: 'Inicio de sesión exitosamente',
         duration: Snackbar.LENGTH_SHORT,
-        action: {
-          text: 'continuar',
-          textColor: 'green',
-          onPress: () => {
-            navigation.navigate('clienteRegistrado');
-            dispatch(clean());
-          },
-        },
       });
+      navigation.navigate('clienteRegistrado');
     }
   }, [token, isAuthenticated]);
 

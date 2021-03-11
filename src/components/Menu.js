@@ -85,7 +85,7 @@ export default function Menu(props) {
             </View>
             <Text style={styles.text}>Contáctanos</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.card}>
+          <TouchableOpacity style={styles.card} onPress={() => handleSubmit()}>
             <View style={styles.listMenu}>
               <Image
                 source={require('../assets/logout.png')}

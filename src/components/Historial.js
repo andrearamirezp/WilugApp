@@ -11,6 +11,7 @@ import { DataTable } from 'react-native-paper';
 import { useSelector, useDispatch } from 'react-redux';
 import { getHistory } from '../actions/history';
 import Snackbar from 'react-native-snackbar';
+import moment from 'moment';
 
 var { height } = Dimensions.get('window');
 
@@ -81,11 +82,11 @@ export default function Servicios(props) {
                 <DataTable.Title style={{ justifyContent: 'flex-end' }}>FECHA VISITA</DataTable.Title>
               </DataTable.Header>
               <ScrollView>
-                {data.map(value => (
-                  <DataTable.Row >
+                {data.map((value, index) => (
+                  <DataTable.Row key={index}>
                     <DataTable.Cell >{value.nombre}</DataTable.Cell>
-                    <DataTable.Cell numeric>{value.solicitud}</DataTable.Cell>
-                    <DataTable.Cell numeric>{value.realizada}</DataTable.Cell>
+                    <DataTable.Cell numeric>{moment(value.solicitud).format('DD/MM/YYYY')}</DataTable.Cell>
+                    <DataTable.Cell numeric>{moment(value.realizada).format('DD/MM/YYYY')}</DataTable.Cell>
                   </DataTable.Row>
                 ))}
               </ScrollView>

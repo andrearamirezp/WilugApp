@@ -8,10 +8,11 @@ import {
   ScrollView,
   ImageBackground,
   TouchableOpacity,
-  AsyncStorage,
 } from 'react-native';
 import Productos from './Productos';
 import { useSelector, useDispatch } from 'react-redux';
+import { getProducts } from '../actions/products';
+import Snackbar from 'react-native-snackbar';
 
 var { height } = Dimensions.get('window');
 
@@ -22,10 +23,48 @@ export default function ListaProductos(props) {
   const { navigation } = props;
   const [showlist, setShowList] = useState(true);
 
+  const dispatch = useDispatch();
   const {
-    token,
-    user,
+    reciveProducts,
+    successProducts,
+    errorProducts,
+    data
+  } = useSelector((state) => state.products);
+  const {
+    user
   } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (successProducts) {
+      Snackbar.show({
+        text: 'Productos cargado exitosamente',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    }
+  }, [successProducts]);
+
+  useEffect(() => {
+    if (errorProducts) {
+      Snackbar.show({
+        text: 'Error al cargar los producttos',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    }
+  }, [errorProducts]);
+
+  useEffect(() => {
+    if (reciveProducts) {
+      Snackbar.show({
+        text: 'Cargando ....',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    }
+  }, [reciveProducts]);
+
+  useEffect(() => {
+    dispatch(getProducts(user.cliente_id))
+    console.log(data)
+  }, [])
 
   return (
     <View style={[styles.box, styles.box1]}>

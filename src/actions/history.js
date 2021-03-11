@@ -35,6 +35,7 @@ export const getHistory = (id) => async (dispatch) => {
         const rawResponse = await fetch(`${url}services/history/${id}`, config);
         if (rawResponse.status === 200) {
             const data = await rawResponse.json();
+            console.log(data)
             dispatch(finishHistory(data));
         } else {
             dispatch(errorHistory());
