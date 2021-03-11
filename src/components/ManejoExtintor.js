@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   imagen: {
-    
+    resizeMode: 'contain',
     height: hp('70%'),
     width: wp('100%'),
   },
@@ -228,6 +228,6 @@ const styles = StyleSheet.create({
   icono2: {
     width: '70%',
     height: 40, 
-    resizeMode: 'center'
+    resizeMode: 'contain'
   },
 });
