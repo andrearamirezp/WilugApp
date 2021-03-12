@@ -101,12 +101,18 @@ export default function AñadirProducto(props) {
                     placeholder={{ label: "Seleccione un agente", value: null }}
                     onValueChange={(value) => console.log(value)}
                     items={[
-                      { label: "JavaScript", value: "JavaScript" },
-                      { label: "TypeStript", value: "TypeStript" },
-                      { label: "Python", value: "Python" },
-                      { label: "Java", value: "Java" },
-                      { label: "C++", value: "C++" },
-                      { label: "C", value: "C" },
+                      { label: "AC-K", value: "JavaScript" },
+                      { label: "AGUA BADGER", value: "TypeStript" },
+                      { label: "BADGER MODELO 150 RB", value: "Python" },
+                      { label: "BADGER MODELO B20BC", value: "Java" },
+                      { label: "BADGER MODELO WC-100", value: "C++" },
+                      { label: "CARRO PQS", value: "C" },
+                      { label: "CO2", value: "JavaScript" },
+                      { label: "ESPUMA AFF", value: "JavaScript" },
+                      { label: "ESPUMA MECANICA", value: "JavaScript" },
+                      { label: "PQS", value: "JavaScript" },
+                      { label: "PQS ANSUL I-A-20-G", value: "JavaScript" },
+                      { label: "PQS ANSUL I-A-20-G TIPO A", value: "JavaScript" },
                     ]}
                   />
                 </View>
