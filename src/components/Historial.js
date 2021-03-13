@@ -16,6 +16,10 @@ var box_count = 3;
 var box_height = height / box_count;
 
 export default function Servicios(props) {
+  const handleChange = (state) => {
+    // You can use setState or dispatch with something like Redux so we can use the retrieved data
+    console.log('Selected Rows: ', state.selectedRows);
+  };
   return (
     <View style={[styles.box, styles.box1]}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
@@ -29,7 +33,7 @@ export default function Servicios(props) {
               width: '100%',
               height: '100%',
             }}>
-            <DataTable style={{backgroundColor: 'rgba(255,255,255, .5)'}}>
+            <DataTable style={{backgroundColor: 'rgba(255,255,255, .5)'}} selectableRows Clicked Selected={handleChange}>
               <DataTable.Header>
                 <DataTable.Title style={{justifyContent: 'center'}}>SERVICIO</DataTable.Title>
                 <DataTable.Title style={{justifyContent: 'flex-end'}}>FECHA SOLICITUD</DataTable.Title>

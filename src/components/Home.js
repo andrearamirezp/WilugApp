@@ -12,8 +12,14 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
+import Notificacion from './notificacion';
+
+
+
 export default function Home(props) {
   const {navigation} = props;
+
+  const notif = new Notificacion;
 
   const abrirlink = () => {
     Linking.openURL('https://www.wilug.cl/tienda/');
@@ -55,7 +61,7 @@ export default function Home(props) {
         </View>
 
         <View style={styles.menuItem}>
-          <TouchableOpacity onPress={abrirlink}>
+          <TouchableOpacity onPress= {() => notif.testPush}>
             <Image
               source={require('../assets/tienda.png')}
               style={styles.image}

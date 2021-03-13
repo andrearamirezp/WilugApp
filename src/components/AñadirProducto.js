@@ -11,7 +11,6 @@ import {
   TouchableOpacity,
   Touchable,
 } from 'react-native';
-import {Picker} from '@react-native-picker/picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 
@@ -22,7 +21,6 @@ var box_height = height / box_count;
 
 export default function AñadirProducto() {
   const [formData, setFormData] = useState({});
-  const { navigation } = props;
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
   const [isVisibleCarga, setIsVisibleCarga] = useState(false);
   const [isVisibleMantencion, setIsVisibleMantencion] = useState(false);
