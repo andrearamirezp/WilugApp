@@ -26,9 +26,6 @@ export default function DetalleProducto({ route }) {
     errorDetail,
     product,
   } = useSelector((state) => state.products);
-  const {
-    user
-  } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (successDetail) {

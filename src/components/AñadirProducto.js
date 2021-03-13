@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Image,
@@ -12,6 +12,9 @@ import {
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 import RNPickerSelect from 'react-native-picker-select';
+import { useSelector, useDispatch } from 'react-redux';
+import { addProducto, getProducts } from '../actions/products';
+import Snackbar from 'react-native-snackbar';
 
 var { height } = Dimensions.get('window');
 
@@ -19,13 +22,29 @@ var box_count = 3;
 var box_height = height / box_count;
 
 export default function AñadirProducto(props) {
-  const [formData, setFormData] = useState({});
-  const [formDataCarga, setFormDataCarga] = useState({});
-  const [formDataMantencion, setFormDataMantencion] = useState({});
+  const dispatch = useDispatch();
   const { navigation } = props;
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
   const [isVisibleCarga, setIsVisibleCarga] = useState(false);
   const [isVisibleMantencion, setIsVisibleMantencion] = useState(false);
+  const [data, setData] = useState({
+    tipo: 0,
+    capacidad: 0,
+    fechaFabricacion: null,
+    fechaUltCarga: null,
+    fechaUltMantencion: null,
+    idCliente: ''
+  });
+
+  const {
+    reciveInsert,
+    successInsert,
+    errorInsert
+  } = useSelector((state) => state.products);
+
+  const {
+    user
+  } = useSelector((state) => state.auth);
 
   const hideDatePicker = () => {
     setIsDatePickerVisible(false);
@@ -40,7 +59,7 @@ export default function AñadirProducto(props) {
     dateFabricacion.setHours(0);
     dateFabricacion.setMinutes(0);
     dateFabricacion.setSeconds(0);
-    setFormData({ ...formData, dateFabricacion });
+    setData({ ...data, ['fechaFabricacion']: dateFabricacion });
     hideDatePicker();
   };
 
@@ -57,7 +76,7 @@ export default function AñadirProducto(props) {
     dateCarga.setHours(0);
     dateCarga.setMinutes(0);
     dateCarga.setSeconds(0);
-    setFormDataCarga({...formDataCarga, dateCarga});
+    setData({ ...data, ['fechaUltCarga']: dateCarga });
     hideDatePickerCarga();
   };
 
@@ -74,9 +93,50 @@ export default function AñadirProducto(props) {
     dateMantencion.setHours(0);
     dateMantencion.setMinutes(0);
     dateMantencion.setSeconds(0);
-    setFormDataMantencion({...formDataMantencion, dateMantencion});
+    setData({ ...data, ['fechaUltMantencion']: dateMantencion });
     hideDatePickerMantencion();
   };
+
+  useEffect(() => {
+    setData({ ...data, ['idCliente']: user.cliente_id });
+  }, [user]);
+
+  const handleChangePicker = (name, value) => {
+    setData({ ...data, [name]: value });
+  };
+
+  const handleSubmit = () => {
+    dispatch(addProducto(data));
+    navigation.navigate('clienteRegistrado');
+  };
+
+  useEffect(() => {
+    if (successInsert) {
+      dispatch(getProducts(user.cliente_id));
+      Snackbar.show({
+        text: 'Producto registrado exitosamente',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    }
+  }, [successInsert]);
+
+  useEffect(() => {
+    if (errorInsert) {
+      Snackbar.show({
+        text: 'Error al registrar el producto',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    }
+  }, [errorInsert]);
+
+  useEffect(() => {
+    if (reciveInsert) {
+      Snackbar.show({
+        text: 'Cargando ....',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    }
+  }, [reciveInsert]);
 
   return (
     <>
@@ -99,20 +159,10 @@ export default function AñadirProducto(props) {
                 <View style={styles.picker}>
                   <RNPickerSelect
                     placeholder={{ label: "Seleccione un agente", value: null }}
-                    onValueChange={(value) => console.log(value)}
+                    onValueChange={(value) => handleChangePicker('tipo', value)}
                     items={[
-                      { label: "AC-K", value: "JavaScript" },
-                      { label: "AGUA BADGER", value: "TypeStript" },
-                      { label: "BADGER MODELO 150 RB", value: "Python" },
-                      { label: "BADGER MODELO B20BC", value: "Java" },
-                      { label: "BADGER MODELO WC-100", value: "C++" },
-                      { label: "CARRO PQS", value: "C" },
-                      { label: "CO2", value: "JavaScript" },
-                      { label: "ESPUMA AFF", value: "JavaScript" },
-                      { label: "ESPUMA MECANICA", value: "JavaScript" },
-                      { label: "PQS", value: "JavaScript" },
-                      { label: "PQS ANSUL I-A-20-G", value: "JavaScript" },
-                      { label: "PQS ANSUL I-A-20-G TIPO A", value: "JavaScript" },
+                      { label: "PQS", value: "1" },
+                      { label: "CO2", value: "2" },
                     ]}
                   />
                 </View>
@@ -120,7 +170,7 @@ export default function AñadirProducto(props) {
                 <View style={styles.picker}>
                   <RNPickerSelect
                     placeholder={{ label: "Seleccione capacidad", value: null }}
-                    onValueChange={(value) => console.log(value)}
+                    onValueChange={(value) => handleChangePicker('capacidad', value)}
                     items={[
                       { label: "1 KG", value: "1" },
                       { label: "2 KG", value: "2" },
@@ -128,7 +178,9 @@ export default function AñadirProducto(props) {
                       { label: "5 KG", value: "5" },
                       { label: "6 KG", value: "6" },
                       { label: "10 KG", value: "10" },
+                      { label: "25 KG", value: "25" },
                       { label: "50 KG", value: "50" },
+                      { label: "100 KG", value: "100" },
                     ]}
                   />
                 </View>
@@ -138,11 +190,11 @@ export default function AñadirProducto(props) {
                   <Text
                     style={{
                       fontSize: 16,
-                      color: formData.dateFabricacion ? '#000' : '#969696',
+                      color: data.fechaFabricacion ? '#000' : '#969696',
                     }}
                     onPress={showDatePicker}>
-                    {formData.dateFabricacion
-                      ? moment(formData.dateFabricacion).format('DD/MM/YYYY')
+                    {data.fechaFabricacion
+                      ? moment(data.fechaFabricacion).format('DD/MM/YYYY')
                       : 'DD/MM/AA'}
                   </Text>
                 </View>
@@ -152,11 +204,11 @@ export default function AñadirProducto(props) {
                   <Text
                     style={{
                       fontSize: 16,
-                      color: formDataCarga.dateCarga ? '#000' : '#969696',
+                      color: data.fechaUltCarga ? '#000' : '#969696',
                     }}
                     onPress={showDatePickerCarga}>
-                    {formDataCarga.dateCarga
-                      ? moment(formDataCarga.dateCarga).format('DD/MM/YYYY')
+                    {data.fechaUltCarga
+                      ? moment(data.fechaUltCarga).format('DD/MM/YYYY')
                       : 'DD/MM/AA'}
                   </Text>
                   <DateTimePickerModal
@@ -171,11 +223,11 @@ export default function AñadirProducto(props) {
                   <Text
                     style={{
                       fontSize: 16,
-                      color: formDataMantencion.dateMantencion ? '#000' : '#969696',
+                      color: data.fechaUltMantencion ? '#000' : '#969696',
                     }}
                     onPress={showDatePickerMantencion}>
-                    {formDataMantencion.dateMantencion
-                      ? moment(formDataMantencion.dateMantencion).format('DD/MM/YYYY')
+                    {data.fechaUltMantencion
+                      ? moment(data.fechaUltMantencion).format('DD/MM/YYYY')
                       : 'DD/MM/AA'}
                   </Text>
                   <DateTimePickerModal
@@ -185,7 +237,7 @@ export default function AñadirProducto(props) {
                     onCancel={hideDatePickerMantencion}
                   />
                 </View>
-                <TouchableOpacity style={styles.boton}>
+                <TouchableOpacity style={styles.boton} onPress={handleSubmit}>
                   <Text style={styles.btnText}>Agregar</Text>
                 </TouchableOpacity>
               </ScrollView>

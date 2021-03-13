@@ -4,7 +4,11 @@ import {
     ERROR_PRODUCTS,
     RECIVE_DETAIL,
     FINISH_DETAIL,
-    ERROR_DETAIL
+    ERROR_DETAIL,
+    RECIVE_INSERT,
+    FINISH_INSERT,
+    ERROR_INSERT,
+    CLEAN_STATE
 } from '../actions/products';
 
 export default (
@@ -17,6 +21,9 @@ export default (
         successDetail: false,
         errorDetail: false,
         product: {},
+        reciveInsert: false,
+        successInsert: false,
+        errorInsert: false
     },
     action,
 ) => {
@@ -64,6 +71,34 @@ export default (
                 reciveDetail: false,
                 errorDetail: true,
                 successDetail: false,
+            };
+        case RECIVE_INSERT:
+            return {
+                ...state,
+                reciveInsert: true,
+                errorInsert: false,
+                successInsert: false,
+            };
+        case FINISH_INSERT:
+            return {
+                ...state,
+                reciveInsert: false,
+                successInsert: true,
+                errorInsert: false,
+            };
+        case ERROR_INSERT:
+            return {
+                ...state,
+                reciveInsert: false,
+                errorInsert: true,
+                successInsert: false,
+            };
+        case CLEAN_STATE:
+            return {
+                ...state,
+                reciveInsert: false,
+                successInsert: false,
+                errorInsert: false
             };
         default:
             return state;
