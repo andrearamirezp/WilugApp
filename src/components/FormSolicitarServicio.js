@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
@@ -14,14 +14,21 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import { useSelector, useDispatch } from 'react-redux';
+import { sendMail } from '../actions/services';
+import Snackbar from 'react-native-snackbar';
 
-var {height} = Dimensions.get('window');
+var { height } = Dimensions.get('window');
 
 var box_count = 3;
 var box_height = height / box_count;
 
-export default function FormSolicitarServicio({route,navigation}) {
+export default function FormSolicitarServicio({ route }) {
   const { tituloCabecera } = route.params;
+  const [to, setTo] = useState('');
+  const [text, setText] = useState('');
+  
+
   const Alerta = () =>
     Alert.alert(
       "Solicitar Servicio",
@@ -32,20 +39,71 @@ export default function FormSolicitarServicio({route,navigation}) {
           onPress: () => console.log("Cancelar Presionado"),
           style: "cancel"
         },
-        { text: "SI", onPress: () => console.log("Si presionado") }
+        { text: "SI", onPress: () => handleSubmit() }
       ],
       { cancelable: false }
     );
+
+
+  const dispatch = useDispatch();
+  const {
+    reciveMail,
+    successMail,
+    errorMail,
+  } = useSelector((state) => state.services);
+  const {
+    user
+  } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    setTo(user.email_cliente);
+  }, [user]);
+
+  useEffect(() => {
+    if (successMail) {
+      Snackbar.show({
+        text: 'Solicitud enviada exitosamente',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    }
+  }, [successMail]);
+
+  useEffect(() => {
+    if (errorMail) {
+      Snackbar.show({
+        text: 'Error al enviar la solicitud',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    }
+  }, [errorMail]);
+
+  useEffect(() => {
+    if (reciveMail) {
+      Snackbar.show({
+        text: 'Enviando ....',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    }
+  }, [reciveMail]);
+
+  const handleSubmit = () => {
+    dispatch(sendMail(to, text))
+  };
+
+  const handleChange = () => (value) => {
+    setText(value);
+  };
+
   return (
     <View style={[styles.box, styles.box1]}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
       <ScrollView style={styles.container}>
         <Text style={styles.titulo}>{tituloCabecera}</Text>
-        <Text style={[styles.texto, {marginBottom: 10}]}>
+        <Text style={[styles.texto, { marginBottom: 10 }]}>
           Desarrollo de la Ingeniaría de Sistemas contra incendio por un equipo
           profesional técnicamente experimentado.
         </Text>
-        <Text style={[styles.texto, {marginBottom: 10}, {marginTop: 10}]}>
+        <Text style={[styles.texto, { marginBottom: 10 }, { marginTop: 10 }]}>
           Déjanos más detalles de tu proyecto.
         </Text>
         <TextInput
@@ -54,6 +112,7 @@ export default function FormSolicitarServicio({route,navigation}) {
           numberOfLines={8}
           placeholder=""
           placeholderTextColor="#969696"
+          onChangeText={handleChange()}
         />
         <TouchableOpacity style={styles.boton} onPress={Alerta}>
           <Text style={styles.btnText}>Enviar</Text>

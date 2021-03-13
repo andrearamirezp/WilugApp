@@ -1,61 +1,104 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   Image,
   Dimensions,
   StyleSheet,
   Text,
-  TouchableOpacity,
   ScrollView,
 } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import { getDetailProduct } from '../actions/products';
+import Snackbar from 'react-native-snackbar';
+import moment from 'moment';
 
-var {height} = Dimensions.get('window');
+var { height } = Dimensions.get('window');
 
 var box_count = 3;
 var box_height = height / box_count;
 
-export default function DetalleProducto(props) {
-  const {navigation} = props;
-  return (
-    <View style={[styles.box, styles.box1]}>
-      <Image style={styles.logo} source={require('../assets/logo.png')} />
+export default function DetalleProducto({ route }) {
+  const { params } = route
+  const dispatch = useDispatch();
+  const {
+    reciveDetail,
+    successDetail,
+    errorDetail,
+    product,
+  } = useSelector((state) => state.products);
+  const {
+    user
+  } = useSelector((state) => state.auth);
 
-      <ScrollView style={styles.box4} showsVerticalScrollIndicator={false}>
-        <Text style={styles.titulo}>Detalles del producto</Text>
-        <View style={styles.viewText}>
-          <Text style={styles.text}>Número de certificación:</Text>
-          <Text style={styles.textOutPut}>HOLA</Text>
-        </View>
-        <View style={styles.viewText}>
-          <Text style={styles.text}>Tipo de agente:</Text>
-          <Text style={styles.textOutPut}>HOLA</Text>
-        </View>
-        <View style={styles.viewText}>
-          <Text style={styles.text}>Capacidad:</Text>
-          <Text style={styles.textOutPut}>HOLA</Text>
-        </View>
-        <View style={styles.viewText}>
-          <Text style={styles.text}>Fecha de fabricación:</Text>
-          <Text style={styles.textOutPut}>HOLA</Text>
-        </View>
-        <View style={styles.viewText}>
-          <Text style={styles.text}>Fecha última carga:</Text>
-          <Text style={styles.textOutPut}>HOLA</Text>
-        </View>
-        <View style={styles.viewText}>
-          <Text style={styles.text}>Vencimiento de carga:</Text>
-          <Text style={styles.textOutPut}>HOLA</Text>
-        </View>
-        <View style={styles.viewText}>
-          <Text style={styles.text}>Fecha última mantención:</Text>
-          <Text style={styles.textOutPut}>HOLA</Text>
-        </View>
-        <View style={styles.viewText}>
-          <Text style={styles.text}>Fecha próxima mantención:</Text>
-          <Text style={styles.textOutPut}>HOLA</Text>
-        </View>
-      </ScrollView>
-    </View>
+  useEffect(() => {
+    if (successDetail) {
+      Snackbar.show({
+        text: 'Detalle cargado exitosamente',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    }
+  }, [successDetail]);
+
+  useEffect(() => {
+    if (errorDetail) {
+      Snackbar.show({
+        text: 'Error al cargar el detalle',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    }
+  }, [errorDetail]);
+
+  useEffect(() => {
+    if (reciveDetail) {
+      Snackbar.show({
+        text: 'Cargando ....',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    }
+  }, [reciveDetail]);
+
+  useEffect(() => {
+    dispatch(getDetailProduct(params.id))
+  }, [])
+
+  return (
+    product && (
+      <View style={[styles.box, styles.box1]}>
+        <Image style={styles.logo} source={require('../assets/logo.png')} />
+
+        <ScrollView style={styles.box4} showsVerticalScrollIndicator={false}>
+          <Text style={styles.titulo}>Detalles del producto</Text>
+          <View style={styles.viewText}>
+            <Text style={styles.text}>Número de certificación:</Text>
+            <Text style={styles.textOutPut}>{product.num_cert == null ? '--' : product.num_cert}</Text>
+          </View>
+          <View style={styles.viewText}>
+            <Text style={styles.text}>Tipo de agente:</Text>
+            <Text style={styles.textOutPut}>{product.nom_agente == null ? '--' : product.nom_agente}</Text>
+          </View>
+          <View style={styles.viewText}>
+            <Text style={styles.text}>Capacidad:</Text>
+            <Text style={styles.textOutPut}>{product.cap_extagente == null ? '--' : `${product.cap_extagente} kg`}</Text>
+          </View>
+          <View style={styles.viewText}>
+            <Text style={styles.text}>Fecha de fabricación:</Text>
+            <Text style={styles.textOutPut}>{moment(product.fecha_fabricacion).format('DD/MM/YYYY') == null ? '--' : moment(product.fecha_fabricacion).format('DD/MM/YYYY')}</Text>
+          </View>
+          <View style={styles.viewText}>
+            <Text style={styles.text}>Fecha última carga:</Text>
+            <Text style={styles.textOutPut}>{moment(product.fecha_ultcarga).format('DD/MM/YYYY') == null ? '--' : moment(product.fecha_ultcarga).format('DD/MM/YYYY')}</Text>
+          </View>
+          <View style={styles.viewText}>
+            <Text style={styles.text}>Vencimiento de carga:</Text>
+            <Text style={styles.textOutPut}>{moment(product.fecha_vencarga).format('DD/MM/YYYY') == null ? '--' : moment(product.fecha_vencarga).format('DD/MM/YYYY')}</Text>
+          </View>
+          <View style={styles.viewText}>
+            <Text style={styles.text}>Fecha última mantención:</Text>
+            <Text style={styles.textOutPut}>{moment(product.fecha_ultMant).format('DD/MM/YYYY') == null ? '--' : moment(product.fecha_ultMant).format('DD/MM/YYYY')}</Text>
+          </View>
+        </ScrollView>
+      </View>
+    )
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   Image,
@@ -21,18 +21,12 @@ var box_height = height / box_count;
 
 export default function ListaProductos(props) {
   const { navigation } = props;
-  const [showlist, setShowList] = useState(true);
 
   const dispatch = useDispatch();
-  const {
-    reciveProducts,
-    successProducts,
-    errorProducts,
-    data
-  } = useSelector((state) => state.products);
-  const {
-    user
-  } = useSelector((state) => state.auth);
+  const { reciveProducts, successProducts, errorProducts, data } = useSelector(
+    (state) => state.products,
+  );
+  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (successProducts) {
@@ -62,9 +56,8 @@ export default function ListaProductos(props) {
   }, [reciveProducts]);
 
   useEffect(() => {
-    dispatch(getProducts(user.cliente_id))
-    console.log(data)
-  }, [])
+    dispatch(getProducts(user.cliente_id));
+  }, []);
 
   return (
     <View style={[styles.box, styles.box1]}>
@@ -80,7 +73,9 @@ export default function ListaProductos(props) {
               width: '100%',
               height: '100%',
             }}>
-            <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+            <ScrollView
+              style={styles.scrollView}
+              showsVerticalScrollIndicator={false}>
               <View
                 style={{
                   flexDirection: 'row',
@@ -100,12 +95,12 @@ export default function ListaProductos(props) {
                 </View>
               </View>
 
-              {showlist ? (
+              {data.length > 0 ? (
                 <>
-                  <Productos />
+                  <Productos data={data} />
                 </>
               ) : (
-                console.log('Hola')
+                <Text> Cliente sin productos asociados </Text>
               )}
             </ScrollView>
           </View>
