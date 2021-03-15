@@ -30,15 +30,6 @@ export default function Menu(props) {
     <View style={[styles.box, styles.box1]}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
         <ScrollView style={styles.box4} showsVerticalScrollIndicator={false}>
-          <TouchableOpacity style={styles.card}>
-            <View style={styles.listMenu}>
-              <Image
-                source={require('../assets/notificacion.png')}
-                style={styles.image}
-              />
-            </View>
-            <Text style={styles.text}>Notificaciones</Text>
-          </TouchableOpacity>
           <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('nosotros')}>
             <View style={styles.listMenu}>
               <Image
