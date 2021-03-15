@@ -86,7 +86,7 @@ export default function Servicios(props) {
                   <DataTable.Row key={index}>
                     <DataTable.Cell >{value.nombre}</DataTable.Cell>
                     <DataTable.Cell numeric>{moment(value.solicitud).format('DD/MM/YYYY')}</DataTable.Cell>
-                    <DataTable.Cell numeric>{moment(value.realizada).format('DD/MM/YYYY')}</DataTable.Cell>
+                    <DataTable.Cell numeric>{value.realizada == null ? '--' : moment(value.realizada).format('DD/MM/YYYY')}</DataTable.Cell>
                   </DataTable.Row>
                 ))}
               </ScrollView>

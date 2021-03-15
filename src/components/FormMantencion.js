@@ -13,6 +13,7 @@ import SelectMultiple from 'react-native-select-multiple';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProducts } from '../actions/products';
 import { saveMantencion } from '../actions/mantencion';
+import { getHistory } from '../actions/history';
 import Snackbar from 'react-native-snackbar';
 
 var { height } = Dimensions.get('window');
@@ -61,6 +62,7 @@ export default function FormMantencion({ navigation }) {
 
   useEffect(() => {
     if (successManrtencion) {
+      dispatch(getHistory(user.cliente_id))
       Snackbar.show({
         text: 'Productos enviados a mantención',
         duration: Snackbar.LENGTH_SHORT,
@@ -95,9 +97,8 @@ export default function FormMantencion({ navigation }) {
   }
 
   const handleSubmit = () => {
-    console.log(selectData)
     dispatch(saveMantencion(selectData));
-    //navigation.navigate('clienteRegistrado');
+    navigation.navigate('clienteRegistrado');
   };
 
   return (

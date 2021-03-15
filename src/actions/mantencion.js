@@ -23,7 +23,7 @@ const errorMantencion = () => {
     };
 };
 
-export const saveMantencion = (id) => async (dispatch) => {
+export const saveMantencion = (data) => async (dispatch) => {
     try {
         dispatch(reciveMantencion());
 
@@ -35,9 +35,8 @@ export const saveMantencion = (id) => async (dispatch) => {
             body: `data=${encodeURIComponent(JSON.stringify(data))}`,
         };
 
-        const rawResponse = await fetch(`${url}services/mantencion/${id}`, config);
+        const rawResponse = await fetch(`${url}services/saveMantencion`, config);
         if (rawResponse.status === 200) {
-            const data = await rawResponse.json();
             dispatch(finishMantencion());
         } else {
             dispatch(errorMantencion());

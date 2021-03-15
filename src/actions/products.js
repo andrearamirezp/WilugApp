@@ -111,7 +111,6 @@ export const getProducts = (id, view) => async (dispatch) => {
                 });
                 dispatch(finishProductsMantencion(newData));
             } else {
-                console.log('else')
                 dispatch(finishProducts(data));
             }
         } else {
