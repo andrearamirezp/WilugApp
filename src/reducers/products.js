@@ -8,7 +8,8 @@ import {
     RECIVE_INSERT,
     FINISH_INSERT,
     ERROR_INSERT,
-    CLEAN_STATE
+    CLEAN_STATE,
+    FINISH_PRODUCTS_MANTENCION
 } from '../actions/products';
 
 export default (
@@ -17,6 +18,7 @@ export default (
         successProducts: false,
         errorProducts: false,
         data: [],
+        dataMantencion: [],
         reciveDetail: false,
         successDetail: false,
         errorDetail: false,
@@ -42,6 +44,14 @@ export default (
                 successProducts: true,
                 errorProducts: false,
                 data: action.data
+            };
+        case FINISH_PRODUCTS_MANTENCION:
+            return {
+                ...state,
+                reciveProducts: false,
+                successProducts: true,
+                errorProducts: false,
+                dataMantencion: action.data
             };
         case ERROR_PRODUCTS:
             return {

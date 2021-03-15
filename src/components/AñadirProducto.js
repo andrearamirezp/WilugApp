@@ -27,6 +27,10 @@ export default function AñadirProducto(props) {
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
   const [isVisibleCarga, setIsVisibleCarga] = useState(false);
   const [isVisibleMantencion, setIsVisibleMantencion] = useState(false);
+  const [ option, setOption] = useState({
+    label: "Seleccione capacidad",
+    value: null
+  });
   const [data, setData] = useState({
     tipo: 0,
     capacidad: 0,
@@ -102,6 +106,7 @@ export default function AñadirProducto(props) {
   }, [user]);
 
   const handleChangePicker = (name, value) => {
+    setOption({ label: 'PQS', value: value });
     setData({ ...data, [name]: value });
   };
 
@@ -158,7 +163,7 @@ export default function AñadirProducto(props) {
                 <Text style={styles.texto}>Tipo de agente</Text>
                 <View style={styles.picker}>
                   <RNPickerSelect
-                    placeholder={{ label: "Seleccione un agente", value: null }}
+                    placeholder={{ label: option.label, value: option.value }}
                     onValueChange={(value) => handleChangePicker('tipo', value)}
                     items={[
                       { label: "PQS", value: "1" },
@@ -182,6 +187,7 @@ export default function AñadirProducto(props) {
                       { label: "50 KG", value: "50" },
                       { label: "100 KG", value: "100" },
                     ]}
+                    value={data.capacidad}
                   />
                 </View>
 

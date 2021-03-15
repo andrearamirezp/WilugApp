@@ -56,7 +56,7 @@ export default function ListaProductos(props) {
   }, [reciveProducts]);
 
   useEffect(() => {
-    dispatch(getProducts(user.cliente_id));
+    dispatch(getProducts(user.cliente_id, 'list'));
   }, []);
 
   return (

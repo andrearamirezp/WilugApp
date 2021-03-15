@@ -4,3 +4,4 @@ export { default as user } from './user';
 export { default as history } from './history';
 export { default as products } from './products';
 export { default as services } from './services';
+export { default as mantencion } from './mantencion';

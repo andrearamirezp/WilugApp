@@ -4,6 +4,7 @@ import moment from 'moment';
 // ACTIONS
 export const RECIVE_PRODUCTS = "RECIVE_PRODUCTS";
 export const FINISH_PRODUCTS = "FINISH_PRODUCTS";
+export const FINISH_PRODUCTS_MANTENCION = "FINISH_PRODUCTS_MANTENCION";
 export const ERROR_PRODUCTS = "ERROR_PRODUCTS";
 
 export const RECIVE_DETAIL = "RECIVE_DETAIL";
@@ -76,13 +77,20 @@ const finishProducts = (data) => {
     };
 };
 
+const finishProductsMantencion = (data) => {
+    return {
+        type: FINISH_PRODUCTS_MANTENCION,
+        data
+    };
+};
+
 const errorProducts = () => {
     return {
         type: ERROR_PRODUCTS
     };
 };
 
-export const getProducts = (id) => async (dispatch) => {
+export const getProducts = (id, view) => async (dispatch) => {
     try {
         dispatch(reciveProducts());
 
@@ -90,10 +98,22 @@ export const getProducts = (id) => async (dispatch) => {
             method: 'GET'
         };
 
-        const rawResponse = await fetch(`${url}products/ByCliente/${id}`, config);
+        const rawResponse = await fetch(`${url}products/ByCliente/${id}/${view}`, config);
         if (rawResponse.status === 200) {
             const data = await rawResponse.json();
-            dispatch(finishProducts(data));
+            if(view == 'mantencion') {
+                let newData = []
+                data.map(value => {
+                    newData.push({
+                        label: value.name,
+                        value: value.id
+                    })
+                });
+                dispatch(finishProductsMantencion(newData));
+            } else {
+                console.log('else')
+                dispatch(finishProducts(data));
+            }
         } else {
             dispatch(errorProducts());
         }
