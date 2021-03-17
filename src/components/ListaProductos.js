@@ -31,7 +31,7 @@ export default function ListaProductos(props) {
   useEffect(() => {
     if (successProducts) {
       Snackbar.show({
-        text: 'Productos cargado exitosamente',
+        text: 'Productos cargados exitosamente',
         duration: Snackbar.LENGTH_SHORT,
       });
     }
@@ -40,7 +40,7 @@ export default function ListaProductos(props) {
   useEffect(() => {
     if (errorProducts) {
       Snackbar.show({
-        text: 'Error al cargar los producttos',
+        text: 'Error al cargar los productos',
         duration: Snackbar.LENGTH_SHORT,
       });
     }
