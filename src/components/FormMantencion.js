@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Image,
@@ -7,36 +7,37 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
-  ImageBackground,
 } from 'react-native';
 import SelectMultiple from 'react-native-select-multiple';
-import { useSelector, useDispatch } from 'react-redux';
-import { getProducts } from '../actions/products';
-import { saveMantencion } from '../actions/mantencion';
-import { getHistory } from '../actions/history';
+import {useSelector, useDispatch} from 'react-redux';
+import {getProducts} from '../actions/products';
+import {saveMantencion} from '../actions/mantencion';
+import {getHistory} from '../actions/history';
 import Snackbar from 'react-native-snackbar';
 
-var { height } = Dimensions.get('window');
+var {height} = Dimensions.get('window');
 var box_count = 3;
 var box_height = height / box_count;
 
-
-export default function FormMantencion({ navigation }) {
-  const [selectData, setSelectData] = useState({ selectedFruits: [] })
+export default function FormMantencion({navigation}) {
+  const [selectData, setSelectData] = useState({selectedFruits: []});
 
   const dispatch = useDispatch();
-  const { reciveProducts, successProducts, errorProducts, dataMantencion } = useSelector(
-    (state) => state.products,
-  );
-  const { reciveManrtencion, successManrtencion, errorManrtencion, } = useSelector(
+  const {
+    reciveProducts,
+    successProducts,
+    errorProducts,
+    dataMantencion,
+  } = useSelector((state) => state.products);
+  const {reciveManrtencion, successManrtencion, errorManrtencion} = useSelector(
     (state) => state.mantencion,
   );
-  const { user } = useSelector((state) => state.auth);
+  const {user} = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (successProducts) {
       Snackbar.show({
-        text: 'Productos cargado exitosamente',
+        text: 'Productos cargados exitosamente',
         duration: Snackbar.LENGTH_SHORT,
       });
     }
@@ -62,7 +63,7 @@ export default function FormMantencion({ navigation }) {
 
   useEffect(() => {
     if (successManrtencion) {
-      dispatch(getHistory(user.cliente_id))
+      dispatch(getHistory(user.cliente_id));
       Snackbar.show({
         text: 'Productos enviados a mantención',
         duration: Snackbar.LENGTH_SHORT,
@@ -93,8 +94,8 @@ export default function FormMantencion({ navigation }) {
   }, []);
 
   onSelectionsChange = (selectedFruits) => {
-    setSelectData({ selectedFruits })
-  }
+    setSelectData({selectedFruits});
+  };
 
   const handleSubmit = () => {
     dispatch(saveMantencion(selectData));
@@ -105,17 +106,16 @@ export default function FormMantencion({ navigation }) {
     <View style={[styles.box, styles.box1]}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
       <View style={[styles.box4]}>
-        <ImageBackground
-          style={styles.box3}
-          source={require('../assets/fondo2.jpg')}>
-          <View style={{ backgroundColor: 'rgba(235,245,250, .6)' }}>
+        <View style={styles.box3}>
+          <View>
             <ScrollView showsVerticalScrollIndicator={false}>
-              <Text style={styles.titulo}>Solicita aquí tu mantención.</Text>
+              <Text style={styles.titulo}>Solicita aquí tu mantención</Text>
               <View>
                 <SelectMultiple
                   items={dataMantencion}
                   selectedItems={selectData.selectedFruits}
-                  onSelectionsChange={this.onSelectionsChange} />
+                  onSelectionsChange={this.onSelectionsChange}
+                />
               </View>
 
               <TouchableOpacity style={styles.boton} onPress={handleSubmit}>
@@ -123,10 +123,10 @@ export default function FormMantencion({ navigation }) {
               </TouchableOpacity>
             </ScrollView>
           </View>
-        </ImageBackground>
+        </View>
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -174,6 +174,7 @@ const styles = StyleSheet.create({
   titulo: {
     fontSize: 25,
     textAlign: 'center',
+    color: '#0A6DD3',
     marginBottom: 10,
     marginTop: 10,
   },
@@ -213,4 +214,3 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 });
-

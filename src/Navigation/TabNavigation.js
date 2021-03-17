@@ -15,7 +15,7 @@ export default function navigation() {
           margin: 15,
         },
         activeTintColor: '#FFF',
-        activeBackgroundColor: '#212778',
+        activeBackgroundColor: '#005297',
         inactiveTintColor: '#000',
       }}>
       <Tab.Screen

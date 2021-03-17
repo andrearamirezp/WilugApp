@@ -10,7 +10,7 @@ const Products = ({ data, navigation }) =>
             onPress={() => navigation.navigate('detalleProducto', {
                 id: value.id
             })}>
-            <Text >{value.name}</Text>
+            <Text style={{color:'white'}}>{value.name}</Text>
         </TouchableOpacity>
     ));
 
@@ -28,6 +28,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         margin: 10,
         borderRadius: 15,
-        backgroundColor: '#00A1C3',
+        backgroundColor: '#2B88E9',
     },
 });
