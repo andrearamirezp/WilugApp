@@ -125,9 +125,10 @@ export default function RegistrarEmpresa(props) {
             onChangeText={handleChange('razonSocial')}
           />
           <Text style={styles.texto}>Rut</Text>
+          <Text style={{marginLeft: 30, fontSize:12}}>(sin punto ni guión)</Text>
           <TextInput
             style={styles.input}
-            placeholder="12.345.678-9"
+            placeholder="123456789"
             placeholderTextColor="#969696"
             value={data.rut}
             onChangeText={handleChange('rut')}

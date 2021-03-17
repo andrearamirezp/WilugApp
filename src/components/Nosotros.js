@@ -59,7 +59,7 @@ export default function Nosotros() {
               source={require('../assets/icono1.png')}
             />
             <Text style={styles.textIcono}>
-              27% DE NUESTRAS TRABAJADORAS SON MUJERES
+              27% DE NUESTROS TRABAJADORES SON MUJERES
             </Text>
           </View>
           <View style={{width: '33.33%'}}>

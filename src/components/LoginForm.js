@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -14,16 +14,16 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import { useSelector, useDispatch } from 'react-redux';
-import { login, clean } from '../actions/auth';
+import {useSelector, useDispatch} from 'react-redux';
+import {login, clean} from '../actions/auth';
 import Snackbar from 'react-native-snackbar';
 
-var { height } = Dimensions.get('window');
+var {height} = Dimensions.get('window');
 
 var box_count = 3;
 var box_height = height / box_count;
 
-export default function LoginForm({ navigation }) {
+export default function LoginForm({navigation}) {
   const dispatch = useDispatch();
   const {
     token,
@@ -39,7 +39,7 @@ export default function LoginForm({ navigation }) {
   });
 
   const handleChange = (name) => (value) => {
-    setData({ ...data, [name]: value });
+    setData({...data, [name]: value});
   };
 
   const handleSubmit = () => {
@@ -85,13 +85,17 @@ export default function LoginForm({ navigation }) {
             source={require('../assets/usuario.png')}
           />
           <Text style={styles.textWelcome}>Bienvenid@ a WilugApp</Text>
+          <Text style={{fontSize: 12, marginBottom: 10}}>
+            (Rut sin punto ni guión)
+          </Text>
           <TextInput
             style={styles.input}
-            placeholder="11.111.111-1"
+            placeholder="111111111"
             placeholderTextColor="#969696"
             value={data.rut}
             onChangeText={handleChange('rut')}
           />
+
           <TextInput
             style={styles.input}
             placeholder="Contraseña"
@@ -105,7 +109,7 @@ export default function LoginForm({ navigation }) {
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={{ height: '5%' }}
+            style={{height: '5%'}}
             onPress={() => navigation.navigate('recuperarContraseña')}>
             <Text style={styles.textUnder}>¿Olvidaste tu contraseña?</Text>
           </TouchableOpacity>
@@ -154,13 +158,13 @@ const styles = StyleSheet.create({
   textWelcome: {
     color: '#212778',
     fontSize: 20,
-    marginBottom: 40,
+    marginBottom: 20,
   },
   input: {
     height: 50,
     color: '#2b2926',
     width: '80%',
-    marginBottom: 20,
+    marginBottom: 30,
     backgroundColor: '#fff',
     paddingHorizontal: 20,
     borderRadius: 50,
@@ -186,7 +190,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 10,
     position: 'relative',
-    top: 25,
-    marginBottom: 50,
+    top: 20,
+    marginBottom: 40,
   },
 });
