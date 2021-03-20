@@ -146,6 +146,8 @@ export default function RegistrarEmpresa(props) {
             <RNPickerSelect
               placeholder={{ label: "Seleccione una región", value: null }}
               onValueChange={(value) => filterComuna(value)}
+              style={{ inputAndroid: { color: 'black' } }}
+              useNativeAndroidPickerStyle={true}
               items={regions}
             />
           </View>
@@ -155,6 +157,8 @@ export default function RegistrarEmpresa(props) {
             <RNPickerSelect
               placeholder={{ label: "Seleccione una comuna", value: null }}
               onValueChange={(value) => handleChangePicker('comuna', value)}
+              style={{ inputAndroid: { color: 'black' } }}
+              useNativeAndroidPickerStyle={true}
               items={comunasPicker}
               value={data.comuna}
             />
