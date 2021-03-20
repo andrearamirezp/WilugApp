@@ -165,6 +165,8 @@ export default function AñadirProducto(props) {
                   <RNPickerSelect
                     placeholder={{ label: option.label, value: option.value }}
                     onValueChange={(value) => handleChangePicker('tipo', value)}
+                    style={{ inputAndroid: { color: 'black' } }}
+                    useNativeAndroidPickerStyle={true}
                     items={[
                       { label: "PQS", value: "1" },
                       { label: "CO2", value: "2" },
@@ -176,6 +178,8 @@ export default function AñadirProducto(props) {
                   <RNPickerSelect
                     placeholder={{ label: "Seleccione capacidad", value: null }}
                     onValueChange={(value) => handleChangePicker('capacidad', value)}
+                    style={{ inputAndroid: { color: 'black' } }}
+                    useNativeAndroidPickerStyle={true}
                     items={[
                       { label: "1 KG", value: "1" },
                       { label: "2 KG", value: "2" },
