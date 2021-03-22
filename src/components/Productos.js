@@ -6,8 +6,8 @@ const Products = ({ data, navigation }) =>
     data.map((value, index) => (
         <TouchableOpacity
             key={index}
-            style={styles.card}
-            onPress={() => navigation.navigate('detalleProducto', {
+            style={[styles.card, value.dias < 0 ==true ? styles.pasado : value.dias < 30 == true ? styles.presente : styles.futuro]}
+            onPress={console.log(value.dias),() => navigation.navigate('detalleProducto', {
                 id: value.id
             })}>
             <Text style={{color:'white'}}>{value.name}</Text>
@@ -28,6 +28,15 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         margin: 10,
         borderRadius: 15,
-        backgroundColor: '#2B88E9',
+        // backgroundColor: '#2B88E9',
     },
+    pasado:{
+       backgroundColor: '#BC0505', 
+    },
+    futuro:{
+        backgroundColor: '#2B88E9', 
+     },
+     presente:{
+        backgroundColor: 'green', 
+     },
 });
