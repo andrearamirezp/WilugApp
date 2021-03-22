@@ -7,7 +7,11 @@ export const ERROR_LOGIN = "ERROR_LOGIN";
 
 export const RECIVE_LOGOUT = "RECIVE_LOGOUT";
 export const SUCCESS_LOGOUT = "SUCCESS_LOGOUT";
-export const ERROR_LOGOUT = "ERROR_LOGIN";
+export const ERROR_LOGOUT = "ERROR_LOGOUT";
+
+export const RECIVE_RECOVER = "RECIVE_RECOVER";
+export const SUCCESS_RECOVER = "SUCCESS_RECOVER";
+export const ERROR_RECOVER = "ERROR_RECOVER";
 
 export const CLEAN_STATE = "CLEAN_STATE";
 
@@ -60,6 +64,24 @@ const errorLogout = () => {
     };
 };
 
+const reciveRecover = () => {
+    return {
+        type: RECIVE_RECOVER
+    };
+};
+
+const successRecover = () => {
+    return {
+        type: SUCCESS_RECOVER
+    };
+};
+
+const errorRecover = () => {
+    return {
+        type: ERROR_RECOVER
+    };
+};
+
 export const login = (data) => async (dispatch) => {
     try {
         dispatch(reciveLogin());
@@ -89,5 +111,27 @@ export const logout = () => async (dispatch) => {
         dispatch(successLogout());
     } catch (error) {
         dispatch(errorLogout());
+    }
+};
+
+export const recoverPass = (data) => async (dispatch) => {
+    try {
+        dispatch(reciveRecover());
+        const config = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `data=${encodeURIComponent(JSON.stringify(data))}`,
+        };
+
+        const rawResponse = await fetch(`${url}auth/recoverPassword`, config);
+        if (rawResponse.status === 200) {
+            dispatch(successRecover);
+        } else {
+            dispatch(errorRecover());
+        }
+    } catch (error) {
+        dispatch(errorRecover());
     }
 };

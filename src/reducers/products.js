@@ -9,7 +9,10 @@ import {
     FINISH_INSERT,
     ERROR_INSERT,
     CLEAN_STATE,
-    FINISH_PRODUCTS_MANTENCION
+    FINISH_PRODUCTS_MANTENCION,
+    RECIVE_AGENTS,
+    FINISH_AGENTS,
+    ERROR_AGENTS
 } from '../actions/products';
 
 export default (
@@ -25,7 +28,11 @@ export default (
         product: {},
         reciveInsert: false,
         successInsert: false,
-        errorInsert: false
+        errorInsert: false,
+        reciveAgents: false,
+        successAgents: false,
+        errorAgents: false,
+        agents: []
     },
     action,
 ) => {
@@ -102,6 +109,28 @@ export default (
                 reciveInsert: false,
                 errorInsert: true,
                 successInsert: false,
+            };
+        case RECIVE_AGENTS:
+            return {
+                ...state,
+                reciveAgents: true,
+                errorAgents: false,
+                successAgents: false,
+            };
+        case FINISH_AGENTS:
+            return {
+                ...state,
+                reciveAgents: false,
+                successAgents: true,
+                errorAgents: false,
+                agents: action.data
+            };
+        case ERROR_AGENTS:
+            return {
+                ...state,
+                reciveAgents: false,
+                errorAgents: true,
+                successAgents: false,
             };
         case CLEAN_STATE:
             return {

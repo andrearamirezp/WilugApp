@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
@@ -13,13 +13,63 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import { useSelector, useDispatch } from 'react-redux';
+import { recoverPass } from '../actions/auth';
+import Snackbar from 'react-native-snackbar';
 
-var {height} = Dimensions.get('window');
+var { height } = Dimensions.get('window');
 
 var box_count = 3;
 var box_height = height / box_count;
 
-export default function RecuperarContraseña() {
+export default function RecuperarContraseña({ navigation }) {
+  const dispatch = useDispatch();
+  const {
+    reciveRecover,
+    sucessRecover,
+    errorRecover
+  } = useSelector((state) => state.auth);
+
+  const [data, setData] = useState({
+    email: ''
+  });
+
+  useEffect(() => {
+    if (sucessRecover) {
+      Snackbar.show({
+        text: 'Contraseña actualizada, revise su correo',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+      navigation.navigate('loginForm');
+    }
+  }, [sucessRecover]);
+
+  useEffect(() => {
+    if (errorRecover) {
+      Snackbar.show({
+        text: 'Error al recuperar la contraseña',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    }
+  }, [errorRecover]);
+
+  useEffect(() => {
+    if (reciveRecover) {
+      Snackbar.show({
+        text: 'Cargando ....',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    }
+  }, [reciveRecover]);
+
+  const handleSubmit = () => {
+    dispatch(recoverPass(data));
+  };
+
+  const handleChange = (name) => (value) => {
+    setData({ ...data, [name]: value });
+  };
+
   return (
     <View style={[styles.box, styles.box1]}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
@@ -32,9 +82,13 @@ export default function RecuperarContraseña() {
           style={styles.input}
           placeholder="Ej: email@email.com"
           placeholderTextColor="#969696"
+          value={data.email}
+          onChangeText={handleChange('email')}
         />
         <TouchableOpacity
-          style={styles.boton}>
+          style={styles.boton}
+          onPress={handleSubmit}
+        >
           <Text style={styles.btnText}>Enviar</Text>
         </TouchableOpacity>
       </ScrollView>

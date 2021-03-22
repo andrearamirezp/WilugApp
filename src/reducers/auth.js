@@ -5,7 +5,10 @@ import {
     RECIVE_LOGOUT,
     SUCCESS_LOGOUT,
     ERROR_LOGOUT,
-    CLEAN_STATE
+    CLEAN_STATE,
+    RECIVE_RECOVER,
+    SUCCESS_RECOVER,
+    ERROR_RECOVER
 } from "../actions/auth";
 
 export default (
@@ -14,7 +17,10 @@ export default (
         isAuthenticated: false,
         authenticateError: false,
         user: {},
-        token: ''
+        token: '',
+        reciveRecover: false,
+        sucessRecover: false,
+        errorRecover: false
     },
     action
 ) => {
@@ -56,6 +62,27 @@ export default (
                 ...state,
                 authenticating: false,
                 authenticateError: true,
+            };
+        case RECIVE_RECOVER:
+            return {
+                ...state,
+                reciveRecover: true,
+                errorRecover: false,
+                sucessRecover: false,
+            };
+        case SUCCESS_RECOVER:
+            return {
+                ...state,
+                sucessRecover: true,
+                reciveRecover: false,
+                errorRecover: false,
+            };
+        case ERROR_RECOVER:
+            return {
+                ...state,
+                reciveRecover: false,
+                errorRecover: true,
+                sucessRecover: false,
             };
         case CLEAN_STATE:
             return {

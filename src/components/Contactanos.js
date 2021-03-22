@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -8,9 +8,11 @@ import {
   TouchableOpacity,
   ImageBackground,
   Alert
-
 } from 'react-native';
 import Base from './Base';
+import { useSelector, useDispatch } from 'react-redux';
+import { sendMailContacto } from '../actions/services';
+import Snackbar from 'react-native-snackbar';
 
 export default function Contactanos() {
   const Alerta = () =>
@@ -23,10 +25,70 @@ export default function Contactanos() {
           onPress: () => console.log("Cancelar Presionado"),
           style: "cancel"
         },
-        { text: "SI", onPress: () => console.log("Si presionado") }
+        { text: "SI", onPress: () => handleSubmit() }
       ],
       { cancelable: false }
     );
+
+  const dispatch = useDispatch();
+  const {
+    reciveContacto,
+    successContacto,
+    errorContacto,
+  } = useSelector((state) => state.services);
+
+  const {
+    user
+  } = useSelector((state) => state.auth);
+
+  const [data, setData] = useState({
+    email_cliente: '',
+    nombre_cliente: '',
+    telefono: '',
+    msg: ''
+  });
+
+  useEffect(() => {
+    if (successContacto) {
+      Snackbar.show({
+        text: 'Solicitud de contacto enviada',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    }
+  }, [successContacto]);
+
+  useEffect(() => {
+    if (errorContacto) {
+      Snackbar.show({
+        text: 'Error al enviar la solicitud de contacto',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    }
+  }, [errorContacto]);
+
+  useEffect(() => {
+    if (reciveContacto) {
+      Snackbar.show({
+        text: 'Cargando ....',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    }
+  }, [reciveContacto]);
+
+  const handleSubmit = () => {
+    dispatch(sendMailContacto(data));
+  };
+
+  const handleChange = (name) => (value) => {
+    setData({ ...data, [name]: value });
+  };
+
+  useEffect(() => {
+    if (user.email_cliente) {
+      setData(user);
+    }
+  }, [user])
+
   return (
     <>
       <Base />
@@ -38,17 +100,24 @@ export default function Contactanos() {
             style={styles.input}
             placeholder="Ej: Diego López"
             placeholderTextColor="#969696"
+            value={data.nombre_cliente}
+            onChangeText={handleChange('nombre_cliente')}
           />
           <Text style={styles.texto}>Correo electrónico</Text>
           <TextInput
             style={styles.input}
             placeholder="email@email.com"
             placeholderTextColor="#969696"
+            value={data.email_cliente}
+            onChangeText={handleChange('email_cliente')}
           />
           <Text style={styles.texto}>Teléfono</Text>
           <TextInput style={styles.input}
-           placeholder="9 1234 5678"
-           placeholderTextColor="#969696" />
+            placeholder="9 1234 5678"
+            placeholderTextColor="#969696"
+            value={data.telefono}
+            onChangeText={handleChange('telefono')}
+          />
           <Text style={styles.texto}>Mensaje</Text>
           <TextInput
             style={styles.inputMSJ}
@@ -56,6 +125,8 @@ export default function Contactanos() {
             numberOfLines={5}
             placeholder=""
             placeholderTextColor="#969696"
+            value={data.msg}
+            onChangeText={handleChange('msg')}
           />
           <TouchableOpacity style={styles.boton} onPress={Alerta}>
             <Text style={styles.btnText}>Enviar</Text>
@@ -64,51 +135,51 @@ export default function Contactanos() {
         <ImageBackground
           style={styles.box3}
           source={require('../assets/mapa.jpg')}>
-          <View style={{backgroundColor: 'rgba(235,245,250, .6)'}}>
+          <View style={{ backgroundColor: 'rgba(235,245,250, .6)' }}>
             <Text style={styles.titulo2}>Sucursales</Text>
             <View
               style={{
                 flexDirection: 'row',
                 flexWrap: 'wrap',
               }}>
-              <View style={{width: '35%', marginLeft: 5}}>
+              <View style={{ width: '35%', marginLeft: 5 }}>
                 <Text style={styles.titulo}>Calama</Text>
-                <Text style={{textAlign: 'center'}}>
+                <Text style={{ textAlign: 'center' }}>
                   Avda. Arturo Prat #2576
                 </Text>
-                <Text style={{textAlign: 'center', color: 'blue'}}>lacarvajal@wilug.cl</Text>
-                <Text style={{textAlign: 'center'}}>+569 9563 3527 </Text>
+                <Text style={{ textAlign: 'center', color: 'blue' }}>lacarvajal@wilug.cl</Text>
+                <Text style={{ textAlign: 'center' }}>+569 9563 3527 </Text>
               </View>
-              <View style={{width: '28%', marginLeft: 10}}>
+              <View style={{ width: '28%', marginLeft: 10 }}>
                 <Text style={styles.titulo}>Coquimbo</Text>
-                <Text style={{textAlign: 'center'}}>
+                <Text style={{ textAlign: 'center' }}>
                   Los Carpinteros #1250, Barrio Industrial
                 </Text>
-                <Text style={{textAlign: 'center', color: 'blue'}}>ventas@wilug.cl</Text>
-                <Text style={{textAlign: 'center'}}>+569 4410 3811</Text>
+                <Text style={{ textAlign: 'center', color: 'blue' }}>ventas@wilug.cl</Text>
+                <Text style={{ textAlign: 'center' }}>+569 4410 3811</Text>
               </View>
-              <View style={{width: '28%', marginLeft: 15}}>
+              <View style={{ width: '28%', marginLeft: 15 }}>
                 <Text style={styles.titulo}>Express</Text>
-                <Text style={{textAlign: 'center'}}>
+                <Text style={{ textAlign: 'center' }}>
                   Pedro Aguirre Cerca #865, El Llano, Coquimbo
                 </Text>
-                <Text style={{textAlign: 'center', color: 'blue'}}>egarri@wilug.cl </Text>
-                <Text style={{textAlign: 'center'}}>+569 6494 7726</Text>
+                <Text style={{ textAlign: 'center', color: 'blue' }}>egarri@wilug.cl </Text>
+                <Text style={{ textAlign: 'center' }}>+569 6494 7726</Text>
               </View>
-              <View style={{width: '35%', marginLeft: 60}}>
+              <View style={{ width: '35%', marginLeft: 60 }}>
                 <Text style={styles.titulo}>Copiapó</Text>
-                <Text style={{textAlign: 'center'}}>Los Aromos #1705</Text>
-                <Text style={{textAlign: 'center', color: 'blue'}}>mescobar@wilug.cl</Text>
-                <Text style={{textAlign: 'center'}}>+569 5012 5338</Text>
+                <Text style={{ textAlign: 'center' }}>Los Aromos #1705</Text>
+                <Text style={{ textAlign: 'center', color: 'blue' }}>mescobar@wilug.cl</Text>
+                <Text style={{ textAlign: 'center' }}>+569 5012 5338</Text>
               </View>
 
-              <View style={{width: '35%'}}>
+              <View style={{ width: '35%' }}>
                 <Text style={styles.titulo}>Santiago</Text>
-                <Text style={{textAlign: 'center'}}>
+                <Text style={{ textAlign: 'center' }}>
                   Av. El Vestisquero #1225, Renca
                 </Text>
-                <Text style={{textAlign: 'center', color: 'blue'}}>comercial@wilug.cl</Text>
-                <Text style={{textAlign: 'center'}}>+569 6468 2685</Text>
+                <Text style={{ textAlign: 'center', color: 'blue' }}>comercial@wilug.cl</Text>
+                <Text style={{ textAlign: 'center' }}>+569 6468 2685</Text>
               </View>
             </View>
           </View>

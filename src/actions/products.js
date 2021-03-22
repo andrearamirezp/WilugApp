@@ -15,6 +15,10 @@ export const RECIVE_INSERT = "RECIVE_INSERT";
 export const FINISH_INSERT = "FINISH_INSERT";
 export const ERROR_INSERT = "ERROR_INSERT";
 
+export const RECIVE_AGENTS = "RECIVE_AGENTS";
+export const FINISH_AGENTS = "FINISH_AGENTS";
+export const ERROR_AGENTS = "ERROR_AGENTS";
+
 export const CLEAN_STATE = "CLEAN_STATE";
 
 const cleanState = () => {
@@ -27,6 +31,25 @@ export const clean = () => async (dispatch) => {
     dispatch(cleanState());
 };
 
+const reciveAgents = () => {
+    return {
+        type: RECIVE_AGENTS
+    };
+};
+
+const finishAgents = (data) => {
+    return {
+        type: FINISH_AGENTS,
+        data
+    };
+};
+
+const errorAgents = () => {
+    return {
+        type: ERROR_AGENTS
+    };
+}
+;
 const reciveInsert = () => {
     return {
         type: RECIVE_INSERT
@@ -138,6 +161,26 @@ export const getDetailProduct = (id) => async (dispatch) => {
         }
     } catch (error) {
         dispatch(errorDetail());
+    }
+};
+
+export const getAgents = () => async (dispatch) => {
+    try {
+        dispatch(reciveAgents());
+
+        const config = {
+            method: 'GET'
+        };
+
+        const rawResponse = await fetch(`${url}products/agents`, config);
+        if (rawResponse.status === 200) {
+            const data = await rawResponse.json();
+            dispatch(finishAgents(data));
+        } else {
+            dispatch(errorAgents());
+        }
+    } catch (error) {
+        dispatch(errorAgents());
     }
 };
 

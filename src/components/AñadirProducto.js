@@ -13,8 +13,9 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 import RNPickerSelect from 'react-native-picker-select';
 import { useSelector, useDispatch } from 'react-redux';
-import { addProducto, getProducts } from '../actions/products';
+import { addProducto, getProducts, getAgents } from '../actions/products';
 import Snackbar from 'react-native-snackbar';
+import LoadingView from 'react-native-loading-view';
 
 var { height } = Dimensions.get('window');
 
@@ -24,13 +25,11 @@ var box_height = height / box_count;
 export default function AñadirProducto(props) {
   const dispatch = useDispatch();
   const { navigation } = props;
+  const [loading, setLoading] = useState(true);
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
   const [isVisibleCarga, setIsVisibleCarga] = useState(false);
   const [isVisibleMantencion, setIsVisibleMantencion] = useState(false);
-  const [ option, setOption] = useState({
-    label: "Seleccione capacidad",
-    value: null
-  });
+
   const [data, setData] = useState({
     tipo: 0,
     capacidad: 0,
@@ -43,7 +42,11 @@ export default function AñadirProducto(props) {
   const {
     reciveInsert,
     successInsert,
-    errorInsert
+    errorInsert,
+    reciveAgents,
+    successAgents,
+    errorAgents,
+    agents
   } = useSelector((state) => state.products);
 
   const {
@@ -106,7 +109,6 @@ export default function AñadirProducto(props) {
   }, [user]);
 
   const handleChangePicker = (name, value) => {
-    setOption({ label: 'PQS', value: value });
     setData({ ...data, [name]: value });
   };
 
@@ -143,125 +145,152 @@ export default function AñadirProducto(props) {
     }
   }, [reciveInsert]);
 
+  useEffect(() => {
+    if (successAgents) {
+      setLoading(false)
+    }
+  }, [successAgents]);
+
+  useEffect(() => {
+    if (errorAgents) {
+      Snackbar.show({
+        text: 'Error al registrar el producto',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+      setLoading(false)
+    }
+  }, [errorAgents]);
+
+  useEffect(() => {
+    if (reciveAgents) {
+      Snackbar.show({
+        text: 'Cargando ....',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    }
+  }, [reciveAgents]);
+
+  useEffect(() => {
+    dispatch(getAgents());
+  }, [])
+
   return (
     <>
-      <View style={[styles.box, styles.box1]}>
-        <Image style={styles.logo} source={require('../assets/logo.png')} />
+      <LoadingView text={"cargando"} loading={loading}>
+        <View style={[styles.box, styles.box1]}>
+          <Image style={styles.logo} source={require('../assets/logo.png')} />
 
-        <View style={styles.box4}>
-          <ImageBackground
-            style={styles.box3}
-            source={require('../assets/extintor.jpg')}>
-            <View
-              style={{
-                backgroundColor: 'rgba(209,217,222, .8)',
-                width: '100%',
-                height: '100%',
-              }}>
-              <ScrollView style={styles.scrollView}>
-                <Text style={styles.titulo}>Agregar producto externo</Text>
-                <Text style={styles.texto}>Tipo de agente</Text>
-                <View style={styles.picker}>
-                  <RNPickerSelect
-                    placeholder={{ label: option.label, value: option.value }}
-                    onValueChange={(value) => handleChangePicker('tipo', value)}
-                    style={{ inputAndroid: { color: 'black' } }}
-                    useNativeAndroidPickerStyle={true}
-                    items={[
-                      { label: "PQS", value: "1" },
-                      { label: "CO2", value: "2" },
-                    ]}
-                  />
-                </View>
-                <Text style={styles.texto}>Capacidad</Text>
-                <View style={styles.picker}>
-                  <RNPickerSelect
-                    placeholder={{ label: "Seleccione capacidad", value: null }}
-                    onValueChange={(value) => handleChangePicker('capacidad', value)}
-                    style={{ inputAndroid: { color: 'black' } }}
-                    useNativeAndroidPickerStyle={true}
-                    items={[
-                      { label: "1 KG", value: "1" },
-                      { label: "2 KG", value: "2" },
-                      { label: "4 KG", value: "4" },
-                      { label: "5 KG", value: "5" },
-                      { label: "6 KG", value: "6" },
-                      { label: "10 KG", value: "10" },
-                      { label: "25 KG", value: "25" },
-                      { label: "50 KG", value: "50" },
-                      { label: "100 KG", value: "100" },
-                    ]}
-                    value={data.capacidad}
-                  />
-                </View>
+          <View style={styles.box4}>
+            <ImageBackground
+              style={styles.box3}
+              source={require('../assets/extintor.jpg')}>
+              <View
+                style={{
+                  backgroundColor: 'rgba(209,217,222, .8)',
+                  width: '100%',
+                  height: '100%',
+                }}>
+                <ScrollView style={styles.scrollView}>
+                  <Text style={styles.titulo}>Agregar producto externo</Text>
+                  <Text style={styles.texto}>Tipo de agente</Text>
+                  <View style={styles.picker}>
+                    <RNPickerSelect
+                      placeholder={{ label: "Seleccione agente", value: null }}
+                      onValueChange={(value) => handleChangePicker('tipo', value)}
+                      style={{ inputAndroid: { color: 'black' } }}
+                      useNativeAndroidPickerStyle={true}
+                      items={agents}
+                    />
+                  </View>
+                  <Text style={styles.texto}>Capacidad</Text>
+                  <View style={styles.picker}>
+                    <RNPickerSelect
+                      placeholder={{ label: "Seleccione capacidad", value: null }}
+                      onValueChange={(value) => handleChangePicker('capacidad', value)}
+                      style={{ inputAndroid: { color: 'black' } }}
+                      useNativeAndroidPickerStyle={true}
+                      items={[
+                        { label: "1 KG", value: "1" },
+                        { label: "2 KG", value: "2" },
+                        { label: "4 KG", value: "4" },
+                        { label: "5 KG", value: "5" },
+                        { label: "6 KG", value: "6" },
+                        { label: "10 KG", value: "10" },
+                        { label: "25 KG", value: "25" },
+                        { label: "50 KG", value: "50" },
+                        { label: "100 KG", value: "100" },
+                      ]}
+                    />
+                  </View>
 
-                <Text style={styles.texto}>Fecha fabricación</Text>
-                <View style={[styles.input, styles.datePicker]}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      color: data.fechaFabricacion ? '#000' : '#969696',
-                    }}
-                    onPress={showDatePicker}>
-                    {data.fechaFabricacion
-                      ? moment(data.fechaFabricacion).format('DD/MM/YYYY')
-                      : 'DD/MM/AA'}
-                  </Text>
-                </View>
+                  <Text style={styles.texto}>Fecha fabricación</Text>
+                  <View style={[styles.input, styles.datePicker]}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        color: data.fechaFabricacion ? '#000' : '#969696',
+                      }}
+                      onPress={showDatePicker}>
+                      {data.fechaFabricacion
+                        ? moment(data.fechaFabricacion).format('DD/MM/YYYY')
+                        : 'DD/MM/AA'}
+                    </Text>
+                  </View>
 
-                <Text style={styles.texto}>Fecha última recarga</Text>
-                <View style={[styles.input, styles.datePicker]}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      color: data.fechaUltCarga ? '#000' : '#969696',
-                    }}
-                    onPress={showDatePickerCarga}>
-                    {data.fechaUltCarga
-                      ? moment(data.fechaUltCarga).format('DD/MM/YYYY')
-                      : 'DD/MM/AA'}
-                  </Text>
-                  <DateTimePickerModal
-                    isVisible={isVisibleCarga}
-                    mode="date"
-                    onConfirm={handlerConfirmCarga}
-                    onCancel={hideDatePickerCarga}
-                  />
-                </View>
-                <Text style={styles.texto}>Fecha última mantención</Text>
-                <View style={[styles.input, styles.datePicker]}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      color: data.fechaUltMantencion ? '#000' : '#969696',
-                    }}
-                    onPress={showDatePickerMantencion}>
-                    {data.fechaUltMantencion
-                      ? moment(data.fechaUltMantencion).format('DD/MM/YYYY')
-                      : 'DD/MM/AA'}
-                  </Text>
-                  <DateTimePickerModal
-                    isVisible={isVisibleMantencion}
-                    mode="date"
-                    onConfirm={handlerConfirmMantencion}
-                    onCancel={hideDatePickerMantencion}
-                  />
-                </View>
-                <TouchableOpacity style={styles.boton} onPress={handleSubmit}>
-                  <Text style={styles.btnText}>Agregar</Text>
-                </TouchableOpacity>
-              </ScrollView>
-            </View>
-          </ImageBackground>
+                  <Text style={styles.texto}>Fecha última recarga</Text>
+                  <View style={[styles.input, styles.datePicker]}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        color: data.fechaUltCarga ? '#000' : '#969696',
+                      }}
+                      onPress={showDatePickerCarga}>
+                      {data.fechaUltCarga
+                        ? moment(data.fechaUltCarga).format('DD/MM/YYYY')
+                        : 'DD/MM/AA'}
+                    </Text>
+                    <DateTimePickerModal
+                      isVisible={isVisibleCarga}
+                      mode="date"
+                      onConfirm={handlerConfirmCarga}
+                      onCancel={hideDatePickerCarga}
+                    />
+                  </View>
+                  <Text style={styles.texto}>Fecha última mantención</Text>
+                  <View style={[styles.input, styles.datePicker]}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        color: data.fechaUltMantencion ? '#000' : '#969696',
+                      }}
+                      onPress={showDatePickerMantencion}>
+                      {data.fechaUltMantencion
+                        ? moment(data.fechaUltMantencion).format('DD/MM/YYYY')
+                        : 'DD/MM/AA'}
+                    </Text>
+                    <DateTimePickerModal
+                      isVisible={isVisibleMantencion}
+                      mode="date"
+                      onConfirm={handlerConfirmMantencion}
+                      onCancel={hideDatePickerMantencion}
+                    />
+                  </View>
+                  <TouchableOpacity style={styles.boton} onPress={handleSubmit}>
+                    <Text style={styles.btnText}>Agregar</Text>
+                  </TouchableOpacity>
+                </ScrollView>
+              </View>
+            </ImageBackground>
+          </View>
         </View>
-      </View>
 
-      <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode="date"
-        onConfirm={handlerConfirm}
-        onCancel={hideDatePicker}
-      />
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          mode="date"
+          onConfirm={handlerConfirm}
+          onCancel={hideDatePicker}
+        />
+      </LoadingView>
     </>
   );
 }
