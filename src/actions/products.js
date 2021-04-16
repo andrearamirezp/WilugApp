@@ -1,5 +1,5 @@
 import { url } from '../../config.json';
-import moment from 'moment';
+import { format } from 'date-fns'
 
 // ACTIONS
 export const RECIVE_PRODUCTS = "RECIVE_PRODUCTS";
@@ -49,7 +49,7 @@ const errorAgents = () => {
         type: ERROR_AGENTS
     };
 }
-;
+    ;
 const reciveInsert = () => {
     return {
         type: RECIVE_INSERT
@@ -124,7 +124,7 @@ export const getProducts = (id, view) => async (dispatch) => {
         const rawResponse = await fetch(`${url}products/ByCliente/${id}/${view}`, config);
         if (rawResponse.status === 200) {
             const data = await rawResponse.json();
-            if(view == 'mantencion') {
+            if (view == 'mantencion') {
                 let newData = []
                 data.map(value => {
                     newData.push({
@@ -188,9 +188,13 @@ export const addProducto = (data) => async (dispatch) => {
     try {
         dispatch(reciveInsert());
 
-        data.fechaFabricacion =  moment(data.fechaUltMantencion).format('YYYY/MM/DD')
-        data.fechaUltCarga = moment(data.fechaUltMantencion).format('YYYY/MM/DD')
-        data.fechaUltMantencion = moment(data.fechaUltMantencion).format('YYYY/MM/DD')
+        format(data.fechaFabricacion, 'yyyy-MM-dd')
+        format(data.fechaUltCarga, 'yyyy-MM-dd')
+        format(data.fechaUltMantencion, 'yyyy-MM-dd')
+
+        data.fechaFabricacion =  format(data.fechaFabricacion, 'yyyy-MM-dd');
+        data.fechaUltCarga = format(data.fechaUltCarga, 'yyyy-MM-dd');
+        data.fechaUltMantencion =  format(data.fechaUltMantencion, 'yyyy-MM-dd');
 
         const config = {
             method: 'POST',
@@ -204,6 +208,8 @@ export const addProducto = (data) => async (dispatch) => {
         if (rawResponse.status === 201) {
             dispatch(finishInsert());
         } else {
+            const { error } = await rawResponse.json(); 
+            console.log(error)
             dispatch(errorInsert());
         }
         dispatch(cleanState());
