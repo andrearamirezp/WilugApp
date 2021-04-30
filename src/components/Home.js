@@ -25,26 +25,6 @@ export default function Home(props) {
       </View>
       <View style={styles.menu}>
         <View style={styles.menuItem}>
-          <TouchableOpacity onPress={() => navigation.navigate('informacion')}>
-            <Image
-              source={require('../assets/extintor2.png')}
-              style={styles.image}
-            />
-            <Text style={styles.cardText}>Manejo de extintores</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.menuItem}>
-          <TouchableOpacity onPress={() => navigation.navigate('nosotros')}>
-            <Image
-              source={require('../assets/nosotros.png')}
-              style={styles.image}
-            />
-            <Text style={styles.cardText}>Nosotros</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.menuItem}>
           <TouchableOpacity onPress={() => navigation.navigate('contacto')}>
             <Image
               source={require('../assets/contacto.png')}
@@ -85,26 +65,29 @@ const styles = StyleSheet.create({
     backgroundColor: '#D7DBDD'
   },
   menuItem: {
-    width: '50%',
-    height: '40%',
+    width: '35%',
+    height: '100%',
+    marginHorizontal: 30,
+    justifyContent: 'center',
+    // backgroundColor: 'red'
   },
   menu: {
-    marginTop: 25,
+    width: '100%',
+    height: '50%',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    // backgroundColor:'blue'
   },
   image: {
     width: '100%',
     height: '70%',
     opacity: 0.8,
     resizeMode: 'contain',
-    marginHorizontal: 10,
   },
   cardText: {
     fontSize: 16,
     textAlign: 'center',
     marginTop: 15,
-    marginLeft: 15,
   },
   boton: {
     color: '#fff',
@@ -123,8 +106,7 @@ const styles = StyleSheet.create({
   viewBoton: {
     position: 'absolute',
     width: '100%',
-    height: 100,
-    bottom: 50,
+    bottom: 100,
     alignItems: 'center',
     justifyContent: 'center',
   },
