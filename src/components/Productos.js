@@ -10,7 +10,7 @@ const Products = ({ data, navigation }) =>
             onPress={console.log(value.dias),() => navigation.navigate('detalleProducto', {
                 id: value.id
             })}>
-            <Text style={{color:'white'}}>{value.name}</Text>
+            <Text style={{color:'black'}}>{value.name}</Text>
         </TouchableOpacity>
     ));
 
@@ -34,9 +34,9 @@ const styles = StyleSheet.create({
        backgroundColor: '#BC0505', 
     },
     futuro:{
-        backgroundColor: '#2B88E9', 
+        backgroundColor: 'green', 
      },
      presente:{
-        backgroundColor: 'green', 
+        backgroundColor: 'yellow', 
      },
 });
