@@ -5,6 +5,7 @@ import {
   Dimensions,
   StyleSheet,
   Text,
+  TextInput,
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
@@ -102,6 +103,10 @@ export default function FormMantencion({navigation}) {
     navigation.navigate('clienteRegistrado');
   };
 
+  const seleccionarTodo = () => {
+    console.log(dataMantencion)
+  };
+
   return (
     <View style={[styles.box, styles.box1]}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
@@ -110,14 +115,26 @@ export default function FormMantencion({navigation}) {
           <View>
             <ScrollView showsVerticalScrollIndicator={false}>
               <Text style={styles.titulo}>Solicita aquí tu mantención</Text>
+              <TouchableOpacity style={styles.boton} onPress={seleccionarTodo} >
+                <Text style={styles.btnText}>Seleccionar todos los productos</Text>
+              </TouchableOpacity>
               <View>
                 <SelectMultiple
                   items={dataMantencion}
                   selectedItems={selectData.selectedFruits}
                   onSelectionsChange={this.onSelectionsChange}
+                  
                 />
               </View>
-
+              <Text style={styles.titulo }>Mas detalle sobre su mantencion</Text>
+              <TextInput
+          style={styles.inputMSJ}
+          multiline
+          numberOfLines={8}
+          placeholder=""
+          placeholderTextColor="#969696"
+          
+        />
               <TouchableOpacity style={styles.boton} onPress={handleSubmit}>
                 <Text style={styles.btnText}>Enviar</Text>
               </TouchableOpacity>
