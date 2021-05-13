@@ -100,7 +100,7 @@ export default function FormSolicitarServicio({ route }) {
       <ScrollView style={styles.container}>
         <Text style={styles.titulo}>{tituloCabecera}</Text>
         <Text style={[styles.texto, { marginBottom: 10 }]}>
-          Desarrollo de la Ingeniaría de Sistemas contra incendio por un equipo
+          Desarrollo de la Ingeniería de Sistemas contra incendio por un equipo
           profesional técnicamente experimentado.
         </Text>
         <Text style={[styles.texto, { marginBottom: 10 }, { marginTop: 10 }]}>

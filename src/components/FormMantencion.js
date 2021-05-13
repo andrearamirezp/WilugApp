@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Image,
@@ -10,30 +10,30 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import SelectMultiple from 'react-native-select-multiple';
-import {useSelector, useDispatch} from 'react-redux';
-import {getProducts} from '../actions/products';
-import {saveMantencion} from '../actions/mantencion';
-import {getHistory} from '../actions/history';
+import { useSelector, useDispatch } from 'react-redux';
+import { getProducts } from '../actions/products';
+import { saveMantencion } from '../actions/mantencion';
+import { getHistory } from '../actions/history';
 import Snackbar from 'react-native-snackbar';
 
-var {height} = Dimensions.get('window');
+var { height } = Dimensions.get('window');
 var box_count = 3;
 var box_height = height / box_count;
 
-export default function FormMantencion({navigation}) {
-  const [selectData, setSelectData] = useState({selectedFruits: []});
+export default function FormMantencion({ navigation }) {
+  const [selectData, setSelectData] = useState({ selectedFruits: [] });
 
   const dispatch = useDispatch();
-  const {
+  let {
     reciveProducts,
     successProducts,
     errorProducts,
     dataMantencion,
   } = useSelector((state) => state.products);
-  const {reciveManrtencion, successManrtencion, errorManrtencion} = useSelector(
+  const { reciveManrtencion, successManrtencion, errorManrtencion } = useSelector(
     (state) => state.mantencion,
   );
-  const {user} = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (successProducts) {
@@ -95,7 +95,7 @@ export default function FormMantencion({navigation}) {
   }, []);
 
   onSelectionsChange = (selectedFruits) => {
-    setSelectData({selectedFruits});
+    setSelectData({ selectedFruits });
   };
 
   const handleSubmit = () => {
@@ -104,8 +104,32 @@ export default function FormMantencion({navigation}) {
   };
 
   const seleccionarTodo = () => {
-    console.log(dataMantencion)
+    if (selectData.selectedFruits.length > 0) {
+      setSelectData({ selectedFruits: [] } )
+     }
+    else { setSelectData({ selectedFruits: dataMantencion }) };
+
   };
+
+  const prueba = query => {
+    return dataMantencion.filter((texto) =>
+      texto.indexOf(query) > -1
+    );
+  }
+
+  const handleChange = (input) => {
+    console.log(dataMantencion)
+    dataMantencion = dataMantencion.filter(value=>value.label.includes(input))
+    console.log(dataMantencion)
+    
+  }
+  const fruits = ['Apples', 'Oranges', 'Pears', 'Grapes']
+  const filterItems = query => {
+    return fruits.filter((el) =>
+      el.toLowerCase().indexOf(query.toLowerCase()) > -1
+    );
+  }
+  
 
   return (
     <View style={[styles.box, styles.box1]}>
@@ -115,26 +139,37 @@ export default function FormMantencion({navigation}) {
           <View>
             <ScrollView showsVerticalScrollIndicator={false}>
               <Text style={styles.titulo}>Solicita aquí tu mantención</Text>
+              
+
+              <Text style={styles.texto}>Ingrese texto para filtrar</Text>
+              <TextInput
+              style={styles.input}
+              placeholder=""
+              placeholderTextColor="#969696"
+              onChangeText={handleChange}
+              />
+
               <TouchableOpacity style={styles.boton} onPress={seleccionarTodo} >
                 <Text style={styles.btnText}>Seleccionar todos los productos</Text>
               </TouchableOpacity>
+
               <View>
                 <SelectMultiple
                   items={dataMantencion}
                   selectedItems={selectData.selectedFruits}
-                  onSelectionsChange={this.onSelectionsChange}
-                  
+                  onSelectionsChange={onSelectionsChange}
+
                 />
               </View>
-              <Text style={styles.titulo }>Mas detalle sobre su mantencion</Text>
+              <Text style={styles.titulo}>Mas detalle sobre su mantencion</Text>
               <TextInput
-          style={styles.inputMSJ}
-          multiline
-          numberOfLines={8}
-          placeholder=""
-          placeholderTextColor="#969696"
-          
-        />
+                style={styles.inputMSJ}
+                multiline
+                numberOfLines={8}
+                placeholder=""
+                placeholderTextColor="#969696"
+
+              />
               <TouchableOpacity style={styles.boton} onPress={handleSubmit}>
                 <Text style={styles.btnText}>Enviar</Text>
               </TouchableOpacity>
