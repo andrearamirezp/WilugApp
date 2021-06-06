@@ -7,7 +7,10 @@ import {
   TouchableOpacity,
   Linking,
 } from 'react-native';
-// import Header from './Header';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 export default function Home(props) {
   const {navigation} = props;
@@ -17,52 +20,10 @@ export default function Home(props) {
   };
   return (
     <View style={styles.view}>
-      {/* <Header /> */}
       <View style={styles.header}>
         <Image style={styles.logo} source={require('../assets/logo.png')} />
       </View>
       <View style={styles.menu}>
-        <View style={styles.menuItem}>
-          <TouchableOpacity onPress={() => navigation.navigate('mantencion')}>
-            <Image
-              source={require('../assets/mantencion.png')}
-              style={styles.image}
-            />
-            <Text style={styles.cardText}>Solicitar mantención</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.menuItem}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('otrosServicios')}>
-            <Image
-              source={require('../assets/otro.png')}
-              style={styles.image}
-            />
-            <Text style={styles.cardText}>Otros servicios</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.menuItem}>
-          <TouchableOpacity onPress={() => navigation.navigate('informacion')}>
-            <Image
-              source={require('../assets/extintor.png')}
-              style={styles.image}
-            />
-            <Text style={styles.cardText}>Manejo de extintores</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.menuItem}>
-          <TouchableOpacity onPress={() => navigation.navigate('nosotros')}>
-            <Image
-              source={require('../assets/nosotros.png')}
-              style={styles.image}
-            />
-            <Text style={styles.cardText}>Nosotros</Text>
-          </TouchableOpacity>
-        </View>
-
         <View style={styles.menuItem}>
           <TouchableOpacity onPress={() => navigation.navigate('contacto')}>
             <Image
@@ -89,7 +50,7 @@ export default function Home(props) {
           onPress={() => navigation.navigate('loginForm')}>
           <Text style={styles.textLogin}>Ir a tu sesión</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('registrar')}>
           <Text style={styles.textRegistrar}>Registrarse</Text>
         </TouchableOpacity>
       </View>
@@ -101,26 +62,32 @@ const styles = StyleSheet.create({
   view: {
     flex: 1,
     alignItems: 'center',
+    backgroundColor: '#D7DBDD'
   },
   menuItem: {
-    width: '33.33333%',
-    height: '40%',
-    padding: 20,
+    width: '35%',
+    height: '100%',
+    marginHorizontal: 30,
+    justifyContent: 'center',
+    // backgroundColor: 'red'
   },
   menu: {
-    marginTop: 20,
+    width: '100%',
+    height: '50%',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    // backgroundColor:'blue'
   },
   image: {
     width: '100%',
     height: '70%',
     opacity: 0.8,
-    resizeMode: 'center',
+    resizeMode: 'contain',
   },
   cardText: {
-    fontSize: 15,
+    fontSize: 16,
     textAlign: 'center',
+    marginTop: 15,
   },
   boton: {
     color: '#fff',
@@ -139,8 +106,7 @@ const styles = StyleSheet.create({
   viewBoton: {
     position: 'absolute',
     width: '100%',
-    height: 100,
-    bottom: 50,
+    bottom: 100,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -154,8 +120,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   logo: {
-    resizeMode: 'center',
-    height: 150,
+    resizeMode: 'contain',
+    height: hp('100%'), // 70% of height device screen
+    width: wp('90%'),
     marginTop: 40,
     marginBottom: 20,
   },
