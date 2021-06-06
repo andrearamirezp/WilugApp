@@ -4,10 +4,12 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  Image,
   ScrollView,
   TouchableOpacity,
   ImageBackground,
-  Alert
+  Alert,
+  Linking,
 } from 'react-native';
 import Base from './Base';
 import { useSelector, useDispatch } from 'react-redux';
@@ -15,6 +17,23 @@ import { sendMailContacto } from '../actions/services';
 import Snackbar from 'react-native-snackbar';
 
 export default function Contactanos() {
+  
+
+  const initiateWhatsApp = () => {
+    
+    let url =
+      'whatsapp://send?text=' + 
+       
+      '&phone=56961684482' ;
+    Linking.openURL(url)
+      .then((data) => {
+        console.log('WhatsApp Opened');
+      })
+      .catch(() => {
+        alert('Debe tener la aplicacion de WhatsApp instalada en su telefono');
+      });
+  };
+
   const Alerta = () =>
     Alert.alert(
       "Contacto",
@@ -131,6 +150,15 @@ export default function Contactanos() {
           <TouchableOpacity style={styles.boton} onPress={Alerta}>
             <Text style={styles.btnText}>Enviar</Text>
           </TouchableOpacity>
+          
+          <Text style={styles.titulo2}>Para un contacto mas directo</Text>
+          <View >
+                  <TouchableOpacity  onPress={initiateWhatsApp}>
+                    <Image
+                      style={styles.icono2}
+                      source={require('../assets/whatsapp.png')}></Image>
+                  </TouchableOpacity>
+          </View>
         </View>
         <ImageBackground
           style={styles.box3}
@@ -252,4 +280,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  icono2: {
+    width: '100%',
+    height: 40, 
+    resizeMode: 'contain',
+    
+
+  },
+  
 });
