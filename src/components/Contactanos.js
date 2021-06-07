@@ -64,7 +64,8 @@ export default function Contactanos() {
     email_cliente: '',
     nombre_cliente: '',
     telefono: '',
-    msg: ''
+    msg: '',
+    comuna: user.nombre_comuna
   });
 
   useEffect(() => {

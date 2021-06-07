@@ -26,7 +26,7 @@ const errorMantencion = () => {
 export const saveMantencion = (data) => async (dispatch) => {
     try {
         dispatch(reciveMantencion());
-
+        console.log(data)
         const config = {
             method: 'POST',
             headers: {

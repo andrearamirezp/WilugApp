@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Image,
@@ -10,32 +10,29 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import SelectMultiple from 'react-native-select-multiple';
-import { useSelector, useDispatch } from 'react-redux';
-import { getProducts } from '../actions/products';
-import { saveMantencion } from '../actions/mantencion';
-import { getHistory } from '../actions/history';
+import {useSelector, useDispatch} from 'react-redux';
+import {getProducts} from '../actions/products';
+import {saveMantencion} from '../actions/mantencion';
+import {getHistory} from '../actions/history';
 import Snackbar from 'react-native-snackbar';
 
-var { height } = Dimensions.get('window');
+var {height} = Dimensions.get('window');
 var box_count = 3;
 var box_height = height / box_count;
 
-export default function FormMantencion({ navigation }) {
-  const [selectData, setSelectData] = useState({ selectedFruits: [] });
+export default function FormMantencion({navigation}) {
+  const [selectData, setSelectData] = useState({selectedFruits: []});
   const [data, setData] = useState({
     direccion_factura: '',
     telefono: '',
     email_cliente: '',
     password: '',
     confirmPassword: '',
-    nombre:'',
-    ciudad:'',
-    rut_cliente:'',
-    msg:'',
-    
+    nombre: '',
+    ciudad: '',
+    rut_cliente: '',
+    msg: '',
   });
-
-  
 
   useEffect(() => {
     setData(user);
@@ -48,11 +45,11 @@ export default function FormMantencion({ navigation }) {
     errorProducts,
     dataMantencion,
   } = useSelector((state) => state.products);
-  const { reciveManrtencion, successManrtencion, errorManrtencion } = useSelector(
+  const {reciveManrtencion, successManrtencion, errorManrtencion} = useSelector(
     (state) => state.mantencion,
   );
-  const { user } = useSelector((state) => state.auth);
-  const [products, setProducts]= useState (dataMantencion);
+  const {user} = useSelector((state) => state.auth);
+  const [products, setProducts] = useState(dataMantencion);
   useEffect(() => {
     if (successProducts) {
       Snackbar.show({
@@ -113,48 +110,40 @@ export default function FormMantencion({ navigation }) {
   }, []);
 
   onSelectionsChange = (selectedFruits) => {
-    setSelectData({ selectedFruits });
+    setSelectData({selectedFruits});
   };
 
   const handleSubmit = () => {
-    dispatch(saveMantencion(selectData));
+    const dataForm = {
+      user,
+      msg: data.msg,
+      selectData,
+    };
+    dispatch(saveMantencion(dataForm));
     navigation.navigate('clienteRegistrado');
   };
 
   const insmsg = (name) => (value) => {
-    setData({ ...data, [name]: value });
+    setData({...data, [name]: value});
   };
 
   const seleccionarTodo = () => {
     if (selectData.selectedFruits.length > 0) {
-      setSelectData({ selectedFruits: [] } )
-     }
-    else { setSelectData({ selectedFruits: dataMantencion }) };
-
+      setSelectData({selectedFruits: []});
+    } else {
+      setSelectData({selectedFruits: dataMantencion});
+    }
   };
 
-  const prueba =()=> {
-    console.log (user);
-    console.log (user.nombre_contacto);
-    console.log (data.rut_cliente);
-    console.log (data.telefono);
-    console.log (data.email_cliente);
-    console.log (data.ciudad);
-    console.log (data.direccion_factura);
-    console.log (data.msg);
-    console.log (selectData);
-  }
+  const prueba = () => {};
 
   const handleChange = (input) => {
-    if (input.length > 0 ) {
-      setProducts (products.filter(value=>value.label.includes(input)))  
+    if (input.length > 0) {
+      setProducts(products.filter((value) => value.label.includes(input)));
+    } else {
+      setProducts(dataMantencion);
     }
-    else{
-      setProducts (dataMantencion)
-    }
-    
-    
-  }
+  };
 
   return (
     <View style={[styles.box, styles.box1]}>
@@ -164,18 +153,19 @@ export default function FormMantencion({ navigation }) {
           <View>
             <ScrollView showsVerticalScrollIndicator={false}>
               <Text style={styles.titulo}>Solicita aquí tu mantención</Text>
-              
 
               <Text style={styles.texto}>Ingrese texto para filtrar</Text>
               <TextInput
-              style={styles.input}
-              placeholder=""
-              placeholderTextColor="#969696"
-              onChangeText={handleChange}
+                style={styles.input}
+                placeholder=""
+                placeholderTextColor="#969696"
+                onChangeText={handleChange}
               />
 
-              <TouchableOpacity style={styles.boton} onPress={seleccionarTodo} >
-                <Text style={styles.btnText}>Seleccionar todos los productos</Text>
+              <TouchableOpacity style={styles.boton} onPress={seleccionarTodo}>
+                <Text style={styles.btnText}>
+                  Seleccionar todos los productos
+                </Text>
               </TouchableOpacity>
 
               <View>
@@ -183,7 +173,6 @@ export default function FormMantencion({ navigation }) {
                   items={products}
                   selectedItems={selectData.selectedFruits}
                   onSelectionsChange={onSelectionsChange}
-
                 />
               </View>
               <Text style={styles.titulo}>Mas detalle sobre su mantencion</Text>
@@ -195,20 +184,9 @@ export default function FormMantencion({ navigation }) {
                 placeholderTextColor="#969696"
                 onChangeText={insmsg('msg')}
               />
-              <TextInput
-              style={styles.input}
-              placeholder="Ej: email@email.com"
-              placeholderTextColor="#969696"
-              value={data.email_cliente}
-              onChangeText={'email_cliente'}  
-              />
               <TouchableOpacity style={styles.boton} onPress={handleSubmit}>
                 <Text style={styles.btnText}>Enviar</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.boton} onPress={prueba}>
-                <Text style={styles.btnText}>Enviar prueba</Text>
-              </TouchableOpacity>
-              
             </ScrollView>
           </View>
         </View>
@@ -269,7 +247,7 @@ const styles = StyleSheet.create({
   boton: {
     width: '100%',
     height: 100,
-    marginBottom: 30,
+    marginBottom: 15,
     alignItems: 'center',
     justifyContent: 'center',
   },

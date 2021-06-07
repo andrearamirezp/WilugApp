@@ -74,14 +74,9 @@ export const sendMail = (to, text) => async (dispatch) => {
     }
 };
 
-export const sendMailContacto = (to, msg) => async (dispatch) => {
+export const sendMailContacto = (data) => async (dispatch) => {
     try {
         dispatch(reciveContacto());
-
-        const data = {
-            to,
-            msg
-        };
 
         const config = {
             method: 'POST',
