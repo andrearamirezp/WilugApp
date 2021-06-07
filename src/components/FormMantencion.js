@@ -22,6 +22,24 @@ var box_height = height / box_count;
 
 export default function FormMantencion({ navigation }) {
   const [selectData, setSelectData] = useState({ selectedFruits: [] });
+  const [data, setData] = useState({
+    direccion_factura: '',
+    telefono: '',
+    email_cliente: '',
+    password: '',
+    confirmPassword: '',
+    nombre:'',
+    ciudad:'',
+    rut_cliente:'',
+    msg:'',
+    
+  });
+
+  
+
+  useEffect(() => {
+    setData(user);
+  }, []);
 
   const dispatch = useDispatch();
   let {
@@ -34,7 +52,7 @@ export default function FormMantencion({ navigation }) {
     (state) => state.mantencion,
   );
   const { user } = useSelector((state) => state.auth);
-
+  const [products, setProducts]= useState (dataMantencion);
   useEffect(() => {
     if (successProducts) {
       Snackbar.show({
@@ -103,6 +121,10 @@ export default function FormMantencion({ navigation }) {
     navigation.navigate('clienteRegistrado');
   };
 
+  const insmsg = (name) => (value) => {
+    setData({ ...data, [name]: value });
+  };
+
   const seleccionarTodo = () => {
     if (selectData.selectedFruits.length > 0) {
       setSelectData({ selectedFruits: [] } )
@@ -111,25 +133,28 @@ export default function FormMantencion({ navigation }) {
 
   };
 
-  const prueba = query => {
-    return dataMantencion.filter((texto) =>
-      texto.indexOf(query) > -1
-    );
+  const prueba =()=> {
+    console.log (user);
+    console.log (user.nombre_contacto);
+    console.log (data.rut_cliente);
+    console.log (data.telefono);
+    console.log (data.email_cliente);
+    console.log (data.ciudad);
+    console.log (data.direccion_factura);
+    console.log (data.msg);
+    console.log (selectData);
   }
 
   const handleChange = (input) => {
-    console.log(dataMantencion)
-    dataMantencion = dataMantencion.filter(value=>value.label.includes(input))
-    console.log(dataMantencion)
+    if (input.length > 0 ) {
+      setProducts (products.filter(value=>value.label.includes(input)))  
+    }
+    else{
+      setProducts (dataMantencion)
+    }
+    
     
   }
-  const fruits = ['Apples', 'Oranges', 'Pears', 'Grapes']
-  const filterItems = query => {
-    return fruits.filter((el) =>
-      el.toLowerCase().indexOf(query.toLowerCase()) > -1
-    );
-  }
-  
 
   return (
     <View style={[styles.box, styles.box1]}>
@@ -155,7 +180,7 @@ export default function FormMantencion({ navigation }) {
 
               <View>
                 <SelectMultiple
-                  items={dataMantencion}
+                  items={products}
                   selectedItems={selectData.selectedFruits}
                   onSelectionsChange={onSelectionsChange}
 
@@ -168,11 +193,22 @@ export default function FormMantencion({ navigation }) {
                 numberOfLines={8}
                 placeholder=""
                 placeholderTextColor="#969696"
-
+                onChangeText={insmsg('msg')}
+              />
+              <TextInput
+              style={styles.input}
+              placeholder="Ej: email@email.com"
+              placeholderTextColor="#969696"
+              value={data.email_cliente}
+              onChangeText={'email_cliente'}  
               />
               <TouchableOpacity style={styles.boton} onPress={handleSubmit}>
                 <Text style={styles.btnText}>Enviar</Text>
               </TouchableOpacity>
+              <TouchableOpacity style={styles.boton} onPress={prueba}>
+                <Text style={styles.btnText}>Enviar prueba</Text>
+              </TouchableOpacity>
+              
             </ScrollView>
           </View>
         </View>
