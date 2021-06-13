@@ -34,8 +34,8 @@ export default function LoginForm({navigation}) {
   } = useSelector((state) => state.auth);
 
   const [data, setData] = useState({
-    rut: '',
-    password: '',
+    rut: '185809722',
+    password: '123123',
   });
 
   const handleChange = (name) => (value) => {
