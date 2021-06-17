@@ -89,10 +89,6 @@ export default function DetalleProducto({ route }) {
             <Text style={styles.text}>Vencimiento de carga:</Text>
             <Text style={styles.textOutPut}>{moment(product.fecha_vencarga).format('DD/MM/YYYY') == null ? '--' : moment(product.fecha_vencarga).format('DD/MM/YYYY')}</Text>
           </View>
-          <View style={styles.viewText}>
-            <Text style={styles.text}>Fecha última mantención:</Text>
-            <Text style={styles.textOutPut}>{moment(product.fecha_ultMant).format('DD/MM/YYYY') == null ? '--' : moment(product.fecha_ultMant).format('DD/MM/YYYY')}</Text>
-          </View>
         </ScrollView>
       </View>
     )

@@ -19,12 +19,40 @@ import Snackbar from 'react-native-snackbar';
 export default function Contactanos() {
   
 
-  const initiateWhatsApp = () => {
+  const initiateWhatsAppCoquimbo = () => {
     
     let url =
       'whatsapp://send?text=' + 
        
-      '&phone=56961684482' ;
+      '&phone=56944103811' ;
+    Linking.openURL(url)
+      .then((data) => {
+        console.log('WhatsApp Opened');
+      })
+      .catch(() => {
+        alert('Debe tener la aplicacion de WhatsApp instalada en su telefono');
+      });
+  };
+  const initiateWhatsAppCopiapo = () => {
+    
+    let url =
+      'whatsapp://send?text=' + 
+       
+      '&phone=56950125338' ;
+    Linking.openURL(url)
+      .then((data) => {
+        console.log('WhatsApp Opened');
+      })
+      .catch(() => {
+        alert('Debe tener la aplicacion de WhatsApp instalada en su telefono');
+      });
+  };
+  const initiateWhatsAppSantiago = () => {
+    
+    let url =
+      'whatsapp://send?text=' + 
+       
+      '&phone=56964682685' ;
     Linking.openURL(url)
       .then((data) => {
         console.log('WhatsApp Opened');
@@ -64,8 +92,7 @@ export default function Contactanos() {
     email_cliente: '',
     nombre_cliente: '',
     telefono: '',
-    msg: '',
-    comuna: user.nombre_comuna
+    msg: ''
   });
 
   useEffect(() => {
@@ -154,11 +181,7 @@ export default function Contactanos() {
           
           <Text style={styles.titulo2}>Para un contacto mas directo</Text>
           <View >
-                  <TouchableOpacity  onPress={initiateWhatsApp}>
-                    <Image
-                      style={styles.icono2}
-                      source={require('../assets/whatsapp.png')}></Image>
-                  </TouchableOpacity>
+                  
           </View>
         </View>
         <ImageBackground
@@ -180,6 +203,12 @@ export default function Contactanos() {
                 <Text style={{ textAlign: 'center' }}>+569 9563 3527 </Text>
               </View>
               <View style={{ width: '28%', marginLeft: 10 }}>
+                <TouchableOpacity  onPress={initiateWhatsAppCoquimbo}>
+                    <Image
+                      style={styles.icono2}
+                      source={require('../assets/whatsapp.png')}>
+                    </Image>
+                </TouchableOpacity>
                 <Text style={styles.titulo}>Coquimbo</Text>
                 <Text style={{ textAlign: 'center' }}>
                   Los Carpinteros #1250, Barrio Industrial
@@ -196,6 +225,12 @@ export default function Contactanos() {
                 <Text style={{ textAlign: 'center' }}>+569 6494 7726</Text>
               </View>
               <View style={{ width: '35%', marginLeft: 60 }}>
+                <TouchableOpacity  onPress={initiateWhatsAppCopiapo}>
+                    <Image
+                      style={styles.icono2}
+                      source={require('../assets/whatsapp.png')}>
+                    </Image>
+                </TouchableOpacity>
                 <Text style={styles.titulo}>Copiapó</Text>
                 <Text style={{ textAlign: 'center' }}>Los Aromos #1705</Text>
                 <Text style={{ textAlign: 'center', color: 'blue' }}>mescobar@wilug.cl</Text>
@@ -203,6 +238,12 @@ export default function Contactanos() {
               </View>
 
               <View style={{ width: '35%' }}>
+                <TouchableOpacity  onPress={initiateWhatsAppSantiago}>
+                    <Image
+                      style={styles.icono2}
+                      source={require('../assets/whatsapp.png')}>
+                    </Image>
+                </TouchableOpacity>
                 <Text style={styles.titulo}>Santiago</Text>
                 <Text style={{ textAlign: 'center' }}>
                   Av. El Vestisquero #1225, Renca

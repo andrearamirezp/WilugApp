@@ -74,7 +74,6 @@ const styles = StyleSheet.create({
   menu: {
     width: '100%',
     height: '50%',
-    flexDirection: 'row',
     flexWrap: 'wrap',
     // backgroundColor:'blue'
   },
@@ -121,7 +120,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     resizeMode: 'contain',
-    height: hp('100%'), // 70% of height device screen
+    height: hp('100%'), 
     width: wp('90%'),
     marginTop: 40,
     marginBottom: 20,

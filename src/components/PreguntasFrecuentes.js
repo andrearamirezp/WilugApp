@@ -6,10 +6,6 @@ import {
   StyleSheet,
   Text,
   ScrollView,
-  ImageBackground,
-  TextInput,
-  TouchableOpacity,
-  Touchable,
 } from 'react-native';
 
 var {height} = Dimensions.get('window');
