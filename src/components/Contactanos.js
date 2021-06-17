@@ -61,7 +61,20 @@ export default function Contactanos() {
         alert('Debe tener la aplicacion de WhatsApp instalada en su telefono');
       });
   };
-
+  const initiateWhatsAppCalama = () => {
+    
+    let url =
+      'whatsapp://send?text=' + 
+       
+      '&phone=56995633527' ;
+    Linking.openURL(url)
+      .then((data) => {
+        console.log('WhatsApp Opened');
+      })
+      .catch(() => {
+        alert('Debe tener la aplicacion de WhatsApp instalada en su telefono');
+      });
+  };
   const Alerta = () =>
     Alert.alert(
       "Contacto",
@@ -195,6 +208,12 @@ export default function Contactanos() {
                 flexWrap: 'wrap',
               }}>
               <View style={{ width: '35%', marginLeft: 5 }}>
+              <TouchableOpacity  onPress={initiateWhatsAppCalama}>
+                    <Image
+                      style={styles.icono2}
+                      source={require('../assets/whatsapp.png')}>
+                    </Image>
+                </TouchableOpacity>
                 <Text style={styles.titulo}>Calama</Text>
                 <Text style={{ textAlign: 'center' }}>
                   Avda. Arturo Prat #2576
