@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.wilug"
+        applicationId "com.wilugapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

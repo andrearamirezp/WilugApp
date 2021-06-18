@@ -1,4 +1,4 @@
-package com.wilug;
+package com.wilugapp;
 
 import com.facebook.react.ReactActivity;
 
