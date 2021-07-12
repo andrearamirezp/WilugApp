@@ -50,6 +50,13 @@ export default function FormMantencion({navigation}) {
   );
   const {user} = useSelector((state) => state.auth);
   const [products, setProducts] = useState(dataMantencion);
+
+  useEffect(() => {
+    if (dataMantencion.length > 0){
+      setProducts(dataMantencion);
+    }
+  }, [dataMantencion])
+
   useEffect(() => {
     if (successProducts) {
       Snackbar.show({

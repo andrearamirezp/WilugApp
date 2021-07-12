@@ -187,7 +187,6 @@ export const getAgents = () => async (dispatch) => {
 export const addProducto = (data) => async (dispatch) => {
     try {
         dispatch(reciveInsert());
-
         format(data.fechaFabricacion, 'yyyy-MM-dd')
         format(data.fechaUltCarga, 'yyyy-MM-dd')
         format(data.fechaUltMantencion, 'yyyy-MM-dd')
@@ -207,6 +206,7 @@ export const addProducto = (data) => async (dispatch) => {
         const rawResponse = await fetch(`${url}products`, config);
         if (rawResponse.status === 201) {
             dispatch(finishInsert());
+            getProducts( data.idCliente,'list')
         } else {
             const { error } = await rawResponse.json(); 
             console.log(error)
