@@ -207,6 +207,9 @@ export const addProducto = (data) => async (dispatch) => {
         if (rawResponse.status === 201) {
             dispatch(finishInsert());
             getProducts( data.idCliente,'list')
+            getProducts( data.idCliente,'list')
+            getProducts( data.idCliente,'list')
+            getProducts( data.idCliente,'list')
         } else {
             const { error } = await rawResponse.json(); 
             console.log(error)

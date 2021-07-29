@@ -120,6 +120,8 @@ export default function AñadirProducto(props) {
   useEffect(() => {
     if (successInsert) {
       dispatch(getProducts(user.cliente_id));
+      dispatch(getProducts(user.cliente_id));
+      dispatch(getProducts(user.cliente_id));
       Snackbar.show({
         text: 'Producto registrado exitosamente',
         duration: Snackbar.LENGTH_SHORT,
