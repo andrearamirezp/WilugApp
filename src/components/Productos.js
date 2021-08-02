@@ -7,7 +7,7 @@ const Products = ({ data, navigation }) =>
         <TouchableOpacity
             key={index}
             style={[styles.card, value.dias < 0 ==true ? styles.pasado : value.dias < 30 == true ? styles.presente : styles.futuro]}
-            onPress={console.log(value.dias),() => navigation.navigate('detalleProducto', {
+            onPress={console.log('Dias para la siguiente mantencion: ' + value.dias),() => navigation.navigate('detalleProducto', {
                 id: value.id
             })}>
             <Text style={{color:'black'}}>{value.name}</Text>

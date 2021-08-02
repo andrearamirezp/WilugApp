@@ -114,13 +114,12 @@ export default function AñadirProducto(props) {
 
   const handleSubmit = () => {
     dispatch(addProducto(data));
+    dispatch(getProducts(user.cliente_id));
     navigation.navigate('clienteRegistrado');
   };
 
   useEffect(() => {
     if (successInsert) {
-      dispatch(getProducts(user.cliente_id));
-      dispatch(getProducts(user.cliente_id));
       dispatch(getProducts(user.cliente_id));
       Snackbar.show({
         text: 'Producto registrado exitosamente',
