@@ -109,6 +109,10 @@ export default function FormMantencion({navigation}) {
         text: 'Cargando ....',
         duration: Snackbar.LENGTH_SHORT,
       });
+      Snackbar.show({
+        text: 'Productos enviados a mantención',
+        duration: Snackbar.LENGTH_SHORT,
+      });
     }
   }, [reciveManrtencion]);
 

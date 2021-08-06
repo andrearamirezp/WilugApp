@@ -68,8 +68,8 @@ export default function LoginForm({navigation}) {
   useEffect(() => {
     if (authenticating) {
       Snackbar.show({
-        text: 'Iniciando ....',
-        duration: Snackbar.LENGTH_SHORT,
+        text: 'Iniciando sesión ....',
+        duration: Snackbar.LENGTH_INDEFINITE,
       });
     }
   }, [authenticating]);

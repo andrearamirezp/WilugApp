@@ -115,11 +115,20 @@ export default function AñadirProducto(props) {
   const handleSubmit = () => {
     dispatch(addProducto(data));
     dispatch(getProducts(user.cliente_id));
+    dispatch(getProducts(user.cliente_id));
+    dispatch(getProducts(user.cliente_id));
+    dispatch(getProducts(user.cliente_id));
+    dispatch(getProducts(user.cliente_id));
     navigation.navigate('clienteRegistrado');
   };
 
   useEffect(() => {
     if (successInsert) {
+      dispatch(getProducts(user.cliente_id));
+      dispatch(getProducts(user.cliente_id));
+      dispatch(getProducts(user.cliente_id));
+      dispatch(getProducts(user.cliente_id));
+      dispatch(getProducts(user.cliente_id));
       dispatch(getProducts(user.cliente_id));
       Snackbar.show({
         text: 'Producto registrado exitosamente',
@@ -139,6 +148,10 @@ export default function AñadirProducto(props) {
 
   useEffect(() => {
     if (reciveInsert) {
+      dispatch(getProducts(user.cliente_id));
+      dispatch(getProducts(user.cliente_id));
+      dispatch(getProducts(user.cliente_id));
+      dispatch(getProducts(user.cliente_id));
       Snackbar.show({
         text: 'Cargando ....',
         duration: Snackbar.LENGTH_SHORT,
